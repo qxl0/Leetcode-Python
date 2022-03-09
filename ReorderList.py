@@ -10,6 +10,13 @@ def printList(node):
     node = node.next
   print(temp)
 
+def createList(l):
+  dummy = curr = ListNode(0)
+  for i,v in enumerate(l):
+    curr.next = ListNode(v)
+    curr = curr.next
+  return dummy.next
+
 def reorderList(head):
         """
         Do not return anything, modify head in-place instead.
@@ -44,11 +51,8 @@ def reorderList(head):
                 curr = curr.next
         curr.next = head1 or head2
 
-head = ListNode(1)
-head.next = ListNode(2)
-head.next.next = ListNode(3)
-head.next.next.next = ListNode(4)
-
+head = createList([1,2,3,4,5,6,7,8])
 printList(head)
+
 reorderList(head)
 printList(head)
