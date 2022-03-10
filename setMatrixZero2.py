@@ -20,6 +20,7 @@ class Solution:
 
 if __name__ == '__main__':
   m = [[0,1,2,0],[3,4,5,2],[1,2,1,5]]
+  # m = [(0,1,2,0),(3,4,5,2),(1,2,1,5)]
   sol = Solution()
   sol.setZeros(m)
   print(m)
