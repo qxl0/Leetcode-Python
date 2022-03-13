@@ -10,6 +10,7 @@ Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from
 
 
 import collections
+import sys
 
 
 class Solution:
@@ -83,11 +84,41 @@ class Solution:
                 missing += 1  # SPEEEEEEEED UP!
         return s[I:J]
 
+    def min_window(self, S: str, T: str) -> str:
+        """
+        Minimum Window Substring
+
+        :param str S:
+        :param str T:
+        :return str:
+        """
+        Tc = collections.Counter(T)
+        Sc = collections.Counter()
+
+        best_i = -sys.maxsize
+        best_j = sys.maxsize
+
+        i = 0
+
+        for j, char in enumerate(S):
+            Sc[char] += 1
+
+            while Sc & Tc == Tc:
+                if j - i < best_j - best_i:
+                    best_i, best_j = i, j
+
+                Sc[S[i]] -= 1
+                i += 1
+
+        return S[best_i : best_j + 1] if best_j - best_i < len(S) else ""
+
 
 if __name__ == "__main__":
     sol = Solution()
     s = "ADOBECODEBANC"
     x = "ABCDOODEBANC"
     t = "ABC"
-    res = sol.minWindow3(x, t)
+    x = "aaa"
+    t = "aa"
+    res = sol.min_window(x, t)
     print("Result is: ", res)
