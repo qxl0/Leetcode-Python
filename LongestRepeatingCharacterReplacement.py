@@ -23,7 +23,10 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "AABABBA"
+    # s = "AABABBA"
+    # s = "BAAAABBBBBA"
+    # s = "ABCDEFG"
+    s = "AABABBBB"
     k = 1
     res = sol.LongestRepeatingCharacterReplacement(s, k)
     print("Result is: ", res)
