@@ -118,7 +118,7 @@ if __name__ == "__main__":
     s = "ADOBECODEBANC"
     x = "ABCDOODEBANC"
     t = "ABC"
-    x = "aaa"
-    t = "aa"
+    # x = "aaa"
+    # t = "aa"
     res = sol.min_window(x, t)
     print("Result is: ", res)
