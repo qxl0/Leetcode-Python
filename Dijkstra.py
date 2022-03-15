@@ -37,6 +37,20 @@ class Solution:
                     heapq.heappush(minq, (curr_w + new_w, new_n))
         return max(visited.values()) if len(visited) == n else -1
 
+    def networkDelayTime3(self, times, n, k):
+        edges = collections.defaultdict(list)
+        for u, v, w in times:
+            edges[u].append([v, w])
+        minq = [(0, k)]
+        visited = {}
+        while minq:
+            w, v = heapq.heappop(minq)  # weight, node
+            if v not in visited:
+                visited[v] = w
+                for c_v, c_w in edges[v]:
+                    heapq.heappush(minq, (c_w + w, c_v))
+        return max(visited.values()) if len(visited) == n else -1
+
 
 if __name__ == "__main__":
     sol = Solution()
@@ -54,8 +68,11 @@ if __name__ == "__main__":
     # times = [[2, 1, 1], [2, 3, 1], [3, 4, 1]]
     # n = 4
     # k = 2
+    # times = [[1, 2, 1], [2, 3, 7], [1, 3, 4], [2, 1, 2]]
+    # n = 3
+    # k = 1
     times = [[1, 2, 1], [2, 3, 7], [1, 3, 4], [2, 1, 2]]
     n = 3
     k = 1
-    res = sol.network_delaytime2(times, n, k)
+    res = sol.networkDelayTime3(times, n, k)
     print(res)
