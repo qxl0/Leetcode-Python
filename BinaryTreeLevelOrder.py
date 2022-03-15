@@ -1,7 +1,3 @@
-import enum
-from pytest import LogCaptureFixture
-
-
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -23,6 +19,27 @@ class Solution:
             q = [leaf for leaf in temp if leaf]
         return res
 
+    def levelOrder2(self, root):
+        res, level = [], [root]
+        while level:
+            res.append([node.val for node in level])
+            # level = [kid for n in level for kid in (n.left, n.right) if kid]
+            temp = []
+            for n in level:
+                for kid in [n.left, n.right]:
+                    if kid:
+                        temp.append(kid)
+            level = temp
+        return res
+
+    def levelOrder3(self, root):
+        ans, level = [], [root]
+        while root and level:
+            ans.append([node.val for node in level])
+            LRpair = [(node.left, node.right) for node in level]
+            level = [leaf for LR in LRpair for leaf in LR if leaf]
+        return ans
+
 
 def createTree(lst):
     return helper(lst, 0)
@@ -41,4 +58,4 @@ def helper(lst, i):
 if __name__ == "__main__":
     sol = Solution()
     root = createTree([3, 9, 20, None, 13, 15, 7])
-    sol.levelOrder(root)
+    print(sol.levelOrder2(root))
