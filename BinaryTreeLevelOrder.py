@@ -5,6 +5,20 @@ class TreeNode:
         self.right = right
 
 
+def createTree(lst):
+    return helper(lst, 0)
+
+
+def helper(lst, i):
+    if i >= len(lst) or not lst[i]:
+        return None
+    curr = TreeNode(lst[i]) if lst[i] else None
+    curr.left = helper(lst, 2 * i + 1)
+    curr.right = helper(lst, 2 * i + 2)
+
+    return curr
+
+
 class Solution:
     def levelOrder(self, root):
         if not root:
@@ -39,20 +53,6 @@ class Solution:
             LRpair = [(node.left, node.right) for node in level]
             level = [leaf for LR in LRpair for leaf in LR if leaf]
         return ans
-
-
-def createTree(lst):
-    return helper(lst, 0)
-
-
-def helper(lst, i):
-    if i >= len(lst) or not lst[i]:
-        return None
-    curr = TreeNode(lst[i]) if lst[i] else None
-    curr.left = helper(lst, 2 * i + 1)
-    curr.right = helper(lst, 2 * i + 2)
-
-    return curr
 
 
 if __name__ == "__main__":
