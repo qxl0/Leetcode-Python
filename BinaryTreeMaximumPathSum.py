@@ -29,9 +29,11 @@ class Solution:
             leftSum = max(get_max_gain(node.left), 0)
             rightSum = max(get_max_gain(node.right), 0)
 
+            # calculate the current max_path if current node is root
             curr_max_path = node.val + leftSum + rightSum
             self.max_path = max(self.max_path, curr_max_path)
 
+            # return the max_gain this branch contribute
             return node.val + max(leftSum, rightSum)
 
         get_max_gain(root)
