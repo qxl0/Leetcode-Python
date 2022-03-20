@@ -30,7 +30,13 @@ class Solution:
         return -1
 
     def findCheapestPrice2(
-        self, n: int, flights: List[List[int]], src: int, dst: int, K: int
+        # bellman-ford algorithm
+        self,
+        n: int,
+        flights: List[List[int]],
+        src: int,
+        dst: int,
+        K: int,
     ) -> int:
         price_table = [float("inf") for _ in range(n)]
         price_table[src] = 0
