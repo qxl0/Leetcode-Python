@@ -29,6 +29,27 @@ class Solution:
 
         return -1
 
+    def findCheapestPrice2(
+        self, n: int, flights: List[List[int]], src: int, dst: int, K: int
+    ) -> int:
+        price_table = [float("inf") for _ in range(n)]
+        price_table[src] = 0
+        for source, dest, price in flights:
+            if source == src:
+                price_table[dest] = price
+        for transfer in range(0, K):
+            current_price = [*price_table]
+            for source, dest, price in flights:
+                # when we get a s --(p)-> d, we can update current_price[d]
+                current_price[dest] = min(
+                    current_price[dest], price_table[source] + price
+                )
+            price_table = current_price
+        if price_table[dst] == float("inf"):
+            return -1
+        else:
+            return price_table[dst]
+
 
 if __name__ == "__main__":
     s = Solution()
@@ -37,5 +58,10 @@ if __name__ == "__main__":
     src = 0
     dst = 2
     k = 1
-    res = s.findCheapestPrice(n, flights, src, dst, k)
+    # n = 5
+    # flights = [[4, 1, 1], [1, 2, 3], [0, 3, 2], [0, 4, 10], [3, 1, 1], [1, 4, 3]]
+    # src = 2
+    # dst = 1
+    # k = 1
+    res = s.findCheapestPrice2(n, flights, src, dst, k)
     print(res)
