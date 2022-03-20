@@ -31,6 +31,19 @@ class Solution:
                     arr.append(i)
         return [arr[x] for x in range(k)]
 
+    def topKFrequent3(self, nums, k):
+        frq = collections.defaultdict(list)
+        c = collections.Counter(nums)
+        for key, cnt in c.items():
+            frq[cnt].append(key)
+
+        res = []
+        for times in reversed(range(len(nums) + 1)):
+            res.extend(frq[times])
+            if len(res) >= k:
+                return res[:k]
+        return res[:k]
+
 
 if __name__ == "__main__":
     s = Solution()
@@ -38,5 +51,5 @@ if __name__ == "__main__":
     # k = 2
     nums = [3, 0, 1, 0]
     k = 1
-    res = s.topKFrequent2(nums, k)
+    res = s.topKFrequent3(nums, k)
     print(res)
