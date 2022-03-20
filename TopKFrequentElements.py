@@ -5,8 +5,8 @@ import collections
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         counter = collections.Counter(nums)
-        # counter.most_common()
-        return [*counter.keys()][:k]
+        mostK = counter.most_common(k)
+        return [item for item, count in mostK]
 
     def topKFrequent2(self, nums, k):
         hs = {}
@@ -51,5 +51,5 @@ if __name__ == "__main__":
     # k = 2
     nums = [3, 0, 1, 0]
     k = 1
-    res = s.topKFrequent3(nums, k)
+    res = s.topKFrequent(nums, k)
     print(res)
