@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def findCheapestPrice(
         self, n: int, flights: List[List[int]], src: int, dst: int, k: int
@@ -6,7 +9,7 @@ class Solution:
         from collections import defaultdict
 
         # Make graph
-        adj_list = defaultdict(list)
+        adj_list = defaultdict(list)  # list, dict,
         for u, v, w in flights:
             adj_list[u].append((v, w))
 
