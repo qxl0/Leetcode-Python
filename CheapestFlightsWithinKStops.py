@@ -69,5 +69,5 @@ if __name__ == "__main__":
     # src = 2
     # dst = 1
     # k = 1
-    res = s.findCheapestPrice2(n, flights, src, dst, k)
+    res = s.findCheapestPrice(n, flights, src, dst, k)
     print(res)
