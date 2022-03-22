@@ -9,6 +9,9 @@ Notice that you may not slant the container.
 """
 
 
+from typing import List
+
+
 class Solution:
     def maxArea(self, height: List[int]) -> int:
         pass
