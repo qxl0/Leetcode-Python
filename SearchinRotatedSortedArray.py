@@ -29,6 +29,25 @@ class Solution:
                     r = mid - 1
         return -1
 
+    def search2(self, nums, target):
+        if not nums:
+            return -1
+        l, r = 0, len(nums) - 1
+        while l < r:
+            mid = l + (r - l) // 2
+            # mid and target are on the same side
+            isTargetandMidOnSameSide = (nums[mid] - nums[0]) * (target - nums[0]) > 0
+            if isTargetandMidOnSameSide:
+                if nums[mid] < target:
+                    l = mid + 1
+                else:
+                    r = mid
+            elif target > nums[len(nums) - 1]:
+                r = mid
+            else:
+                l = mid + 1
+        return l if nums[l] == target else -1
+
 
 if __name__ == "__main__":
     s = Solution()
@@ -42,8 +61,8 @@ if __name__ == "__main__":
     # nums = [1, 3, 5]
     # target = 5
     nums = [4, 5, 6, 7, 0, 1, 2]
-    target = 3
+    target = 1
     # nums = [4, 5, 6, 7, 0, 1, 2]
     # target = 0
-    res = s.search(nums, target)
+    res = s.search2(nums, target)
     print(res)
