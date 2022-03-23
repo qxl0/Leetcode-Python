@@ -27,7 +27,7 @@ class Solution:
             ok.append(isok)
         return ok[-1]
 
-    def wordBreak(self, s, words):
+    def wordBreak3(self, s, words):
         ok = [True]
         max_len = max(map(len, words + [""]))
         words = set(words)
@@ -43,5 +43,5 @@ if __name__ == "__main__":
     s = "leetcode"
     wordDict = ["leet", "code"]
     # res = sol.wordBreak(s, wordDict)
-    res2 = sol.wordBreak2(s, wordDict)
+    res2 = sol.wordBreak3(s, wordDict)
     print(res2)
