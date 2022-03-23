@@ -19,10 +19,22 @@ class Solution:
                     dp[i] += dp[i - num]
         return dp[target]
 
+    def combinationSum4_2(self, nums: List[int], target: int) -> int:
+        dp = [0] * (target + 1)
+        dp[0] = 1
+        for i in range(target):
+            if not dp[i]:
+                continue
+            for num in nums:
+                if num + i <= target:
+                    dp[i + num] += dp[i]
+        return dp[target]
+
 
 if __name__ == "__main__":
     sol = Solution()
     nums = [1, 2, 3]
     target = 4
     res = sol.combinationSum4(nums, target)
+    res2 = sol.combinationSum4_2(nums, target)
     print(res)
