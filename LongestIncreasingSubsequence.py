@@ -9,6 +9,7 @@ import sys
 from typing import List
 
 """
+LeetCode: 300. Longest Increasing Subsequence
 Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
 
 You must write an algorithm with O(log n) runtime complexity.
@@ -17,7 +18,13 @@ You must write an algorithm with O(log n) runtime complexity.
 
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        pass
+        n = len(nums)
+        dp = [1] * n
+        for i in range(1, n):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        return max(dp)
 
 
 if __name__ == "__main__":
