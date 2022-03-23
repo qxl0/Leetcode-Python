@@ -12,13 +12,75 @@ from typing import List
 
 
 class Solution:
-    def combinationSum(self, nums: List[int], target: int) -> int:
-        pass
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        self.dfs(candidates, target, 0, [], res)
+        return res
+
+    def dfs(self, candidates, target, index, path, res):
+        if target < 0:
+            return
+        if target == 0:
+            res.append(path)
+            return
+        for i in range(index, len(candidates)):
+            self.dfs(candidates, target - candidates[i], i, path + [candidates[i]], res)
+
+    def combinationSum2(self, candidates, target):
+        res = []
+        self.dfs2(candidates, target, [], res)
+        return res
+
+    def dfs2(self, candidates, target, path, res):
+        if target < 0:
+            return
+        if target == 0:
+            res.append(path)
+            return
+        for i in range(len(candidates)):
+            self.dfs2(
+                candidates[i:], target - candidates[i], path + [candidates[i]], res
+            )
+
+    def combinationSum3(self, nums, target):
+        res = []
+        nums.sort()
+
+        def dfs(left, path, idx):
+            if not left:
+                res.append(path[:])
+            else:
+                for i, val in enumerate(nums[idx:]):
+                    if val > left:
+                        break
+                    dfs(left - val, path + [val], idx + i)
+
+        dfs(target, [], 0)
+        return res
+
+    def combinationSum4(self, nums, target):
+        result = []
+        nums = sorted(nums)
+
+        def dfs(remain, stack):
+            if remain == 0:
+                result.append(stack)
+                return
+            for num in nums:
+                if num > remain:
+                    break
+                if stack and num < stack[-1]:
+                    continue
+                else:
+                    dfs(remain - num, stack + [num])
+
+        dfs(target, [])
+        return result
 
 
 if __name__ == "__main__":
     sol = Solution()
     nums = [2, 3, 6, 7]
     target = 7
-    res = sol.combinationSum(nums, target)
+    res = sol.combinationSum3(nums, target)
     print(res)
