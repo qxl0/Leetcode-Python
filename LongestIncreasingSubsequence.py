@@ -26,9 +26,25 @@ class Solution:
                     dp[i] = max(dp[i], dp[j] + 1)
         return max(dp)
 
+    def lengthOfLIS2(self, nums):
+        tails = [0] * len(nums)
+        size = 0
+        for x in nums:
+            i, j = 0, size
+            while i != j:
+                m = (i + j) // 2
+                if tails[m] < x:
+                    i = m + 1
+                else:
+                    j = m
+            tails[i] = x
+            size = max(i + 1, size)
+        return size
+
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [10, 9, 2, 5, 3, 7, 101, 18]
-    res = sol.lengthOfLIS(nums)
+    # nums = [10, 9, 2, 5, 3, 7, 101, 18]
+    nums = [1, 3, 5, 2, 8, 4, 6]
+    res = sol.lengthOfLIS2(nums)
     print(res)
