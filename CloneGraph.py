@@ -66,6 +66,45 @@ class Solution:
         dfs(node, visited, m)
         return m[node]
 
+    # dfs iteratively
+    def cloneGraph2(self, node):
+        if not node:
+            return node
+        m, visited, stack = dict(), set(), collections.deque([node])
+        while stack:
+            n = stack.pop()
+            if n in visited:
+                continue
+            visited.add(node)
+            if n not in m:
+                m[n] = Node(n.val)
+
+            for neigh in n.neighbors:
+                if neigh not in m:
+                    m[neigh] = Node(neigh.val)
+                m[n].neighbors.append(neigh)
+                stack.append(neigh)
+        return m[node]
+
+    # bfs
+    def cloneGraph3(self, node):
+        if not node:
+            return node
+        m, visited, queue = {}, set(), collections.deque([node])
+        while queue:
+            n = queue.popleft()
+            if n in visited:
+                continue
+            visited.add(n)
+            if n not in m:
+                m[n] = Node(n.val)
+            for neigh in n.neighbors:
+                if neigh not in m:
+                    m[neigh] = Node(neigh.val)
+                m[n].neighbors.append(m[neigh])
+                queue.append(neigh)
+        return m[node]
+
 
 def createNode(adjList):
     #
