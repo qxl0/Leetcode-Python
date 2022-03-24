@@ -95,15 +95,33 @@ class Solution:
                 return False
         return True
 
+    def canFinish4(self, numCourses, prerequisites):
+        indegree = collections.defaultdict(int)
+        adj = collections.defaultdict(list)
+        for crs, pre in prerequisites:
+            indegree[crs] += 1
+            adj[pre].append(crs)
+        starts, visited = [i for i in range(numCourses) if not indegree[i]], set()
+        while starts:
+            node = starts.pop()
+            if node in visited:
+                continue
+            visited.add(node)
+            for neigh in adj[node]:
+                indegree[neigh] -= 1
+                if not indegree[neigh]:
+                    starts.append(neigh)
+        return len(visited) == numCourses
+
 
 if __name__ == "__main__":
     sol = Solution()
     n = 2
-    nums = [[1, 0], [0, 1]]
+    # nums = [[1, 0], [0, 1]]
     # nums = [[1, 0]]
-    res2 = sol.canFinish2(n, nums)
-    print(res2)
-    # n = 5
-    # nums = [[0, 1], [0, 2], [1, 3], [1, 4], [3, 4]]
-    res = sol.canFinish(n, nums)
+    # res2 = sol.canFinish4(n, nums)
+    # print(res2)
+    n = 5
+    nums = [[0, 1], [0, 2], [1, 3], [1, 4], [3, 4]]
+    res = sol.canFinish4(n, nums)
     print("result is: ", res)
