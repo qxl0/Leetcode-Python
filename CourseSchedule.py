@@ -71,12 +71,36 @@ class Solution:
                 return False
         return True
 
+    def canFinish3(self, numCourses, prerequisites):
+        # similiar to canFinish2, rather use visit[i] == 1 to mean dfs(i) --> True
+        graph = [[] for _ in range(numCourses)]
+        visit = [0 for _ in range(numCourses)]
+        for x, y in prerequisites:
+            graph[x].append(y)
+
+        def dfs(i):
+            if visit[i] == -1:
+                return False
+            if visit[i] == 1:
+                return True
+            visit[i] = -1
+            for j in graph[i]:
+                if not dfs(j):
+                    return False
+            visit[i] = 1
+            return True
+
+        for i in range(numCourses):
+            if not dfs(i):
+                return False
+        return True
+
 
 if __name__ == "__main__":
     sol = Solution()
     n = 2
-    # nums = [[1, 0], [0, 1]]
-    nums = [[1, 0]]
+    nums = [[1, 0], [0, 1]]
+    # nums = [[1, 0]]
     res2 = sol.canFinish2(n, nums)
     print(res2)
     # n = 5
