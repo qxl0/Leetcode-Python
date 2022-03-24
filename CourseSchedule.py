@@ -47,12 +47,39 @@ class Solution:
             dfs(i, adj, visited, res)
         return len(res) == numCourses
 
+    def canFinish2(self, numCourses, prerequisites):
+        adj = {i: [] for i in range(numCourses)}
+        for crs, pre in prerequisites:
+            adj[crs].append(pre)
+        visited = set()
+
+        def dfs(crs):
+            if crs in visited:
+                return False
+            if not adj[crs]:
+                return True
+            visited.add(crs)
+            for pre in adj[crs]:
+                if not dfs(pre):
+                    return False
+            visited.remove(crs)
+            adj[crs] = []
+            return True
+
+        for crs in range(numCourses):
+            if not dfs(crs):
+                return False
+        return True
+
 
 if __name__ == "__main__":
     sol = Solution()
-    # n = 2
+    n = 2
     # nums = [[1, 0], [0, 1]]
-    n = 5
-    nums = [[0, 1], [0, 2], [1, 3], [1, 4], [3, 4]]
+    nums = [[1, 0]]
+    res2 = sol.canFinish2(n, nums)
+    print(res2)
+    # n = 5
+    # nums = [[0, 1], [0, 2], [1, 3], [1, 4], [3, 4]]
     res = sol.canFinish(n, nums)
     print("result is: ", res)
