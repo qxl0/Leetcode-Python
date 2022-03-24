@@ -31,6 +31,7 @@ The given node will always be the first node with val = 1. You must return the c
 """
 
 
+import collections
 from typing import List
 
 
@@ -40,14 +41,56 @@ class Node:
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
 
+    def addNeighbor(self, n):
+        self.neighbors.append(n)
+
 
 class Solution:
     def cloneGraph(self, node: "Node") -> "Node":
-        pass
+        if not node:
+            return None
+        visited, m = set(), dict()
+
+        def dfs(node, visited, m):
+            if node in visited:
+                return
+            visited.add(node)
+            if node not in m:
+                m[node] = Node(node.val)
+            for neigh in node.neighbors:
+                if neigh not in m:
+                    m[neigh] = Node(neigh.val)
+                m[node].neighbors.append(m[neigh])
+                dfs(neigh, visited, m)
+
+        dfs(node, visited, m)
+        return m[node]
+
+
+def createNode(adjList):
+    #
+    if not adjList:
+        return None
+    if len(adjList) == 1 and len(adjList[0]) == 0:
+        return Node(
+            1
+        )  # For simplicity, each node's value is the same as the node's index (1-indexed)
+    nodeMap = collections.defaultdict()
+    for i, v in enumerate(adjList):
+        if i + 1 not in nodeMap:
+            nodeMap[i + 1] = Node(i + 1)
+        node = nodeMap[i + 1]
+        for e in v:
+            if e not in nodeMap:
+                nodeMap[e] = Node(e)
+            neighbor = nodeMap[e]
+            node.addNeighbor(neighbor)
+    return nodeMap[1]
 
 
 if __name__ == "__main__":
     sol = Solution()
     adjList = [[2, 4], [1, 3], [2, 4], [1, 3]]
-    res = sol.cloneGraph(adjList)
+    node = createNode(adjList)
+    res = sol.cloneGraph(node)
     print("result is: ", res)
