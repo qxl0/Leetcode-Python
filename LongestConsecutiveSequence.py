@@ -33,10 +33,21 @@ class Solution:
             longest = max(longest, cur_len)
         return longest
 
+    def longestConsecutive2(self, nums: List[int]) -> int:
+        longest, S = 0, set(nums)
+        for num in S:
+            if num - 1 in S:
+                continue
+            count = 1
+            while num + count in S:
+                count += 1
+            longest = max(longest, count)
+        return longest
+
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [0, 3, 7, 2, 5, 8, 4, 6, 0, 1]
-    # nums = [100, 4, 200, 1, 3, 2]
-    res = sol.longestConsecutive(nums)
+    # nums = [0, 3, 7, 2, 5, 8, 4, 6, 0, 1]
+    nums = [100, 4, 200, 1, 3, 2]
+    res = sol.longestConsecutive2(nums)
     print("result is: ", res)
