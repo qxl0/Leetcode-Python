@@ -18,5 +18,5 @@ class Solution:
 if __name__ == "__main__":
     sol = Solution()
     intervals = [[0, 30], [5, 10], [15, 20]]
-    res = sol.meeting_room_i_i_i(intervals)
+    res = sol.meeting_room(intervals)
     print("result is: ", res)
