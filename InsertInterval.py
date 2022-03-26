@@ -31,8 +31,8 @@ class Solution:
     def insert(self, intervals, newInterval):
         result = []
         for interval in intervals:
-            A = newInterval[1] < interval[0]
-            B = interval[1] < newInterval[0]
+            A = newInterval[1] < interval[0]  # newInterval is earlier
+            B = interval[1] < newInterval[0]  # newInterval is large (later)
             if A:
                 result.append(newInterval)
                 newInterval = interval
@@ -47,7 +47,9 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    intervals = [[1, 3], [6, 9]]
-    newInterval = [2, 5]
+    # intervals = [[1, 3], [6, 9]]
+    # newInterval = [2, 5]
+    intervals = [[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]]
+    newInterval = [4, 8]
     res = sol.insert(intervals, newInterval)
     print("result is: ", res)
