@@ -22,7 +22,16 @@ from typing import List
 
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
-        pass
+        intervals.sort()  # based on starttime
+        pre = float("-inf")
+        ans = 0
+        for i in intervals:
+            if pre <= i[0]:
+                pre = i[1]
+            else:
+                pre = min(i[1], pre)
+                ans += 1
+        return ans
 
 
 if __name__ == "__main__":
