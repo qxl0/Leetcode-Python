@@ -67,6 +67,6 @@ if __name__ == "__main__":
     sol = Solution()
     intervals = [[1, 2], [4, 5], [8, 10]]
     rooms = 1
-    ask = [[2, 3], [3, 4]]
+    ask = [[2, 4], [3, 4]]
     res = sol.meeting_room_i_i_i(intervals, rooms, ask)
     print("result is: ", res)
