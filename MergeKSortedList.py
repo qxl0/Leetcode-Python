@@ -19,6 +19,15 @@ from typing import List, Optional
 
 
 class ListNode:
+    __eq__ = lambda self, other: self.val == other.val
+    __lt__ = lambda self, other: self.val < other.val
+
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
@@ -26,7 +35,16 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        pass
+        minq = []
+        for list in lists:
+            for node in list:
+                heappush(minq, (node.val, node))
+        head = curr = ListNode(-1)
+        while minq:
+            node = heappop(minq)
+            curr.next = ListNode(node.val)
+            curr = curr.next
+        return head.next
 
 
 if __name__ == "__main__":
