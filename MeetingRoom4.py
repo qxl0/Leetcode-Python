@@ -28,10 +28,27 @@ class Solution:
                     dp[t] = max(dp[t], dp[start] + val)
         return dp[last_meeting_end]
 
+    def max_value2(self, meetings, values):
+        meeting_end_time_to_index_value = collections.defaultdict(list)
+        last_meeting_ends = 0
+        for i in range(len(meetings)):
+            meeting_end_time_to_index_value[meetings[i][1]].append(
+                (meetings[i][0], values[i])
+            )
+            last_meeting_ends = max(last_meeting_ends, meetings[i][1])
+        dp = [0] * (last_meeting_ends + 1)
+        for i in range(1, last_meeting_ends + 1):
+            dp[i] = dp[i - 1]
+            for j in range(len(meeting_end_time_to_index_value[i])):
+                meetinfo = meeting_end_time_to_index_value[i][j]
+                start, value = meetinfo
+                dp[i] = max(dp[i], dp[start] + value)
+        return dp[last_meeting_ends]
+
 
 if __name__ == "__main__":
     sol = Solution()
     intervals = [[10, 40], [20, 50], [30, 45], [40, 60]]
     value = [3, 6, 2, 4]
-    res = sol.max_value(intervals, value)
+    res = sol.max_value2(intervals, value)
     print("result is: ", res)
