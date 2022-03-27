@@ -29,19 +29,20 @@ class Solution:
         return True
 
     def canattendmeeting(self, intervals):
-        intervals.sort(key=lambda i: i.start)
+        # intervals.sort(key=lambda i: i.start)
+        intervals.sort(key=lambda i: i[0])
 
         for i in range(1, len(intervals)):
             i1 = intervals[i - 1]
             i2 = intervals[i]
-            if i2.start < i1.end:
+            if i2[0] < i1[1]:
                 return False
         return True
 
 
 if __name__ == "__main__":
     sol = Solution()
-    # intervals = [[0, 30], [5, 10], [15, 20]]
-    intervals = [[5, 8], [9, 15]]
-    res = sol.meeting_room(intervals)
+    intervals = [[0, 30], [5, 10], [15, 20]]
+    # intervals = [[5, 8], [9, 15]]
+    res = sol.canattendmeeting(intervals)
     print("result is: ", res)
