@@ -13,20 +13,41 @@ Given the head of a linked list, remove the nth node from the end of the list an
 """
 from heapq import *
 from lib2to3.pgen2.token import MINEQUAL
+from typing import Optional
 
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
+
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-   
+        res = ListNode(0)
+        res.next = head
+        tmp = res
+
+        for i in range(n):
+            head = head.next
+
+        while head != None:
+            head = head.next
+            tmp = tmp.next
+
+        tmp.next = tmp.next.next
+        return res.next
 
 
 if __name__ == "__main__":
     s = Solution()
-    head = [1,2,3,4,5]
-    n = 2 
-    res = s.removeNthFromEnd(head, n)
+    head = ListNode(0)
+    head.next = ListNode(1)
+    head.next.next = ListNode(2)
+    head.next.next.next = ListNode(3)
+    head.next.next.next.next = ListNode(4)
+    head.next.next.next.next.next = ListNode(5)
+    n = 2
+    res = s.removeNthFromEnd(head.next, n)
+    # Output: [1,2,3,5]
     print(res)
