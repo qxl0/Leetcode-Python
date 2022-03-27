@@ -21,8 +21,7 @@ class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head:
             return head
-        prev = None
-        curr = head
+        prev, curr = None, head
         while curr:
             next = curr.next
             curr.next = prev
