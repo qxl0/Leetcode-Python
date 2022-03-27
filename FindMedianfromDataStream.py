@@ -1,3 +1,16 @@
+"""
+295. Find Median from Data Stream
+
+The median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value and the median is the mean of the two middle values.
+
+For example, for arr = [2,3,4], the median is 3.
+For example, for arr = [2,3], the median is (2 + 3) / 2 = 2.5.
+Implement the MedianFinder class:
+
+MedianFinder() initializes the MedianFinder object.
+void addNum(int num) adds the integer num from the data stream to the data structure.
+double findMedian() returns the median of all elements so far. Answers within 10-5 of the actual answer will be accepted.
+"""
 import heapq
 from lib2to3.pgen2.token import MINEQUAL
 
@@ -15,7 +28,10 @@ class MedianFinder:
             heapq.heappush(self.maxq, -heapq.heappop(self.minq))
 
     def findMedian(self) -> float:
-        pass
+        if len(self.minq) == len(self.maxq):
+            return (self.minq[0] + -self.maxq[0]) / 2
+        else:
+            return -self.maxq[0]
 
 
 # Your MedianFinder object will be instantiated and called as such:
