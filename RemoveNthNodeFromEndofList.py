@@ -41,13 +41,16 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    head = ListNode(0)
-    head.next = ListNode(1)
-    head.next.next = ListNode(2)
-    head.next.next.next = ListNode(3)
-    head.next.next.next.next = ListNode(4)
-    head.next.next.next.next.next = ListNode(5)
+    # head = ListNode(0)
+    # head.next = ListNode(1)
+    # head.next.next = ListNode(2)
+    # head.next.next.next = ListNode(3)
+    # head.next.next.next.next = ListNode(4)
+    # head.next.next.next.next.next = ListNode(5)
+    # res = s.removeNthFromEnd(head.next, n)
     n = 2
-    res = s.removeNthFromEnd(head.next, n)
+    head = ListNode(1)
+    n = 1
+    res = s.removeNthFromEnd(head, n)
     # Output: [1,2,3,5]
     print(res)
