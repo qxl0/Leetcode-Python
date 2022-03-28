@@ -22,11 +22,10 @@ class Solution:
     def spiralOrder2(self, matrix):
         res = []
         while matrix:
-            # res.extend(matrix.pop(0))
-            res.append(matrix.pop(0))
+            res.extend(matrix.pop(0))
             matrix = [*zip(*matrix)][::-1]
             print("--->", matrix)
-        return [j for i in res for j in i]
+        return res
 
 
 if __name__ == "__main__":
