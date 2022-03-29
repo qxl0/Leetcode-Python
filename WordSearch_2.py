@@ -58,7 +58,7 @@ class Solution:
             board[i][j] = c
 
 
-DIRS = [(-1, 0), (1, 0), (0, 1), (0 - 1)]
+DIRS = [(-1, 0), (1, 0), (0, 1), (0, -1)]
 
 
 class TrieNode:
@@ -128,13 +128,13 @@ class Solution2:
 
 
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     board = [
-        ["o", "a", "b", "n"],
-        ["o", "t", "a", "e"],
-        ["a", "h", "k", "r"],
-        ["a", "f", "l", "v"],
+        ["o", "a", "a", "n"],
+        ["e", "t", "a", "e"],
+        ["i", "h", "k", "r"],
+        ["i", "f", "l", "v"],
     ]
-    words = ["oa", "oaa"]
-    res = sol.findWords(board, words)
+    words = ["oath", "pea", "eat", "rain"]
+    res = sol.wordsearch2(board, words)
     print(res)
