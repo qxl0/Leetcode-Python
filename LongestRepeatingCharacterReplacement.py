@@ -1,3 +1,24 @@
+"""
+424. Longest Repeating Character Replacement
+Medium
+
+4090
+
+162
+
+Add to List
+
+Share
+You are given a string s and an integer k. You can choose any character of the string and change it to any other uppercase 
+English character. You can perform this operation at most k times.
+
+Return the length of the longest substring containing the same letter you can get after performing the above operations.
+"""
+
+
+from collections import defaultdict
+
+
 class Solution:
     def LongestRepeatingCharacterReplacement(self, s, k):
         charCountMap = {}
@@ -21,12 +42,28 @@ class Solution:
         return maxWindow
 
 
+class Solution2:
+    def LongestRepeatingCharacterReplacement(self, s: str, k: int) -> int:
+        max_length = max(1, k)
+        counts = defaultdict(int)
+        counts[s[0]] += 1
+        l = 0
+
+        for r in range(1, len(s)):
+            counts[s[r]] += 1
+            while (r - l + 1) - max(counts.values()) > k:
+                counts[s[l]] -= 1
+                l += 1
+            max_length = max(max_length, r - l + 1)
+        return max_length
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     # s = "AABABBA"
     # s = "BAAAABBBBBA"
     # s = "ABCDEFG"
-    s = "AABABBBB"
+    s = "AABABBA"
     k = 1
     res = sol.LongestRepeatingCharacterReplacement(s, k)
     print("Result is: ", res)
