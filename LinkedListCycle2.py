@@ -26,15 +26,31 @@ class ListNode:
         self.val = val
         self.next = next
 
+    def __str__(self):
+        return str(self.val)
+
 
 class Solution:
     def detectCycle(self, head):
-        pass
+        if not head or not head.next:
+            return None
+        slow = fast = head
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+            if slow == fast:
+                break
+        if slow == fast:
+            slow = head
+            while slow != fast:
+                slow = slow.next
+                fast = fast.next
+            return slow
+        return None
 
 
 if __name__ == "__main__":
     s = Solution()
-    head = ListNode(21)
+    head = ListNode(21)  # 21->10->4->5->10 10 is the cycle start
     head.next = tail = ListNode(10)
     head.next.next = ListNode(4)
     head.next.next.next = ListNode(5)
