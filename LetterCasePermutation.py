@@ -20,7 +20,20 @@ Return a list of all possible strings we could create. Return the output in any 
 
 class Solution:
     def letterCasePermutation(self, s: str) -> List[str]:
-        pass
+        res = []
+
+        def helper(s, i, curr, res):
+            if i >= len(s) or len(curr) == len(s):
+                res.append(curr)
+                return
+            if s[i].isdigit():
+                helper(s, i + 1, curr + s[i], res)
+                return
+            helper(s, i + 1, curr + s[i].upper(), res)
+            helper(s, i + 1, curr + s[i].lower(), res)
+
+        helper(s, 0, "", res)
+        return res
 
 
 if __name__ == "__main__":
