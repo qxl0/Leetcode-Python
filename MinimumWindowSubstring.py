@@ -1,4 +1,5 @@
 """
+76. Minimum Window Substring
 Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
 The testcases will be generated such that the answer is unique.
 A substring is a contiguous sequence of characters within the string.
@@ -115,10 +116,14 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "ADOBECODEBANC"
-    x = "ABCDOODEBANC"
+    # s = "ADOBECODEBANC"
+    s = "ABCDOODEBANC"
     t = "ABC"
     # x = "aaa"
     # t = "aa"
-    res = sol.min_window(x, t)
+    # s = "a"
+    # t = "aa"
+    s = "abcd"
+    t = "db"
+    res = sol.minWindow3(s, t)
     print("Result is: ", res)
