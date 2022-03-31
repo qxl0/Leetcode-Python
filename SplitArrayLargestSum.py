@@ -40,8 +40,31 @@ class Solution:
         return dfs(0, m)
 
 
+class Solution2:
+    def splitArray(slef, nums, m):
+        l, r = max(nums), sum(nums)
+
+        def canSplit(y):
+            numofsets = 1
+            currSum = 0
+            for n in range(len(nums)):
+                currSum += nums[n]
+                if currSum > y:
+                    numofsets += 1
+                    currSum = nums[n]
+            return numofsets <= m
+
+        while l < r:
+            mid = l + (r - l) // 2
+            if canSplit(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return l
+
+
 if __name__ == "__main__":
-    s = Solution()
+    s = Solution2()
     nums = [7, 2, 5, 10, 8]
     m = 2
     res = s.splitArray(nums, m)
