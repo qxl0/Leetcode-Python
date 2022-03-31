@@ -23,7 +23,7 @@ class Solution:
         res = []
 
         def helper(s, i, curr, res):
-            if i >= len(s) or len(curr) == len(s):
+            if len(curr) == len(s):
                 res.append(curr)
                 return
             if s[i].isdigit():
