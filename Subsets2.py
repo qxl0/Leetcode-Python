@@ -1,4 +1,5 @@
 import math
+
 from typing import List
 
 """
@@ -19,20 +20,43 @@ The solution set must not contain duplicate subsets. Return the solution in any 
 
 
 class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         res = []
 
-        def dfs(nums, path):
-            res.append(path)
-            for i in range(len(nums)):
-                dfs(nums[i + 1 :], path + [nums[i]])
+        def dfs(i, subset):
+            if i == len(nums):
+                # res.append(subset.copy())
+                res.append(subset[::])
+                return
+            # included
+            subset.append(nums[i])
+            dfs(i + 1, subset)
+            subset.pop()
 
-        dfs(nums, [])
+            while i + 1 < len(nums) and nums[i + 1] == nums[i]:
+                i += 1
+            dfs(i + 1, subset)
+
+        dfs(0, [])
+        return res
+
+
+class Solution2:
+    # @param num, a list of integer
+    # @return a list of lists of integer
+    def subsetsWithDup(self, S):
+        res = [[]]
+        S.sort()
+        for i in range(len(S)):
+            if i == 0 or S[i] != S[i - 1]:
+                l = len(res)
+            for j in range(len(res) - l, len(res)):
+                res.append(res[j] + [S[i]])
         return res
 
 
 if __name__ == "__main__":
     s = Solution()
     nums = [1, 2, 2]
-    res = s.subsets(nums)
+    res = s.subsetsWithDup(nums)
     print(res)
