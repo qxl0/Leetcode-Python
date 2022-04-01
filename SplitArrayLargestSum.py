@@ -1,4 +1,5 @@
 import math
+import sys
 from typing import List
 
 """
@@ -39,6 +40,23 @@ class Solution:
 
         return dfs(0, m)
 
+    def splitArrayDP(self, nums, m):
+        n = len(nums)
+        sums = [0] * n
+        dp = [[sys.maxsize / 2] * n for _ in range(m + 1)]
+        sums[0] = nums[0]
+        for i in range(1, n):
+            sums[i] = sums[i - 1] + nums[i]
+
+        for i in range(n):
+            dp[1][i] = sums[i]
+
+        for i in range(2, m + 1):
+            for j in range(i - 1, n):
+                for k in range(j):
+                    dp[i][j] = min(dp[i][j], max(dp[i - 1][k], sums[j] - sums[k]))
+        return dp[m][n - 1]
+
 
 class Solution2:
     def splitArray(slef, nums, m):
@@ -64,8 +82,8 @@ class Solution2:
 
 
 if __name__ == "__main__":
-    s = Solution2()
+    s = Solution()
     nums = [7, 2, 5, 10, 8]
     m = 2
-    res = s.splitArray(nums, m)
+    res = s.splitArrayDP(nums, m)
     print(res)

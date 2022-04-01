@@ -26,8 +26,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    strs = ["lint", "code", "love", "you"]
-    res = sol.encode(strs)
+    str = "abbbabbbcabbbabbbc"
+    res = sol.encode(str)
     print(res)
-    res2 = sol.decode(res)
-    print(res2)
