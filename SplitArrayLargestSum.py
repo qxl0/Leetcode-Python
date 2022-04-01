@@ -85,5 +85,5 @@ if __name__ == "__main__":
     s = Solution()
     nums = [7, 2, 5, 10, 8]
     m = 2
-    res = s.splitArrayDP(nums, m)
+    res = s.splitArray(nums, m)
     print(res)
