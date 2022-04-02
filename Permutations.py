@@ -25,14 +25,15 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         res = []
 
-        def dfs(i, cur):
-            if i == len(nums):
-                res.append(cur.copy())
-            cur.append(i)
-            dfs(i + 1, cur)
-            cur.pop()
+        def dfs(level, avail, cur):
+            if level == len(nums):
+                # res.append(cur.copy())
+                res.append(cur)
+                return
+            for i in range(len(avail)):
+                dfs(level + 1, avail[:i] + avail[i + 1 :], cur + [avail[i]])
 
-        dfs(0, [])
+        dfs(0, nums, [])
         return res
 
 
@@ -40,5 +41,5 @@ if __name__ == "__main__":
 
     sol = Solution()
     nums = [1, 2, 3]
-    res = sol.permute(nums)(nums)
+    res = sol.permute(nums)
     print(res)

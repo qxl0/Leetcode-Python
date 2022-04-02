@@ -39,6 +39,9 @@ https://leetcode.com/problems/first-missing-positive/discuss/17214/Java-simple-s
 """
 
 
+from typing import List
+
+
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         pass
