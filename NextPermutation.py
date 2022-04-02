@@ -42,7 +42,7 @@ class Solution:
 
         n = len(nums)
         k = n - 2
-        while k >= 0 and nums[k] > nums[k + 1]:
+        while k >= 0 and nums[k] >= nums[k + 1]:
             k -= 1
         if k < 0:
             reverse(nums, 0, n - 1)
