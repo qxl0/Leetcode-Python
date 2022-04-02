@@ -44,8 +44,8 @@ class Solution:
         for k in range(n - 2, -1, -1):
             if nums[k] < nums[k + 1]:
                 break
-        if k < 0:
-            reverse(nums)
+        if k <= 0:
+            reverse(nums, 0, n - 1)
         else:
             for l in range(n - 1, k, -1):
                 if nums[l] > nums[k]:
@@ -61,6 +61,7 @@ if __name__ == "__main__":
     # nums = [1, 2, 3]
     # nums = [3, 1, 2]
     # nums = [2, 3, 1]
-    nums = [2, 3, 6, 5, 4, 1, 0]
+    # nums = [2, 3, 6, 5, 4, 1, 0]
+    nums = [3, 2, 1]
     sol.nextPermutation(nums)
     print(nums)

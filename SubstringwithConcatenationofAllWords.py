@@ -26,7 +26,35 @@ class Solution:
     """
 
     def findSubstring(self, s: str, words: List[str]) -> List[int]:
-        pass
+        res = []
+        N = len(words)
+        if N <= 0:
+            return res
+        wordLen = len(words[0])
+        allWords = {}
+        for w in words:
+            if w not in allWords:
+                allWords[w] = 0
+            allWords[w] += 1
+        for i in range(len(s) - wordLen * N):
+            hasWords = {}
+            num = 0
+            while num < N:
+                word = s[i + num * wordLen : i + (num + 1) * wordLen]
+                # check words
+                if word in allWords:
+                    value = hasWords.get(
+                        word, 0
+                    )  # get(, 0) allow us to get default if not
+                    hasWords[word] = value + 1
+                    if hasWords[word] > allWords[word]:
+                        break
+                else:
+                    break
+                num += 1
+            if num == N:
+                res.append(i)
+        return res
 
 
 if __name__ == "__main__":
