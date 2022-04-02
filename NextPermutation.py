@@ -33,15 +33,34 @@ class Solution:
     """
 
     def nextPermutation(self, nums: List[int]) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        pass
+        def reverse(arr, l, r):
+            # in place reverse
+            while l < r:
+                arr[l], arr[r] = arr[r], arr[l]
+                l += 1
+                r -= 1
+
+        n = len(nums)
+        for k in range(n - 2, -1, -1):
+            if nums[k] < nums[k + 1]:
+                break
+        if k < 0:
+            reverse(nums)
+        else:
+            for l in range(n - 1, k, -1):
+                if nums[l] > nums[k]:
+                    break
+            nums[k], nums[l] = nums[l], nums[k]
+            reverse(nums, k + 1, n - 1)
 
 
 if __name__ == "__main__":
 
     sol = Solution()
-    nums = [1, 1, 3]
-    res = sol.nextPermutation(nums)
-    print(res)
+    # nums = [1, 1, 3]
+    # nums = [1, 2, 3]
+    # nums = [3, 1, 2]
+    # nums = [2, 3, 1]
+    nums = [2, 3, 6, 5, 4, 1, 0]
+    sol.nextPermutation(nums)
+    print(nums)
