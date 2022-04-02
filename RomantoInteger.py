@@ -30,16 +30,33 @@ Given a roman numeral, convert it to an integer.
 """
 
 
+import enum
 from typing import List
 
 
 class Solution:
     def romanToInt(self, s: str) -> int:
-        pass
+        roman2int = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000,
+        }
+        number = 0
+        s = s.replace("IV", "IIII").replace("IV", "VIIII")
+        s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
+        s = s.replace("CD", "CCCC").replace("CM", "DCCCC")
+        for char in s:
+            number += roman2int[char]
+        return number
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "III"
-    res = sol.romanToInt(s)(s)
+    s = "LIV"
+    # s = "III"
+    res = sol.romanToInt(s)
     print(res)
