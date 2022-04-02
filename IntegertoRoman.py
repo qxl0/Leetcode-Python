@@ -39,7 +39,7 @@ class Solution:
     def intToRoman(self, num: int) -> str:
         digits = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
         tenth = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
-        hundr = ["", "C" "CC", "CCC", "CD" "D", "DC", "DCC", "DCCC", "CM"]
+        hundr = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
         thous = ["", "M", "MM", "MMM"]
 
         return (
@@ -52,6 +52,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    num = 40
+    # num = 40
+    num = 3900
     res = sol.intToRoman(num)
     print(res)
