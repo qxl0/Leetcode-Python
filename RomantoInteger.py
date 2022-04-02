@@ -54,9 +54,37 @@ class Solution:
         return number
 
 
+class Solution2:
+    def romanToInt(self, s: str) -> int:
+        res, prev = 0, 0
+        d = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        for c in s[::-1]:
+            if d[c] >= prev:  # IV-->4 = 5-1 IX --> 10-1=9 XL-->50-10=40
+                res += d[c]
+            else:
+                res -= d[c]
+            prev = d[c]
+        return res
+
+
+class Solution3:
+    def romanToInt(self, s):
+        d = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        value = 0
+        for idx, char in enumerate(
+            s[:-1]
+        ):  # only goes next last, because we look ahead 1 pos
+            if d[char] < d[s[idx + 1]]:
+                value -= d[char]
+            else:
+                value += d[char]
+        # value += d[s[-1]]
+        return value
+
+
 if __name__ == "__main__":
-    sol = Solution()
-    s = "LIV"
-    # s = "III"
+    sol = Solution3()
+    # s = "LIV"
+    s = "IX"
     res = sol.romanToInt(s)
     print(res)
