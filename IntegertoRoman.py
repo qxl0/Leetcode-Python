@@ -37,11 +37,21 @@ class Solution:
     """
 
     def intToRoman(self, num: int) -> str:
-        pass
+        digits = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+        tenth = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
+        hundr = ["", "C" "CC", "CCC", "CD" "D", "DC", "DCC", "DCCC", "CM"]
+        thous = ["", "M", "MM", "MMM"]
+
+        return (
+            thous[num // 1000]
+            + hundr[(num % 1000) // 100]
+            + tenth[(num % 100) // 10]
+            + digits[(num % 10)]
+        )
 
 
 if __name__ == "__main__":
     sol = Solution()
-    num = 3
+    num = 40
     res = sol.intToRoman(num)
     print(res)
