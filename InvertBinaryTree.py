@@ -11,16 +11,20 @@ class TreeNode:
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        pass
+        if not root:
+            return root
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+        return root
 
 
 if __name__ == "__main__":
     sol = Solution()
-    p = TreeNode(1)
+    p = TreeNode(4)
     p.left = TreeNode(2)
-    p.right = TreeNode(3)
-    q = TreeNode(1)
-    q.left = TreeNode(2)
-    q.right = TreeNode(3)
-    res = sol.isSameTree(p, q)
+    p.right = TreeNode(7)
+    p.left.left = TreeNode(1)
+    p.left.right = TreeNode(3)
+    p.right.left = TreeNode(6)
+    p.right.right = TreeNode(9)
+    res = sol.invertTree(p)
     print(res)
