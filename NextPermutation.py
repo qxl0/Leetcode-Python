@@ -41,10 +41,10 @@ class Solution:
                 r -= 1
 
         n = len(nums)
-        for k in range(n - 2, -1, -1):
-            if nums[k] < nums[k + 1]:
-                break
-        if k <= 0:
+        k = n - 2
+        while k >= 0 and nums[k] > nums[k + 1]:
+            k -= 1
+        if k < 0:
             reverse(nums, 0, n - 1)
         else:
             for l in range(n - 1, k, -1):
@@ -58,10 +58,12 @@ if __name__ == "__main__":
 
     sol = Solution()
     # nums = [1, 1, 3]
-    # nums = [1, 2, 3]
     # nums = [3, 1, 2]
     # nums = [2, 3, 1]
     # nums = [2, 3, 6, 5, 4, 1, 0]
-    nums = [3, 2, 1]
+    # nums = [3, 2, 1]
+    # nums = [1, 3, 2]
+    # nums = [1, 2, 3]
+    nums = [5, 1, 1]
     sol.nextPermutation(nums)
     print(nums)

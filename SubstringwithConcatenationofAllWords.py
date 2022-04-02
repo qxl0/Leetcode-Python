@@ -59,7 +59,9 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "barfoothefoobarman"
-    words = ["foo", "bar"]
+    # s = "barfoothefoobarman"
+    # words = ["foo", "bar"]
+    s = "barfoofoobarman"
+    words = ["foo", "bar", "foo"]
     res = sol.findSubstring(s, words)
     print(res)
