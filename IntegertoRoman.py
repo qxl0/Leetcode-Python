@@ -50,9 +50,43 @@ class Solution:
         )
 
 
+class Solution2:
+    def intToRoman(self, num):
+        values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        romans = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+
+        res = ""
+        for i, v in enumerate(values):
+            res += romans[i] * (num // v)
+            num %= v
+        return res
+
+    def intToRoman2(self, num):
+        int2roman = {
+            1000: "M",
+            900: "CM",
+            500: "D",
+            400: "CD",
+            100: "C",
+            90: "XC",
+            50: "L",
+            40: "XL",
+            10: "X",
+            9: "IX",
+            5: "V",
+            4: "IV",
+            1: "I",
+        }
+        res = ""
+        for i in int2roman:
+            res += (num // i) * int2roman[i]
+            num %= i
+        return res
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     # num = 40
-    num = 3900
+    num = 3400
     res = sol.intToRoman(num)
     print(res)
