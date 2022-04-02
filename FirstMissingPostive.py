@@ -12,7 +12,10 @@ Share
 Given an unsorted integer array nums, return the smallest missing positive integer.
 
 You must implement an algorithm that runs in O(n) time and uses constant extra space.
-The basic idea is that we have an array with n cells (n is the length of the array). If an integer is missing it must be in the range [1..n]. This is the crucial observation we use to deduce the algorithm. This means that the range of possible answers is [1..n] if an integer is missing, and if an integer is not missing then the answer is n+1.
+
+The basic idea is that we have an array with n cells (n is the length of the array). 
+If an integer is missing it must be in the range [1..n]. This is the crucial observation we use to deduce the algorithm. 
+This means that the range of possible answers is [1..n] if an integer is missing, and if an integer is not missing then the answer is n+1.
 
 I'll try my best to explain why.
 
