@@ -22,7 +22,18 @@ from typing import List
 
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
-        pass
+        res = []
+
+        def helper(level, avail, curr):
+            if level == k and sum(curr) == n:
+                res.append(curr)
+                return
+            for i in range(len(avail)):
+                helper(level + 1, avail[i + 1 :], curr + [avail[i]])
+
+        nums = [i for i in range(1, 10)]
+        helper(0, nums, [])
+        return res
 
 
 if __name__ == "__main__":
