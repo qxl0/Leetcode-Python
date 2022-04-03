@@ -44,13 +44,33 @@ from typing import List
 
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        pass
+        for i in range(len(nums)):
+            while 0 <= nums[i] - 1 < len(nums) and nums[nums[i] - 1] != nums[i]:
+                tmp = nums[i] - 1
+                nums[i], nums[tmp] = nums[tmp], nums[i]
+        for i in range(len(nums)):
+            if nums[i] != i + 1:
+                return i + 1
+        return len(nums) + 1
+
+
+class Solution2:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        flags = {}
+        for num in nums:
+            if num > 0:
+                flags[num - 1] = True
+
+        for index in range(len(nums)):
+            if index not in flags:
+                return index + 1
+        return index + 1
 
 
 if __name__ == "__main__":
-    sol = Solution()
-    # nums = [1,2,0] # output: 3
-    # nums = [3,4,-1,1]
-    nums = [7, 8, 9, 11, 12]
+    sol = Solution2()
+    # nums = [1, 2, 0]  # output: 3
+    # nums = [3, 4, -1, 1]  # output: 2
+    nums = [7, 8, 9, 11, 12]  # output: 1
     res = sol.firstMissingPositive(nums)
     print(res)
