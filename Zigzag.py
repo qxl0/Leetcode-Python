@@ -28,12 +28,23 @@ from typing import List
 
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        pass
+        if numRows == 1:
+            return s
+        res = ""
+        for r in range(numRows):
+            dr = (numRows - 1) * 2  # gap for top and bottom rows
+            for i in range(r, len(s), dr):  # dr is the gap
+                res += s[i]
+                if r > 0 and r < numRows - 1 and i + dr - 2 * r < len(s):
+                    res += s[
+                        i + dr - 2 * r
+                    ]  # if mid rows, gap dr-2*r: r=1, dr-2;r=2:dr-4
+        return res
 
 
 if __name__ == "__main__":
     sol = Solution()
     s = "PAYPALISHIRING"
     numrows = 3
-    res = sol.convert(s, numRows)
+    res = sol.convert(s, numrows)
     print(res)
