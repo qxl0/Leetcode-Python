@@ -23,17 +23,39 @@ Given n and k, return the kth permutation sequence.
 """
 
 
+from math import factorial
 from typing import List
 
 
 class Solution:
     def getPermutation(self, n: int, k: int) -> str:
-        pass
+        res, nums = "", [i for i in range(1, n + 1)]
+        k -= 1
+        while n:
+            n -= 1
+            index, k = divmod(k, factorial(n))
+            res += str(nums.pop(index))
+        return res
+
+    def getPermutation2(self, n, k):
+        nums = [i for i in range(1, n + 1)]
+        k -= 1
+
+        def helper(n, k):
+            if n == 1 and k == 0:
+                return str(nums.pop())
+            n -= 1
+            index, k = divmod(k, factorial(n))
+            return str(nums.pop(index)) + helper(n, k)
+
+        return helper(n, k)
 
 
 if __name__ == "__main__":
     sol = Solution()
-    n = 3
-    k = 3
-    res = sol.getPermutation(n, k)
+    # n = 3
+    # k = 3
+    n = 4
+    k = 9
+    res = sol.getPermutation2(n, k)
     print(res)
