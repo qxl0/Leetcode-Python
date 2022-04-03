@@ -20,7 +20,17 @@ from typing import List
 
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
-        pass
+        res = []
+
+        def helper(level, curr):
+            if level == k:
+                res.append(curr.copy())
+                return
+            for i in range(1, n):
+                helper(level + 1, curr + [i])
+
+        helper(0, [])
+        return res
 
 
 if __name__ == "__main__":
