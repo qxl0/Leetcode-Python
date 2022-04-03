@@ -55,7 +55,9 @@ if __name__ == "__main__":
     sol = Solution()
     # n = 3
     # k = 3
-    n = 4
-    k = 9
+    # n = 4
+    # k = 9
+    n = 1
+    k = 1
     res = sol.getPermutation2(n, k)
     print(res)
