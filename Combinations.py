@@ -27,7 +27,7 @@ class Solution:
                 res.append(curr.copy())
                 return
             for i in range(len(avail)):
-                helper(level + 1, avail[:i] + avail[i + 1 :], curr + [avail[i]])
+                helper(level + 1, avail[i + 1 :], curr + [avail[i]])
 
         helper(0, [i for i in range(1, n + 1)], [])
         return res
