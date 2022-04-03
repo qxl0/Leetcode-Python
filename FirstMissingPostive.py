@@ -66,11 +66,21 @@ class Solution2:
                 return index + 1
         return index + 1
 
+    def firstMissingPositive2(self, nums):
+        flags = [False] * (len(nums))
+        for num in nums:
+            if 0 <= num <= len(nums):
+                flags[num - 1] = True
+        for index in range(len(flags)):
+            if not flags[index]:
+                return index + 1
+        return len(flags) + 1
+
 
 if __name__ == "__main__":
     sol = Solution2()
     # nums = [1, 2, 0]  # output: 3
-    # nums = [3, 4, -1, 1]  # output: 2
-    nums = [7, 8, 9, 11, 12]  # output: 1
-    res = sol.firstMissingPositive(nums)
+    nums = [3, 4, -1, 1]  # output: 2
+    # nums = [7, 8, 9, 11, 12]  # output: 1
+    res = sol.firstMissingPositive2(nums)
     print(res)
