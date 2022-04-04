@@ -19,8 +19,19 @@ class Solution2:
         return d.values()
 
 
+class Solution3:
+    def group_anagrams(self, strs):
+        res = defaultdict(list)
+        for w in strs:
+            count = [0] * 26
+            for c in w:
+                count[ord(c) - ord("a")] += 1
+            res[tuple(count)].append(w)
+        return res.values()
+
+
 if __name__ == "__main__":
-    sol = Solution2()
+    sol = Solution3()
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
     res = sol.group_anagrams(strs)
     print(res)
