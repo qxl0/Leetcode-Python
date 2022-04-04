@@ -1,3 +1,4 @@
+import heapq
 from typing import List, Optional
 import collections
 
@@ -45,11 +46,29 @@ class Solution:
         return res[:k]
 
 
+class Solution2:
+    def topKFrequent(self, nums, k):
+        freq = {}  # n --> freq
+        for n in nums:
+            if n not in freq:
+                freq[n] = 0
+            freq[n] += 1
+        # set up maxHeap
+        h = []
+        for n, f in freq.items():
+            heapq.heappush(h, (f * (-1), n))
+        # pop up top K
+        res = []
+        for i in range(k):
+            res.append(heapq.heappop(h)[1])
+        return res
+
+
 if __name__ == "__main__":
-    s = Solution()
-    # nums = [1, 1, 1, 2, 2, 3]
-    # k = 2
-    nums = [3, 0, 1, 0]
-    k = 1
+    s = Solution2()
+    nums = [1, 1, 1, 2, 2, 3]
+    k = 2
+    # nums = [3, 0, 1, 0]
+    # k = 1
     res = s.topKFrequent(nums, k)
     print(res)
