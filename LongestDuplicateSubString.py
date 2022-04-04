@@ -75,8 +75,40 @@ class Solution2:
         return ans
 
 
+class Solution3:
+    def longestDupSubstring(self, S):
+        nums = [ord(c) - ord("a") for c in S]
+        n = len(S)
+        MOD = 2**63 - 1
+
+        def search(m, MOD):
+            h = 0
+            for i in range(m):
+                h = (h * 26 + nums[i]) % MOD
+            s = {h}
+            aL = pow(26, m, MOD)
+            for pos in range(1, n - m + 1):
+                h = (h * 26 - nums[pos - 1] * aL + nums[pos + m - 1]) % MOD
+                if h in s:
+                    return pos
+                else:
+                    s.add(h)
+            return -1
+
+        l, r = 1, n
+        while l < r:
+            m = (l + r) // 2
+            cur = search(m, MOD)
+            if cur != -1:
+                l = m + 1
+                pos = cur
+            else:
+                r = m - 1
+        return S[pos : pos + l - 1]
+
+
 if __name__ == "__main__":
-    sol = Solution2()
+    sol = Solution3()
     s = "banana"
     res = sol.longestDupSubstring(s)
     print(res)
