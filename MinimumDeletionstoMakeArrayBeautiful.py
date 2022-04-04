@@ -57,7 +57,7 @@ class Solution2:
 if __name__ == "__main__":
     sol = Solution2()
     # nums = [1, 1, 2, 2, 3, 3]
-    nums = [1, 1, 1, 2, 3, 3]
+    nums = [1, 2, 2, 3]
     # nums = [1, 1, 2, 3, 5]
     res = sol.minDeletion(nums)
     print(res)
