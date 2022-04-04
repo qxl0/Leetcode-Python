@@ -21,12 +21,18 @@ from typing import List
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        pass
+        s1len = len(s1)
+        match = "".join(sorted(s1))
+        for i in range(len(s2) - s1len + 1):
+            target = "".join(sorted(s2[i : i + s1len]))
+            if match == target:
+                return True
+        return False
 
 
 if __name__ == "__main__":
     sol = Solution()
     s1 = "ab"
-    s2 = "eidaooo"
+    s2 = "eidbaooo"
     res = sol.checkInclusion(s1, s2)
     print(res)
