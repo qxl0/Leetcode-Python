@@ -20,13 +20,13 @@ from typing import List
 
 
 class Solution:
-    def isAnagram(self, s: str, t: str) -> bool: 
-      pass
+    def isAnagram(self, s: str, t: str) -> bool:
+        return all([s.count(c) == t.count(c) for c in string.ascii_lowercase])
 
 
 if __name__ == "__main__":
     sol = Solution()
     s = "anagram"
     t = "nagaram"
-    res = sol.isAnagram(s,t)
+    res = sol.isAnagram(s, t)
     print(res)
