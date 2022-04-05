@@ -52,12 +52,14 @@ class Solution2:
             s2 = max(s2, s1 + p)
             s3 = max(s3, s2 - p)
             s4 = max(s4, s3 + p)
+            print(f"p={p}: s1={s1},s2={s2},s3={s3},s4={s4}")
         return s4
 
 
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     # prices = [7, 1, 5, 3, 6, 4]
-    prices = [3, 3, 5, 0, 0, 3, 1, 4]
+    # prices = [3, 3, 5, 0, 0, 3, 1, 4]
+    prices = [1, 3, 2, 4]
     res = sol.maxProfit(prices)
     print(res)
