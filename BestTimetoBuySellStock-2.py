@@ -25,18 +25,19 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        maxP = 0
-        l = 0
+        maxp, l = 0, 0
         for i in range(1, len(prices)):
             if prices[i] > prices[l]:
-                maxP = max(maxP, prices[i] - prices[l])
+                maxp += prices[i] - prices[l]
+                l = i
             else:
                 l = i
-        return maxP
+        return maxp
 
 
 if __name__ == "__main__":
     sol = Solution()
-    prices = [7, 1, 5, 3, 6, 4]
+    # prices = [7, 1, 5, 3, 6, 4]
+    prices = [1, 2, 3]
     res = sol.maxProfit(prices)
     print(res)
