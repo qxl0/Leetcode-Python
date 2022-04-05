@@ -24,7 +24,14 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        pass
+        maxP = 0
+        l = 0
+        for i in range(1, len(prices)):
+            if prices[i] > prices[l]:
+                maxP = max(maxP, prices[i] - prices[l])
+            else:
+                l = i
+        return maxP
 
 
 if __name__ == "__main__":
