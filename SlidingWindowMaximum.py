@@ -15,19 +15,39 @@ left of the array to the very right. You can only see the k numbers in the windo
 Return the max sliding window.
 """
 from collections import defaultdict
+import collections
 from math import factorial
 from operator import itemgetter
 from typing import List
 
 
 class Solution:
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        pass
+    def maxSlidingWindow(self, nums, k):
+        d = collections.deque()
+        out = []
+        for i in range(n):
+            while (
+                d and nums[d[-1]] < nums[i]
+            ):  # new element > q's end, remove it , desc order
+                d.pop()
+            # d += (i,)
+            d.append(i)
+            if d[0] == i - k:  # out of sliding window, remove
+                d.popleft()
+            if i >= k - 1:  # k = 3, i=0,1, no output
+                out += nums[d[0]]
+        return out
 
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [1, 3, -1, -3, 5, 3, 6, 7]
-    k = 3
+    # nums = [1, 3, -1, -3, 5, 3, 6, 7]
+    # k = 3
+    # nums = [1, -1]
+    # k = 1
+    # nums = [1, 3, -1, -3, 5, 3, 6, 7]
+    # k = 3
+    nums = [7, 2, 4]
+    k = 2
     res = sol.maxSlidingWindow(nums, k)
     print(res)
