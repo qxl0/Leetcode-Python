@@ -24,12 +24,55 @@ Return true if you can make s a valid parentheses string. Otherwise, return fals
 
 class Solution:
     def canBeValid(self, s: str, locked: str) -> bool:
-        pass
+        freeL, freeR, degree = 0, 0, 0
+        for c, lock in zip(s, locked):
+            if c == "(":
+                degree += 1
+                if lock == "0":
+                    freeL += 1
+            else:
+                degree -= 1
+                if lock == "0":
+                    freeR += 1
+            if degree < 0:
+                if not freeR:
+                    return False
+                freeR -= 1
+                degree += 2
+            freeL = min(degree // 2, freeL)
+        return degree == freeL * 2
+
+
+class Solution2:
+    def canBeValid(self, s, locked):
+        if len(s) % 2 != 0:
+            return False
+        lower, upper = 0, 0
+        for c, lock in zip(s, locked):
+            if lock == "1":
+                if c == "(":
+                    lower += 1
+                    upper += 1
+                else:
+                    lower -= 1
+                    upper -= 1
+            else:  # *
+                upper += 1
+                lower -= 1
+            if lower < 0:
+                lower += 2
+            if upper < 0:
+                return False
+        return lower == 0  # unmatched ( must be 0
 
 
 if __name__ == "__main__":
-    sol = Solution()
-    s = "()()"
-    locked = "010100"
-    res = sol.canBeValidk(s, locked)
+    sol = Solution2()
+    # s = "))()))"
+    # locked = "010100"
+    # s = "))"
+    # locked = "01"
+    s = "())(())((())))(()())())()))))()("
+    locked = "11100101100001001111010110101011"
+    res = sol.canBeValid(s, locked)
     print(res)
