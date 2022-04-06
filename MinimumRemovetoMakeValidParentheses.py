@@ -26,11 +26,24 @@ from this import d
 
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        pass
+        stack = []
+        s_list = list(s)
+        for i, c in enumerate(s_list):
+            if c == "(":
+                stack.append(i)
+            elif c == ")":
+                if len(stack) > 0:
+                    stack.pop()
+                else:
+                    s_list[i] = ""
+        while len(stack) > 0:
+            s_list[stack.pop()] = ""
+        return "".join(s_list)
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "lee(t(c)o)de)"
+    # s = "lee(t(c)o)de)"
+    s = "(a(b(c)d)"
     res = sol.minRemoveToMakeValid(s)
     print(res)
