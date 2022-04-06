@@ -96,7 +96,8 @@ class Solution3:
             return -1
 
         l, r = 1, n
-        while l < r:
+        while l <= r:
+            print(f"{l}, {r}")
             m = (l + r) // 2
             cur = search(m, MOD)
             if cur != -1:
@@ -107,8 +108,45 @@ class Solution3:
         return S[pos : pos + l - 1]
 
 
+class Solution4:
+    def longestDupSubstring(self, s: str) -> str:
+        MOD = 2**99 - 1
+        nums = [ord(c) - ord("a") for c in s]
+
+        def search(m):
+            h = 0
+            for i in range(m):
+                h = (h * 26 + nums[i]) % MOD
+            S = {h}
+            AL = pow(26, m, MOD)
+            for i in range(1, len(s) - m + 1):
+                h = (h * 26 - nums[i - 1] * AL + nums[i + m - 1]) % MOD
+                if h in S:
+                    return i
+                else:
+                    S.add(h)
+            return -1
+
+        l, r = 1, len(s)
+        pos = 0
+        while l <= r:
+            print(f"{l}, {r}")
+            m = (l + r) // 2
+            cur = search(m)
+            if cur != -1:
+                l = m + 1
+                pos = cur
+            else:
+                r = m - 1
+        return s[pos : pos + l - 1]
+
+
 if __name__ == "__main__":
-    sol = Solution3()
-    s = "banana"
+    sol = Solution4()
+    # s = "banana"
+    # s = "dcsopfbhupztcyxctlyxocqwgcgydrxkbbeowdlkcehhslmidwphslbf"
+    # s = "abcd"
+    s = "nyvzwttxsshphczjjklqniaztccdrawueylaelkqtjtxdvutsewhghcmoxlvqjktgawwgpytuvoepnyfbdywpmmfukoslqvdrkuokxcexwugogcwvsuhcziwuwzfktjlhbiuhkxcreqrdbj"
+    #  expected: hcz
     res = sol.longestDupSubstring(s)
     print(res)
