@@ -66,6 +66,48 @@ class Solution2:
         return lower == 0  # unmatched ( must be 0
 
 
+class Solution3:
+    def canBeValid(self, s, locked):
+        if len(s) % 2 != 0:
+            return False
+
+        count = 0
+        chance = 0
+        for c, lock in zip(s, locked):
+            if c == "(":
+                count += 1
+            else:
+                count -= 1
+
+            if locked == "0" and c == ")":
+                chance += 1
+
+            if count < 0:
+                if chance == 0:
+                    return False
+                count += 2
+                chance -= 1
+        # ) has matching (
+        # 2nd pass unmatched )
+        count = 0
+        chance = 0
+        for c, lock in zip(s[::-1], locked[::-1]):
+            if c == ")":
+                count += 1
+            else:
+                count -= 1
+
+            if locked == "0" and c == "(":
+                chance += 1
+
+            if count < 0:
+                if chance == 0:
+                    return False
+                count += 2
+                chance -= 1
+        return True
+
+
 if __name__ == "__main__":
     sol = Solution2()
     # s = "))()))"

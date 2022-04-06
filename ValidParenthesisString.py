@@ -22,11 +22,31 @@ Left parenthesis '(' must go before the corresponding right parenthesis ')'.
 
 class Solution:
     def checkValidString(self, s: str) -> bool:
-        pass
+        lower, upper = 0, 0
+        middle = 0
+        for c in s:
+            if c == "*":
+                lower -= 1
+                upper += 1
+            elif c == "(":
+                lower += 1
+                upper += 1
+                middle += 1
+            else:  # )
+                lower -= 1
+                upper -= 1
+                middle -= 1
+            if lower < 0:
+                lower += 1
+            if upper < 0:
+                return False
+        print(middle)
+        return lower == 0
 
 
 if __name__ == "__main__":
     sol = Solution()
     s = "(*))"
+    # s = "(*)"
     res = sol.checkValidString(s)
     print(res)
