@@ -21,13 +21,43 @@ Return the minimum number of moves required to make s valid.
 """
 
 
+from this import d
+
+
 class Solution:
     def minAddToMakeValid(self, s: str) -> int:
-        pass
+        count = 0
+        st = []
+        for c in s:
+            if c == "(":
+                st.append(c)
+            else:
+                if not st:
+                    count += 1
+                else:
+                    st.pop()
+        while st:
+            st.pop()
+            count += 1
+        return count
+
+
+class Solution2:
+    def minAddToMakeValid(self, s):
+        left, count = 0, 0
+        for c in s:
+            if c == "(":
+                left += 1
+            else:
+                left -= 1
+            if left < 0:
+                left = 0
+                count += 1
+        return left + count
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "())"
+    s = "()))"
     res = sol.minAddToMakeValid(s)
     print(res)
