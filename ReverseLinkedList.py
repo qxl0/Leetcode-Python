@@ -30,9 +30,19 @@ class Solution:
         return prev
 
 
+class Solution2:
+    def reverseList(self, head):
+        pre, curr = None, head
+        while curr:
+            # curr.next, curr, pre = pre, curr.next, curr
+            pre, curr.next, curr = curr, pre, curr.next
+        return pre
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     head = ListNode(1)
-    head.next = ListNode(2)
+    # head.next = ListNode(2)
+    # head.next.next = ListNode(3)
     res = sol.reverseList(head)
     print("result is: ", res)
