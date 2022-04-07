@@ -28,7 +28,14 @@ from this import d
 
 class Solution:
     def minSwaps(self, s: str) -> int:
-        pass
+        right, maxRight = 0, 0
+        for c in s:
+            if c == "]":
+                right += 1
+            else:
+                right -= 1
+            maxRight = max(maxRight, right)
+        return (maxRight + 1) // 2
 
 
 if __name__ == "__main__":
