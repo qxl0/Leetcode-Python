@@ -26,14 +26,39 @@ from this import d
 
 
 class Solution:
+    # two steps process: if singl right, increase count by 1 do whatever required
+    #                    if left < 0, increase count by 1 for adding a left
     def minInsertion(self, s: str) -> str:
-        pass
+        left = 0
+        count = 0
+        i = 0
+        while i < len(s):
+            if s[i] == "(":
+                left += 1
+            else:
+                if i + 1 < len(s) and s[i + 1] == ")":
+                    left -= 1
+                    i += 1
+                else:  # )(
+                    count += 1  # add 1 )
+                    left -= 1
+            if left < 0:
+                count += 1
+                left = 0
+            i += 1
+        return count + left * 2
 
 
 if __name__ == "__main__":
     sol = Solution()
-    # s = "lee(t(c)o)de)"
-    s = "))())("
+    # s = "))())("
     # s = "(()))"
+    # s = ")))))))"
+    # s = "()())))()"
+    # s = ")("
+    # s = "())("
+    # s = "(()))"
+    # s = "()())))()"
+    s = ")"
     res = sol.minInsertion(s)
     print(res)

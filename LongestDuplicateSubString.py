@@ -96,7 +96,7 @@ class Solution3:
             return -1
 
         l, r = 1, n
-        while l <= r:
+        while l < r:
             print(f"{l}, {r}")
             m = (l + r) // 2
             cur = search(m, MOD)
@@ -129,7 +129,7 @@ class Solution4:
 
         l, r = 1, len(s)
         pos = 0
-        while l <= r:
+        while l < r:
             print(f"{l}, {r}")
             m = (l + r) // 2
             cur = search(m)
