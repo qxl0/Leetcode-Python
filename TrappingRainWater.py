@@ -24,7 +24,37 @@ from typing import List, Optional
 
 class Solution:
     def trap(self, height: List[int]) -> int:
-        pass
+        l, r = 0, len(height) - 1
+        leftMax, rightMax = height[l], height[r]
+        res = 0
+        while l < r:
+            if leftMax < rightMax:
+                l += 1
+                leftMax = max(leftMax, height[l])
+                res += leftMax - height[l]
+            else:
+                r -= 1
+                rightMax = max(rightMax, height[r])
+                res += rightMax - height[r]
+        return res
+
+
+class Solution2:
+    def trap(self, bars):
+        if not bars or len(bars) < 3:
+            return 0
+        volume = 0
+        left, right = 0, len(bars) - 1
+        l_max, r_max = bars[left], bars[right]
+        while left < right:
+            l_max, r_max = max(bars[left], l_max), max(bars[right], r_max)
+            if l_max <= r_max:
+                volume += l_max - bars[left]
+                left += 1
+            else:
+                volume += r_max - bars[right]
+                right -= 1
+        return volume
 
 
 if __name__ == "__main__":
