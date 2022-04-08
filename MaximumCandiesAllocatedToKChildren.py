@@ -22,12 +22,43 @@ from typing import List, Optional
 
 class Solution:
     def maximumCandies(self, candies: List[int], k: int) -> int:
-        pass
+        l, r = 0, sum(candies) // k
+        while l < r:
+            m = l + (r - l + 1) // 2
+            print(f"l,r = {l,r}")
+            if self.checkValid(candies, k, m):
+                l = m
+            else:
+                r = m - 1
+        return l
+
+    def checkValid(self, candies, k, m):
+        total = 0
+        for candy in candies:
+            total += candy // m
+            if total >= k:
+                return True
+        return False
+
+    def maximumCandies2(self, A, k):
+        end = sum(candies) // k
+        start = 1
+        ans = 0
+        while start <= end:
+            mid = (start + end) // 2
+            if self.checkValid(candies, k, mid):
+                start = mid + 1
+                ans = mid
+            else:
+                end = mid - 1
+        return ans
 
 
 if __name__ == "__main__":
     sol = Solution()
     candies = [5, 8, 6]
     k = 3
+    # candies = [4, 7, 5]
+    # k = 16
     res = sol.maximumCandies(candies, k)
     print(res)
