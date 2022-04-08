@@ -26,7 +26,24 @@ from typing import List, Optional
 
 class Solution:
     def minimumSize(self, nums: List[int], maxOperations: int) -> int:
-        pass
+        def checkValid(nums, maxOperations, penalty):
+            total = 0
+            for n in nums:
+                total += (n - 1) // penalty
+                if total > maxOperations:
+                    return False
+            return True
+
+        l, r = 1, max(nums)
+        minPenalty = r
+        while l < r:
+            m = l + (r - l) // 2
+            if checkValid(nums, maxOperations, m):
+                minPenalty = m
+                r = m - 1
+            else:
+                l = m + 1
+        return minPenalty
 
 
 if __name__ == "__main__":
