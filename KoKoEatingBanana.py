@@ -18,20 +18,36 @@ Koko likes to eat slowly but still wants to finish eating all the bananas before
 Return the minimum integer k such that she can eat all the bananas within h hours.
 """
 
-from curses.ascii import SO
-from statistics import quantiles
-from this import d
 from typing import List, Optional
 
 
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        pass
+        def checkOK(piles, h, speed):
+            totalh = 0
+            for pile in piles:
+                if pile % speed == 0:
+                    totalh += pile // speed
+                else:
+                    totalh += pile // speed + 1
+
+            return totalh <= h
+
+        l, r = 1, sum(piles)
+        while l < r:
+            speed = l + (r - l) // 2
+            if checkOK(piles, h, speed):
+                r = speed
+            else:
+                l = speed + 1
+        return l
 
 
 if __name__ == "__main__":
     sol = Solution()
-    piles = [3, 6, 7, 11]
-    h = 8
+    # piles = [3, 6, 7, 11]
+    # h = 8
+    piles = [30, 11, 23, 4, 20]
+    h = 5
     res = sol.minEatingSpeed(piles, h)
     print(res)
