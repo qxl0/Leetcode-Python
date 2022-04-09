@@ -22,34 +22,28 @@ from typing import List, Optional
 
 
 class Solution:
-    def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        def checkOK(piles, h, speed):
-            totalh = 0
-            for pile in piles:
-                if pile % speed == 0:
-                    totalh += pile // speed
-                else:
-                    totalh += pile // speed + 1
-                if totalh > h:
-                    return False
-
-            return totalh <= h
-
-        l, r = 1, sum(piles)
-        while l < r:
-            speed = l + (r - l) // 2
-            if checkOK(piles, h, speed):
-                r = speed
-            else:
-                l = speed + 1
-        return l
+    def minimumWeight(
+        self, n: int, edges: List[List[int]], src1: int, src2: int, dest: int
+    ) -> int:
+        pass
 
 
 if __name__ == "__main__":
     sol = Solution()
-    # piles = [3, 6, 7, 11]
-    # h = 8
-    piles = [30, 11, 23, 4, 20]
-    h = 5
-    res = sol.minEatingSpeed(piles, h)
+    n = 6
+    edges = [
+        [0, 2, 2],
+        [0, 5, 6],
+        [1, 0, 3],
+        [1, 4, 5],
+        [2, 1, 1],
+        [2, 3, 3],
+        [2, 3, 4],
+        [3, 4, 2],
+        [4, 5, 1],
+    ]
+    src1 = 0
+    src2 = 1
+    dest = 5
+    res = sol.minimumWeight(n, edges, src1, src2, dest)
     print(res)
