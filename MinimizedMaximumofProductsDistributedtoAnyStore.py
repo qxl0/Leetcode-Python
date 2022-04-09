@@ -18,18 +18,51 @@ After distribution, each store will have been given some number of products (pos
 Return the minimum possible x.
 """
 
+from statistics import quantiles
 from this import d
 from typing import List, Optional
 
 
 class Solution:
     def minimizedMaximum(self, n: int, quantities: List[int]) -> int:
-        pass
+        l, r = 1, max(quantities)
+        while l < r:
+            mid = l + (r - l) // 2
+            if self.checkOK(n, quantities, mid):
+                r = mid
+            else:
+                l = mid + 1
+        return l
+
+    def checkOK(self, n, quantities, mid):
+        total = 0
+        for q in quantities:
+            if q % mid == 0:
+                total += q // mid
+            else:
+                total += q // mid + 1
+        return total <= n
+
+
+class Solution2:
+    def minimizedMaximum(self, n, A):
+        left, right = 1, max(A)
+        while left < right:
+            x = (left + right) // 2
+            if sum((a + x - 1) // x for a in A) > n:
+                left = x + 1
+            else:
+                right = x
+        return left
 
 
 if __name__ == "__main__":
     sol = Solution()
-    n = 6
-    quantities = [11, 6]
+    # n = 6
+    # quantities = [11, 6]
+    # n = 7
+    # quantities = [15, 10, 10]
+    n = 1
+    quantities = [1]
     res = sol.minimizedMaximum(n, quantities)
     print(res)
