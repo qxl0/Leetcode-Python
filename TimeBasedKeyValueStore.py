@@ -18,6 +18,7 @@ void set(String key, String value, int timestamp) Stores the key key with the va
 String get(String key, int timestamp) Returns a value such that set was called previously, with timestamp_prev <= timestamp. If there are multiple such values, it returns the value associated with the largest timestamp_prev. If there are no values, it returns "".
 """
 
+from collections import defaultdict
 from statistics import quantiles
 from this import d
 from typing import List, Optional
@@ -25,13 +26,24 @@ from typing import List, Optional
 
 class TimeMap:
     def __init__(self):
-        pass
+        self.store = defaultdict(list)
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        pass
+        self.store[key].append((timestamp, value))
 
     def get(self, key: str, timestamp: int) -> str:
-        pass
+        values = self.store[key]
+        if not values:
+            return ""
+        l, r = 0, len(values) - 1
+        while l < r:
+            m = (l + r + 1) // 2
+            pre_time, value = values[m]
+            if pre_time > timestamp:
+                r = m - 1
+            else:
+                l = m
+        return values[l][1] if values[l][0] <= timestamp else ""
 
 
 # Your TimeMap object will be instantiated and called as such:
