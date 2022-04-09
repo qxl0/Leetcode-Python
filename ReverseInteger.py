@@ -14,15 +14,15 @@ Given a signed 32-bit integer x, return x with its digits reversed. If reversing
 Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
 """
 
+from filecmp import cmp
 from typing import List, Optional
-
-
-MOD = 2**63 - 1
 
 
 class Solution:
     def reverse(self, x: int) -> int:
-        pass
+        s = (x > 0) - (x < 0)
+        r = int(str(x * s)[::-1])
+        return s * r * (r < 2**31)
 
 
 if __name__ == "__main__":
