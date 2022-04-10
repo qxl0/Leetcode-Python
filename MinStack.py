@@ -44,3 +44,8 @@ class MinStack:
 # obj.pop()
 # param_3 = obj.top()
 # param_4 = obj.getMin()
+if __name__ == "__main__":
+    s = MinStack()
+    heights = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+    res = s.maxArea(heights)
+    print(res)
