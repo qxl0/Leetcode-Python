@@ -17,6 +17,7 @@ Note that it is the kth largest element in the sorted order, not the kth distinc
 from filecmp import cmp
 import heapq
 import math
+import random
 from typing import List, Optional
 
 
@@ -31,11 +32,31 @@ class Solution:
         return -minq[0]
 
 
+class Solution2:
+    def fKLQselect(self, nums, k):
+        if not nums:
+            return
+        p = random.choice(nums)
+        l, m, r = (
+            [x for x in nums if x > p],
+            [x for x in nums if x == p],
+            [x for x in nums if x < p],
+        )
+        nums, i, j = l + m + r, len(l), len(l) + len(m)
+        return (
+            self.fKLQselect(nums[:i], k)
+            if k <= i
+            else self.fKLQselect(nums[j:], k - j)
+            if k > j
+            else nums[i]
+        )
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     # nums = [3, 2, 1, 5, 6, 4]
     # k = 2
     nums = [3, 2, 3, 1, 2, 4, 5, 5, 6]
     k = 4
-    res = sol.findKthLargest(nums, k)
+    res = sol.fKLQselect(nums, k)
     print(res)
