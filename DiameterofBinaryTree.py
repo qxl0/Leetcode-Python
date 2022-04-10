@@ -29,7 +29,18 @@ class TreeNode:
 
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        pass
+        def height(node):
+            nonlocal diameter
+            if not node:
+                return -1
+            l = height(node.left)
+            r = height(node.right)
+            diameter = max(diameter, l + r + 2)
+            return max(l, r) + 1
+
+        diameter = 0
+        height(root)
+        return diameter
 
 
 if __name__ == "__main__":
