@@ -19,12 +19,33 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        pass
+        ret = []
+        if not root:
+            return ret
+
+        q = [root]
+        while q:
+            ret.append(q[-1].val)
+            cur = []
+            for n in q:
+                for kid in (n.left, n.right):
+                    if kid:
+                        cur.append(kid)
+            q = cur
+        return ret
+
+    def rightSideView2(self, root):
+        if not root:
+            return []
+
+        right = self.rightSideView2(root.right)
+        left = self.rightSideView2(root.left)
+        return [root.val] + right + left[len(right) :]
 
 
 if __name__ == "__main__":
     sol = Solution()
     s = [3, 9, 20, None, None, 15, 7]
     root = TreeNode.to_binary_tree(s)
-    res = sol.rightSideView(root)
+    res = sol.rightSideView2(root)
     print("Ans is: ", res)
