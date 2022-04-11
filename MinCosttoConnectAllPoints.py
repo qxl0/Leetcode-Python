@@ -50,8 +50,49 @@ class Solution:
         return res
 
 
+class Solution2:
+    def minCostConnectionPoints(points):
+        n = len(points)
+        Father = [-1 for i in range(n)]
+        for i in range(1, n + 1):
+            Father[i] = i
+
+        def findFather(x):
+            if Father[x] != x:
+                Father[x] = findFather(Father[x])
+            return Father[x]
+
+        def Union(x, y):
+            x = Father[x]
+            y = Father[y]
+            if x < y:
+                Father[y] = x
+            else:
+                Father[x] = y
+
+        edges = []
+        for i in range(n):
+            x1, y1 = points[i]
+            for j in range(i + 1, n):
+                x2, y2 = points[j]
+                dist = abs(x1 - x2) + abs(y1 - y2)
+                edges.append({dist, i, j})
+        edges.sort()
+        count = 0
+        ret = 0
+        for edge in edges:
+            dist, a, b = edge
+            if findFather(a) != findFather(b):
+                Union(a, b)
+                count += 1
+                res += dist
+            if count == n - 1:
+                break
+        return ret
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     points = [[0, 0], [2, 2], [3, 10], [5, 2], [7, 0]]
     res = sol.minCostConnectPoints(points)
     print(res)
