@@ -17,44 +17,71 @@ is defined between two nodes p and q as the lowest node in T that has both p and
 """
 
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+# class TreeNode:
+#     def __init__(self, val: int, left=None, right=None) -> None:
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+#     def __repr__(self) -> str:
+#         return f"val: {self.val}, left: {self.left}, right: {self.right}"
+
+#     def __str__(self) -> str:
+#         return str(self.val)
 
 
-def createTree(lst):
-    return helper(lst, 0)
+# def to_binary_tree(items: list[int]) -> TreeNode:
+#     """Create BT from list of values."""
+#     n = len(items)
+#     if n == 0:
+#         return None
+
+#     def inner(index: int = 0) -> TreeNode:
+#         """Closure function using recursion bo build tree"""
+#         if n <= index or items[index] is None:
+#             return None
+
+#         node = TreeNode(items[index])
+#         node.left = inner(2 * index + 1)
+#         node.right = inner(2 * index + 2)
+#         return node
+
+#     return inner()
 
 
-def helper(lst, i):
-    if i >= len(lst) or not lst[i]:
-        return None
-    curr = TreeNode(lst[i]) if lst[i] else None
-    curr.left = helper(lst, 2 * i + 1)
-    curr.right = helper(lst, 2 * i + 2)
-
-    return curr
+from helpers.TreeNode import TreeNode
 
 
 class Solution:
     def lowestCommonAncestor(
         self, root: "TreeNode", p: "TreeNode", q: "TreeNode"
     ) -> "TreeNode":
-        pass
+        def dfs(curr):
+            if not curr:
+                return None
+            if curr.val == p or curr.val == q:
+                return curr
+            left = dfs(curr.left)
+            right = dfs(curr.right)
+
+            if left and right:
+                return curr
+
+            return left if left else right
+
+        return dfs(root)
 
 
 if __name__ == "__main__":
     sol = Solution()
-    root = TreeNode(1)
-    root.left = TreeNode(2)
-    root.right = TreeNode(3)
-    root.left.left = TreeNode(4)
-    root.left.right = TreeNode(5)
-
-    p = 4
-    q = 5
-
+    # res = sol.lowestCommonAncestor(root, p, q)
+    # s = [3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]
+    # root = to_binary_tree(s)
+    # p = 5
+    # q = 1
+    s = [3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]
+    root = TreeNode.to_binary_tree(s)
+    p = 5
+    q = 4
     res = sol.lowestCommonAncestor(root, p, q)
     print("Ans is: ", res)
