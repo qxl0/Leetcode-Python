@@ -32,49 +32,26 @@ class Solution:
                 and isSametree(node1.right, node2.right)
             )
 
-        if root is None and subRoot is None:
-            return True
-        if root is None and subRoot:
+        if not root:
             return False
-        if root and subRoot is None:
-            return True
 
         return (
             isSametree(root, subRoot)
-            or isSametree(root.left, subRoot)
-            or isSametree(root.right, subRoot)
+            or self.isSubtree(root.left, subRoot)
+            or self.isSubtree(root.right, subRoot)
         )
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s1 = [
-        1,
-        None,
-        1,
-        None,
-        1,
-        None,
-        1,
-        None,
-        1,
-        None,
-        1,
-        None,
-        1,
-        None,
-        1,
-        None,
-        1,
-        None,
-        1,
-        None,
-        1,
-        2,
-    ]
-    s2 = [1, None, 1, None, 1, None, 1, None, 1, None, 1, 2]
+    root = TreeNode(1)
+    root.right = TreeNode(1)
+    root.right.right = TreeNode(1)
+    root.right.right.right = TreeNode(1)
+    root.right.right.right.left = TreeNode(2)
 
-    root = createTree(s1)
-    subtree = createTree(s2)
+    subtree = TreeNode(1)
+    subtree.right = TreeNode(1)
+    subtree.right.left = TreeNode(2)
     res = sol.isSubtree(root, subtree)
     print("Ans is: ", res)
