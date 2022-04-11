@@ -37,8 +37,27 @@ class Solution:
         return ret
 
 
+class Solution_Recursive:
+    def levelOrder(self, root):
+        if not root:
+            return []
+        answer = []
+        self.traverse(root, 1, answer)
+        return answer
+
+    def traverse(self, node, level, answer):
+        if not node:
+            return
+        if level > len(answer):
+            answer.append([node.val])
+        else:
+            answer[level - 1].extend([node.val])
+        self.traverse(node.left, level + 1, answer)
+        self.traverse(node.right, level + 1, answer)
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution_Recursive()
     s = [3, 9, 20, None, None, 15, 7]
     root = TreeNode.to_binary_tree(s)
     res = sol.levelOrder(root)
