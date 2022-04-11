@@ -15,13 +15,27 @@ Return the number of good nodes in the binary tree.
 """
 
 
+import sys
 from typing import List, Optional
 from helpers.TreeNode import TreeNode
 
 
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        pass
+        ret = []
+
+        def dfs(value, node):
+            if not node:
+                return
+            if value <= node.val:
+                ret.append(node.val)
+            dfs(max(node.val, value), node.left)
+            dfs(max(node.val, value), node.right)
+
+        if not root:
+            return 0
+        dfs(-sys.maxsize, root)
+        return len(ret)
 
 
 if __name__ == "__main__":
