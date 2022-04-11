@@ -13,13 +13,28 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
 """
 
 
-from typing import Optional
+from typing import List, Optional
 from helpers.TreeNode import TreeNode
 
 
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        pass
+        ret = []
+        if not root:
+            return ret
+
+        q = [root]
+        while q:
+            curr = []
+            currq = []
+            for i in q:
+                curr.append(i.val)
+                for kid in (i.left, i.right):
+                    if kid:
+                        currq.append(kid)
+            ret.append(curr)
+            q = currq
+        return ret
 
 
 if __name__ == "__main__":
