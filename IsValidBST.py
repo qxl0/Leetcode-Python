@@ -10,12 +10,19 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        def inorder(node):
+        def inorder(node, output):
             if not node:
-                return None
-            left = inorder(node.left)
-            right = inorder(node.right)
-            return left + node.val + right
+                return
+            inorder(node.left, output)
+            output.append(node.val)
+            inorder(node.right, output)
+
+        output = []
+        inorder(root, output)
+        for i in range(1, len(output)):
+            if output[i] <= output[i - 1]:
+                return False
+        return True
 
 
 if __name__ == "__main__":
