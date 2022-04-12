@@ -16,8 +16,19 @@ class Solution:
         return node
 
 
+class Solution2:
+    def buildTree(self, preorder, inorder):
+        root = None
+        if inorder:
+            loc = inorder.index(preorder.pop(0))
+            root = helpers.TreeNode.TreeNode(inorder[loc])
+            root.left = self.buildTree(preorder, inorder[:loc])
+            root.right = self.buildTree(preorder, inorder[loc + 1 :])
+        return root
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     preorder = [3, 9, 20, 15, 7]
     inorder = [9, 3, 15, 20, 7]
     res = sol.buildTree(preorder, inorder)
