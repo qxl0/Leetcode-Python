@@ -1,31 +1,24 @@
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-
-def createTree(lst):
-    return helper(lst, 0)
-
-
-def helper(lst, i):
-    if i >= len(lst) or not lst[i]:
-        return None
-    curr = TreeNode(lst[i]) if lst[i] else None
-    curr.left = helper(lst, 2 * i + 1)
-    curr.right = helper(lst, 2 * i + 2)
-
-    return curr
+import helpers.TreeNode
 
 
 class Solution:
-    def buildTree(prorder, inorder):
-        pass
+    def buildTree(self, preorder, inorder):
+        if not preorder:
+            return None
+        node = helpers.TreeNode.TreeNode(preorder[0])
+        pos = inorder.index(preorder[0])
+        l = inorder[0:pos]
+        l_p = preorder[1 : 1 + len(l)]
+        r_p = preorder[1 + len(l) :]
+        r = inorder[pos + 1 :]
+        node.left = self.buildTree(l_p, l)
+        node.right = self.buildTree(r_p, r)
+        return node
 
 
 if __name__ == "__main__":
     sol = Solution()
-    root = createTree([-10, 9, 20, None, None, 15, 7])
-    res = sol.maxPathSum(root)
-    print("max Sum of the tree is", res)
+    preorder = [3, 9, 20, 15, 7]
+    inorder = [9, 3, 15, 20, 7]
+    res = sol.buildTree(preorder, inorder)
+    print("ans is", res)
