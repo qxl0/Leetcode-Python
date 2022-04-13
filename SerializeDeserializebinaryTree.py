@@ -21,15 +21,63 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def serialize(self, root):
-        """Encodes a tree to a single string.
+        output = []
 
-        :type root: TreeNode
-        :rtype: str
-        """
-        pass
+        def helper(node, output):
+            if not node:
+                output.append("#")
+                return
+            output.append(str(node.val))
+            helper(node.left, output)
+            helper(node.right, output)
+
+        helper(root, output)
+        return ",".join(output)
 
     def deserialize(self, data):
-        pass
+        values = data.split(",")
+        self.i = 0
+
+        def dfs():
+            if values[self.i] == "#":
+                self.i += 1
+                return None
+            node = TreeNode(int(values[self.i]))
+            self.i += 1
+            node.left = dfs()
+            node.right = dfs()
+            return node
+
+        node = dfs()
+        return node
+
+
+class Solution2:
+    def serialize(self, root):
+        def doit(node):
+            if node:
+                vals.append(str(node.val))
+                doit(node.left)
+                doit(node.right)
+            else:
+                vals.append("#")
+
+        vals = []
+        doit(root)
+        return " ".join(vals)
+
+    def deserialize(self, data):
+        def doit():
+            val = next(vals)
+            if val == "#":
+                return None
+            node = TreeNode(int(val))
+            node.left = doit()
+            node.right = doit()
+            return node
+
+        vals = iter(data.split())
+        return doit()
 
 
 # Your Codec object will be instantiated and called as such:
@@ -41,6 +89,7 @@ class Solution:
 if __name__ == "__main__":
     sol = Solution()
     s = [1, 2, 3, None, None, 4, 5]
-    root = TreeNode.to_binary_tree([-10, 9, 20, None, None, 15, 7])
+    root = TreeNode.to_binary_tree(s)
     res = sol.serialize(root)
     print("ans is ", res)
+    node = sol.deserialize(res)
