@@ -18,17 +18,26 @@ You may return the answer in any order. The answer is guaranteed to be unique (e
 
 
 import heapq
+from math import sqrt
 from typing import List, Optional
 
 
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        pass
+        minq = []
+        for x, y in points:
+            dist = sqrt(x * x + y * y)
+            heapq.heappush(minq, (dist, [x, y]))
+
+        res = []
+        for i in range(k):
+            res.append(heapq.heappop(minq)[1])
+        return res
 
 
 if __name__ == "__main__":
     s = Solution()
-    points = [[1, 3], [-2, 2]]
-    k = 1
+    points = [[3, 3], [5, -1], [-2, 4]]
+    k = 2
     res = s.kClosest(points, k)
     print("Ans is: ", res)
