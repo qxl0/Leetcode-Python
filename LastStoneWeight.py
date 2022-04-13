@@ -21,12 +21,19 @@ Return the smallest possible weight of the left stone. If there are no stones le
 """
 
 
-from typing import Optional
+import heapq
+from typing import List, Optional
 
 
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        pass
+        minq = [-i for i in stones]
+        heapq.heapify(minq)
+        while len(minq)>1:
+            v1 = heapq.heappop(minq)
+            v2 = heapq.heappop(minq)
+            heapq.heappush(minq, v1-v2)
+        return minq[0] if minq[0]>=0 else -minq[0] 
 
 
 if __name__ == "__main__":
