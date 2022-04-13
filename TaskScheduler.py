@@ -1,19 +1,22 @@
 """
-215. Kth Largest Element in an Array
+621. Task Scheduler
 Medium
 
-8842
+6249
 
-481
+1202
 
 Add to List
 
 Share
-Given an integer array nums and an integer k, return the kth largest element in the array.
+Given a characters array tasks, representing the tasks a CPU needs to do, where each letter represents a different task. Tasks could be done in any order. Each task is done in one unit of time. For each unit of time, the CPU could complete either one task or just be idle.
 
-Note that it is the kth largest element in the sorted order, not the kth distinct element.
+However, there is a non-negative integer n that represents the cooldown period between two same tasks (the same letter in the array), that is that there must be at least n units of time between any two same tasks.
+
+Return the least number of units of times that the CPU will take to finish all the given tasks.
 """
 
+from collections import Counter, deque
 from filecmp import cmp
 import heapq
 import math
@@ -23,7 +26,21 @@ from typing import List, Optional
 
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
-        pass
+        count = Counter(tasks)
+        maxH = [-c for c in count.values()]
+        heapq.heapify(maxH)
+        q = deque()
+        time = 0
+        while maxH or q:
+            time += 1
+
+            if maxH:
+                cnt = 1 + heapq.heappop(maxH)
+                if cnt:
+                    q.append([cnt, time + n])
+            if q and q[0][1] == time:
+                heapq.heappush(maxH, q.popleft()[0])
+        return time
 
 
 if __name__ == "__main__":
