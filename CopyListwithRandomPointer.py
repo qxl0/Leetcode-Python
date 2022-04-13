@@ -33,13 +33,31 @@ class Node:
 """
 
 
+from typing import Optional
+from helpers.LinkedList import Node
+from helpers.LinkedList import LinkedList
+
+
 class Solution:
     def copyRandomList(self, head: "Optional[Node]") -> "Optional[Node]":
-        pass
+        curr = head
+        mappings = {}
+        while curr: 
+          mappings[curr] = Node(curr.val)
+          curr = curr.next
+        curr = head
+        while curr:
+          if curr.next:
+            mappings[curr].next = mappings[curr.next]
+          if curr.random:
+            mappings[curr].random = mappings[curr.random]
+          curr = curr.next
+        return mappings[head] if head else None
 
 
 if __name__ == "__main__":
     s = Solution()
-    heights = [1, 8, 6, 2, 5, 4, 8, 3, 7]
-    res = s.maxArea(heights)
+    l = [[7, None], [13, 0], [11, 4], [10, 2], [1, 0]]
+    head = LinkedList.
+    res = s.copyRandomList()
     print(res)
