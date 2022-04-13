@@ -29,11 +29,25 @@ class Solution:
     max_path = float("-inf")
 
     def connect(self, root: "Optional[Node]") -> "Optional[Node]":
-        pass
+        if not root:
+            return root
+        q = [root]
+        while q:
+            cur = []
+            for i in range(1, len(q)):
+                q[i - 1].next = q[i]
+                if q[i - 1].left:
+                    cur.append(q[i - 1].left)
+                    cur.append(q[i - 1].right)
+            if q[len(q) - 1].left:
+                cur.append(q[len(q) - 1].left)
+                cur.append(q[len(q) - 1].right)
+            q = cur
+        return root
 
 
 if __name__ == "__main__":
     sol = Solution()
-    root = Node.to_binary_tree([-10, 9, 20, None, None, 15, 7])
-    res = sol.maxPathSum(root)
+    root = Node.to_binary_tree([1, 2, 3, 4, 5, 6, 7])
+    res = sol.connect(root)
     print("max Sum of the tree is", res)
