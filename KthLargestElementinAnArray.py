@@ -31,6 +31,15 @@ class Solution:
 
         return -minq[0]
 
+    def findKthLargest2(self, nums: List[int], k: int) -> int:
+        minq = nums[:k]
+        heapq.heapify(minq)
+
+        for n in nums[k:]:
+            heapq.heappush(minq, n)
+            heapq.heappop(minq)
+        return minq[0]
+
 
 class Solution2:
     def fKLQselect(self, nums, k):
@@ -53,10 +62,12 @@ class Solution2:
 
 
 if __name__ == "__main__":
-    sol = Solution2()
+    sol = Solution()
     # nums = [3, 2, 1, 5, 6, 4]
     # k = 2
-    nums = [3, 2, 3, 1, 2, 4, 5, 5, 6]
-    k = 4
-    res = sol.fKLQselect(nums, k)
+    # nums = [3, 2, 3, 1, 2, 4, 5, 5, 6]
+    # k = 4
+    nums = [-1, 2, 0]
+    k = 1
+    res = sol.findKthLargest2(nums, k)
     print(res)
