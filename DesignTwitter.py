@@ -21,6 +21,7 @@ void unfollow(int followerId, int followeeId) The user with ID followerId starte
 """
 
 from collections import Counter, deque
+import datetime
 from filecmp import cmp
 import heapq
 import math
@@ -31,19 +32,44 @@ from typing import List, Optional
 
 class Twitter:
     def __init__(self):
-        pass
+        self.follows = {}
+        self.post = {}
+        self.timer = 0
 
     def postTweet(self, userId: int, tweetId: int) -> None:
-        pass
+        if userId not in self.post:
+            self.post[userId] = []
+        self.post[userId].append((self.timer, tweetId))
+        self.timer += 1
 
     def getNewsFeed(self, userId: int) -> List[int]:
-        pass
+        res = []
+        # get all its follows
+        if userId not in self.follows:
+            self.follows[userId] = []
+        follows = self.follows[userId][:]
+        follows.append(userId)
+        heap = []
+        for f in follows:
+            if f not in self.post:
+                continue
+            for da, tw in self.post[f]:
+                heapq.heappush(heap, (-da, tw))
+        i = 0
+        while heap and i < 10:
+            res.append(heapq.heappop(heap)[1])
+            i += 1
+        return res
 
     def follow(self, followerId: int, followeeId: int) -> None:
-        pass
+        if followerId not in self.follows:
+            self.follows[followerId] = []
+        if followeeId in self.follows[followerId]:
+            return
+        self.follows[followerId].append(followeeId)
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
-        pass
+        self.follows[followerId].remove(followeeId)
 
 
 # Your Twitter object will be instantiated and called as such:
@@ -56,9 +82,19 @@ class Twitter:
 
 if __name__ == "__main__":
     twitter = Twitter()
-    twitter.postTweet(1, 5)
-    twitter.getNewsFeed(1)
+    # twitter.postTweet(1, 5)
+    # twitter.getNewsFeed(1)
+    # twitter.follow(1, 2)
+    # twitter.postTweet(2, 6)
+    # res = twitter.getNewsFeed(1)
+    # twitter.postTweet(1, 1)
+    # twitter.getNewsFeed(1)
+    # twitter.follow(2, 1)
+    # twitter.getNewsFeed(2)
+    # twitter.unfollow(2, 1)
+    twitter.postTweet(2, 5)
     twitter.follow(1, 2)
-    twitter.postTweet(2, 6)
+    twitter.follow(1, 2)
     twitter.getNewsFeed(1)
+    res = twitter.getNewsFeed(2)
     print(res)
