@@ -19,7 +19,17 @@ from typing import List
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        pass
+        # dp[i] stands for whether you can reach index i from the first index
+        n = len(nums)
+        dp = [False] * (n + 1)
+        dp[0] = True
+
+        for i in range(1, n + 1):
+            for j in range(i - 1, -1, -1):
+                if dp[j] and nums[j] + j >= i:
+                    dp[i] = True
+        print(f"{dp}")
+        return dp[-1]
 
 
 if __name__ == "__main__":
