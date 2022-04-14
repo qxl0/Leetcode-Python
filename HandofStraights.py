@@ -13,13 +13,21 @@ Alice has some number of cards and she wants to rearrange the cards into groups 
 
 Given an integer array hand where hand[i] is the value written on the ith card and an integer groupSize, return true if she can rearrange the cards, or false otherwise.
 """
+import collections
 import sys
 from typing import List
 
 
 class Solution:
     def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
-        pass
+        count = collections.Counter(hand)
+        for y in sorted(count):
+            while count[y] > 0:
+                for k in range(y, y + groupSize):
+                    count[k] -= 1
+                    if count[k] < 0:
+                        return False
+        return True
 
 
 if __name__ == "__main__":
