@@ -1,3 +1,4 @@
+from collections import deque
 import math
 
 from typing import List
@@ -26,12 +27,31 @@ Return the minimum number of minutes that must elapse until no cell has a fresh 
 
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        pass
+        m = len(grid)
+        n = len(grid[0])
+
+        visit, curr = set(), deque()
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    visit.add((i, j))
+                elif grid[i][j] == 2:
+                    curr.append((i, j))
+        result = 0
+        while visit and curr:
+            for _ in range(len(curr)):
+                i, j = curr.popleft()
+                for coord in ((i + 1, j), (i - 1, j), (i, j - 1), (i, j + 1)):
+                    if coord in visit:
+                        visit.remove(coord)
+                        curr.append(coord)
+            result += 1
+        return result if not visit else -1
 
 
 if __name__ == "__main__":
     s = Solution()
-    grid = [[2, 1, 1], [1, 1, 0], [0, 1, 1]]
+    grid = [[2, 1, 1], [1, 1, 0], [0, 0, 1]]
 
     res = s.orangesRotting(grid)
     print(res)
