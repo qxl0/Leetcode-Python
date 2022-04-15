@@ -25,7 +25,14 @@ from typing import List
 
 class Solution:
     def mergeTriplets(self, triplets: List[List[int]], target: List[int]) -> bool:
-        pass
+        w = [0, 0, 0]
+        t1, t2, t3 = target
+        for a, b, c in triplets:
+            if a <= t1 and b <= t2 and c <= t3:
+                w[0] = max(w[0], a)
+                w[1] = max(w[1], b)
+                w[2] = max(w[2], c)
+        return w[0] == t1 and w[1] == t2 and w[2] == t3
 
 
 if __name__ == "__main__":
