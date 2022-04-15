@@ -113,6 +113,29 @@ class Solution:
                     starts.append(neigh)
         return len(visited) == numCourses
 
+    def canFinish5(self, numCourses, prerequisites):
+        indegree = {i: 0 for i in range(numCourses)}
+        adj = {i: [] for i in range(numCourses)}
+
+        for c0, c1 in prerequisites:
+            indegree[c0] += 1
+            adj[c1].append(c0)
+
+        q = collections.deque([i for i in range(numCourses) if not indegree[i]])
+        visited = set()
+
+        while q:
+            c = q.popleft()
+            if c in visited:
+                continue
+            visited.add(c)
+
+            for neigh in adj[c]:
+                indegree[neigh] -= 1
+                if not indegree[neigh]:
+                    q.append(neigh)
+        return len(visited) == numCourses
+
 
 if __name__ == "__main__":
     sol = Solution()
@@ -123,5 +146,5 @@ if __name__ == "__main__":
     # print(res2)
     n = 5
     nums = [[0, 1], [0, 2], [1, 3], [1, 4], [3, 4]]
-    res = sol.canFinish4(n, nums)
+    res = sol.canFinish5(n, nums)
     print("result is: ", res)
