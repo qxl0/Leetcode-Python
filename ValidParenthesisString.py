@@ -42,8 +42,9 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "(*))"
+    # s = "(*))"
     # s = "(*)"
     # s = "(*)("
+    s = "**"
     res = sol.checkValidString(s)
     print(res)

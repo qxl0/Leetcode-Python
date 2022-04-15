@@ -78,9 +78,28 @@ class Solution:
         return result
 
 
+class Solution_Backtrack:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        output = []
+
+        def dfs(index, cur, remaining):
+            if remaining < 0 or index >= len(candidates):
+                return
+            if remaining == 0:
+                output.append(cur.copy())
+                return
+            cur.append(candidates[index])
+            dfs(index, cur, remaining - candidates[index])
+            cur.pop()
+            dfs(index + 1, cur, remaining)
+
+        dfs(0, [], target)
+        return output
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution_Backtrack()
     nums = [2, 3, 6, 7]
     target = 7
-    res = sol.combinationSum3(nums, target)
+    res = sol.combinationSum(nums, target)
     print(res)
