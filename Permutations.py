@@ -37,9 +37,24 @@ class Solution:
         return res
 
 
+class Solution2:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+
+        def dfs(avail, cur):
+            if not avail:
+                res.append(cur)
+                return
+            for i in range(len(avail)):
+                dfs(avail[:i] + avail[i + 1 :], cur + [avail[i]])
+
+        dfs(nums, [])
+        return res
+
+
 if __name__ == "__main__":
 
-    sol = Solution()
+    sol = Solution2()
     nums = [1, 2, 3]
     res = sol.permute(nums)
     print(res)
