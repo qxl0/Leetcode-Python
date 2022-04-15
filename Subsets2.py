@@ -52,11 +52,12 @@ class Solution2:
                 l = len(res)
             for j in range(len(res) - l, len(res)):
                 res.append(res[j] + [S[i]])
+            print(res)
         return res
 
 
 if __name__ == "__main__":
-    s = Solution()
-    nums = [1, 2, 2]
+    s = Solution2()
+    nums = [1, 2, 2, 2]
     res = s.subsetsWithDup(nums)
     print(res)
