@@ -1,4 +1,5 @@
 from collections import deque
+import collections
 import math
 
 from typing import List
@@ -24,7 +25,42 @@ Fill each empty room with the distance to its nearest gate. If it is impossible 
 class Solution:
     def walls_and_gates(self, rooms: List[List[int]]):
         # write your code here
-        pass
+        # write your code here
+        m = len(rooms)
+        n = len(rooms[0])
+        visited = set()
+        q = collections.deque()
+
+        def addRoom(i, j):
+            if (
+                i < 0
+                or i >= m
+                or j < 0
+                or j >= n
+                or rooms[i][j] == -1
+                or (i, j) in visited
+            ):
+                return
+            visited.add((i, j))
+            q.append((i, j))
+
+        for i in range(m):
+            for j in range(n):
+                if rooms[i][j] == 0:
+                    visited.add((i, j))
+                    q.append((i, j))
+        dist = 0
+        while q:
+            for _ in range(len(q)):
+                i, j = q.popleft()
+                rooms[i][j] = dist
+
+                # add to q
+                addRoom(i - 1, j)
+                addRoom(i + 1, j)
+                addRoom(i, j - 1)
+                addRoom(i, j + 1)
+            dist += 1
 
 
 if __name__ == "__main__":
@@ -36,4 +72,4 @@ if __name__ == "__main__":
         [0, -1, 2147483647, 2147483647],
     ]
     res = s.walls_and_gates(rooms)
-    print(res)
+    print(rooms)
