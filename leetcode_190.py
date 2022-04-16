@@ -37,7 +37,7 @@ if __name__ == "__main__":
     sol = Solution()
     # x = 64
     # x = 0b00000010100101000001111010011100
-    x = 0b11111111111111111111111111111101
+    # x = 0b11111111111111111111111111111101
     res2 = sol.reverseBits2(x)
     res = sol.reverseBits(x)
     print(res == res2)
