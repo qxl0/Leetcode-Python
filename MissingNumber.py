@@ -39,8 +39,18 @@ class Solution:
         print(res)
 
 
+class Solution2:
+    def missingNumber(self, nums):
+        n = len(nums)
+        ret = n
+
+        for i, n in enumerate(nums):
+            ret = ret ^ i ^ n
+        return ret
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     # nums = [3, 0, 1]
     nums = [9, 6, 4, 2, 3, 5, 7, 0, 1]
     res = sol.missingNumber(nums)
