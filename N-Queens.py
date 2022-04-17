@@ -24,7 +24,21 @@ from typing import List
 
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        pass
+        res = []
+
+        def dfs(queens, ddiff, ssum):
+            p = len(queens)
+            if p == n:
+                queens = ["." * i + "Q" + "." * (n - i - 1) for i in queens]
+                res.append(queens)
+                return
+            for q in range(n):
+                if q in queens or p - q in ddiff or p + q in ssum:
+                    continue
+                dfs(queens + [q], ddiff + [p - q], ssum + [p + q])
+
+        dfs([], [], [])
+        return res
 
 
 if __name__ == "__main__":
