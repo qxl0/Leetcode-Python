@@ -19,13 +19,42 @@ You may assume all tickets form at least one valid itinerary. You must use all t
 """
 
 
+import collections
+from typing import List
+
+
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-        pass
+        targets = collections.defaultdict(list)
+        for a, b in sorted(tickets)[::-1]:
+            targets[a] += (b,)
+        route = []
+
+        def visit(airport):
+            while targets[airport]:
+                visit(targets[airport].pop())
+            route.append(airport)
+
+        visit("JFK")
+        return route[::-1]
+
+    def findItinerary2(self, tickets: List[List[str]]) -> List[str]:
+        adj = collections.defaultdict(list)
+        for a, b in sorted(tickets)[::-1]:
+            adj[a] += (b,)
+        route = []
+
+        def visit(c):
+            while adj[c]:
+                visit(adj[c].pop())
+            route.append(c)
+
+        visit("JFK")
+        return route[::-1]
 
 
 if __name__ == "__main__":
     s = Solution()
     tickets = [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]
-    res = s.findItinerary(tickets)
+    res = s.findItinerary2(tickets)
     print("Ans is:", res)
