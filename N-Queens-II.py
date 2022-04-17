@@ -22,7 +22,20 @@ from typing import List
 
 class Solution:
     def totalNQueens(self, n: int) -> int:
-        pass
+        res = []
+
+        def dfs(queens, diff, ssum):
+            p = len(queens)
+            if p == n:
+                res.append(queens)
+                return
+            for q in range(n):
+                if q in queens or p - q in diff or p + q in ssum:
+                    continue
+                dfs(queens + [q], diff + [p - q], ssum + [p + q])
+
+        dfs([], [], [])
+        return len(res)
 
 
 if __name__ == "__main__":
