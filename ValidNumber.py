@@ -38,7 +38,29 @@ from typing import List
 
 class Solution:
     def isNumber(self, s: str) -> bool:
-        pass
+        sign, digit, e, dec = False, False, False, False
+
+        for c in s:
+            if c in "0123456789":
+                digit = True
+            elif c in "+-":
+                if digit or sign or digit or dec:
+                    return False
+                sign = True
+            elif c in "eE":
+                if e or not digit:
+                    return False
+                e = True
+                sign = False
+                digit = False
+                dec = False
+            elif c == ".":
+                if dec or e:
+                    return False
+                dec = True
+            else:
+                return False
+        return digit
 
 
 if __name__ == "__main__":
