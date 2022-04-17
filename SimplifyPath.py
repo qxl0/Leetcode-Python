@@ -31,11 +31,23 @@ from typing import List
 
 class Solution:
     def simplifyPath(self, path: str) -> str:
-        pass
+        parts = path.split("/")
+        stack = []
+        for p in parts:
+            if p in ["", "."]:
+                continue
+            elif p == "..":
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(p)
+        return "/" + "/".join(stack)
 
 
 if __name__ == "__main__":
     sol = Solution()
-    path = "/../"
+    # path = "/../"
+    # path = "/home//foo/"
+    path = "/user/qli/../home"
     res = sol.simplifyPath(path)
     print("Ans is:", res)
