@@ -17,12 +17,22 @@ Note: You can only move either down or right at any point in time.
 
 
 import collections
+import sys
 from typing import List
 
 
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
-        pass
+        m, n = len(grid), len(grid[0])
+
+        dp = [[sys.maxsize] * n for _ in range(m)]
+        for i in range(m):
+            for j in range(n):
+                if i == j == 0:
+                    dp[i][j] = grid[i][j]
+                else:
+                    dp[i][j] = min(dp[i][j - 1] + grid[i][j], dp[i - 1][j] + grid[i][j])
+        return dp[m - 1][n - 1]
 
 
 if __name__ == "__main__":
