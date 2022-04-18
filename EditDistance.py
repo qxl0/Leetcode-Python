@@ -27,12 +27,26 @@ from typing import List
 
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
-        pass
+        m, n = len(word1), len(word2)
+        dp = [list(range(n + 1))] + [[r + 1] + [0] * n for r in range(m)]
+
+        for i in range(m):
+            for j in range(n):
+                dp[i + 1][j + 1] = (
+                    dp[i][j]
+                    if word1[i] == word2[j]
+                    else 1 + min(dp[i][j + 1], dp[i + 1][j], dp[i][j])
+                )
+        return dp[m][n]
 
 
 if __name__ == "__main__":
-    word1 = "horse"
-    word2 = "ros"
     sol = Solution()
+    # word1 = "horse"
+    # word2 = "ros"
+    # word1 = "intention"
+    # word2 = "execution"
+    word1 = "inten"
+    word2 = "execu"
     res = sol.minDistance(word1, word2)
     print("Ans is:", res)
