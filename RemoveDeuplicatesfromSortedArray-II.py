@@ -24,11 +24,30 @@ from typing import List
 
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        pass
+        if len(nums) < 3:
+            return len(nums)
+        pos = 1
+        for i in range(1, len(nums) - 1):
+            if nums[i - 1] != nums[i + 1]:
+                nums[pos] = nums[i]
+                pos += 1
+        nums[pos] = nums[-1]
+        return pos + 1
+
+    def removeDuplicates2(self, nums):
+        if len(nums) < 3:
+            return len(nums)
+        pos = 2
+        for i in range(2, len(nums)):
+            if nums[i] != nums[pos - 2]:
+                nums[pos] = nums[i]
+                pos += 1
+        return pos
 
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [1, 1, 1, 2, 2, 3]
-    res = sol.removeDuplicates(nums)
+    # nums = [1, 1, 1, 2, 2, 3]
+    nums = [0, 0, 1, 1, 1, 1, 2, 3, 3]
+    res = sol.removeDuplicates2(nums)
     print(res)
