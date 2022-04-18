@@ -24,12 +24,18 @@ from typing import List
 
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        pass
+        x = 1
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i - 1]:
+                nums[x] = nums[i]
+                x += 1
+        return x
 
 
 if __name__ == "__main__":
     sol = Solution()
     # nums = [1, 1, 1, 2, 2, 3]
-    nums = [0, 0, 1, 1, 1, 1, 2, 3, 3]
+    # nums = [0, 0, 1, 1, 1, 1, 2, 3, 3]
+    nums = [0, 0, 2]
     res = sol.removeDuplicates(nums)
     print(res)
