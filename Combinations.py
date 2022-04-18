@@ -22,14 +22,14 @@ class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         res = []
 
-        def helper(level, avail, curr):
-            if level == k:
-                res.append(curr.copy())
+        def helper(avail, curr):
+            if len(curr) == k:
+                res.append(curr)
                 return
             for i in range(len(avail)):
-                helper(level + 1, avail[i + 1 :], curr + [avail[i]])
+                helper(avail[i + 1 :], curr + [avail[i]])
 
-        helper(0, [i for i in range(1, n + 1)], [])
+        helper([i for i in range(1, n + 1)], [])
         return res
 
     def combine2(self, n, k):
@@ -58,6 +58,5 @@ if __name__ == "__main__":
     n = 4
     k = 2
     res = sol.combine(n, k)
-    res2 = sol.combine2(n, k)
+    # res2 = sol.combine2(n, k)
     print(res)
-    print(res2)
