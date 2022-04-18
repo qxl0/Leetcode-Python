@@ -25,6 +25,21 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        count = {i: 0 for i in [0, 1, 2]}
+        for i in range(len(nums)):
+            count[nums[i]] += 1
+        i = 0
+        while i < len(nums):
+            if count[0]:
+                nums[i] = 0
+                count[0] -= 1
+            elif count[1]:
+                nums[i] = 1
+                count[1] -= 1
+            else:
+                nums[i] = 2
+                count[2] -= 1
+            i += 1
 
 
 if __name__ == "__main__":
