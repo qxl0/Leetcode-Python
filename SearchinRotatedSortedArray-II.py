@@ -27,11 +27,34 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        l, r = 0, len(nums) - 1
+
+        while l < r:
+            while l < r and nums[r - 1] == nums[r]:
+                r -= 1
+            while l < r and nums[l] == nums[l + 1]:
+                l += 1
+            mid = l + (r - l) // 2
+            val = nums[mid]
+            if val == target:
+                return True
+            if val >= nums[l]:
+                if val > target >= nums[l]:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+            else:  # val < nums[l]
+                if val < target <= nums[r]:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+        return True if nums[l] == target else False
 
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [2, 5, 6, 0, 0, 1, 2]
-    target = 0
+    # nums = [2, 5, 6, 0, 0, 1, 2]
+    nums = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1]
+    target = 2
     res = sol.search(nums, target)
     print(res)
