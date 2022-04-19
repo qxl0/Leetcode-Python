@@ -40,13 +40,39 @@ class Solution:
         return ans
 
 
+class Solution2:
+    def maximalRectangle(self, matrix):
+        mxArea = 0
+        m, n = len(matrix), len(matrix[0])
+        heights = [0] * (n + 1)
+
+        for row in matrix:
+            for j in range(n):
+                if row[j] == "1":
+                    heights[j] += 1
+                else:
+                    heights[j] = 0
+            stack = []
+            for i, h in enumerate(heights):
+                while stack and heights[stack[-1]] > h:
+                    H = heights[stack.pop()]
+                    if stack:
+                        w = i - stack[-1] - 1
+                    else:
+                        w = i
+                    mxArea = max(mxArea, H * w)
+                stack.append(i)
+        return mxArea
+
+
 if __name__ == "__main__":
-    sol = Solution()
-    matrix = [
-        ["1", "0", "1", "0", "0"],
-        ["1", "0", "1", "1", "1"],
-        ["1", "1", "1", "1", "1"],
-        ["1", "0", "0", "1", "0"],
-    ]
+    sol = Solution2()
+    # matrix = [
+    #     ["1", "0", "1", "0", "0"],
+    #     ["1", "0", "1", "1", "1"],
+    #     ["1", "1", "1", "1", "1"],
+    #     ["1", "0", "0", "1", "0"],
+    # ]
+    matrix = [["1", "0"], ["1", "0"]]
     res = sol.maximalRectangle(matrix)
     print(res)
