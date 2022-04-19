@@ -22,6 +22,17 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        if not head:
+            return None
+        l, r = head, head.next
+        while r:
+            if r.value != l.value:
+                l.next = r
+                l = l.next
+            r = r.next
+        if l.next and l.value == l.next.value:
+            l.next = None
+        return head
 
 
 if __name__ == "__main__":
