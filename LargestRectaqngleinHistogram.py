@@ -55,8 +55,25 @@ class Solution2:
         return maxArea
 
 
+class Solution3:
+    def largestRectangleArea(self, heights):
+        mx = 0
+        stack = []
+        for i, h in enumerate(heights + [0]):
+            while stack and h < heights[stack[-1]]:
+                height = heights[stack.pop()]
+                if stack:
+                    w = i - stack[-1] - 1
+                else:
+                    w = i
+                mx = max(mx, height * w)
+            stack.append(i)
+
+        return mx
+
+
 if __name__ == "__main__":
-    sol = Solution2()
+    sol = Solution3()
     heights = [2, 1, 5, 6, 2, 3]
     res = sol.largestRectangleArea(heights)
     print(res)
