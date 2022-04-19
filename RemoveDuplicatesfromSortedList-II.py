@@ -22,6 +22,19 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        dummy = Node(0)
+        dummy.next = head
+        pre, cur = dummy, head
+        while cur and cur.next:
+            if cur.value == cur.next.value:
+                while cur and cur.next and cur.value == cur.next.value:
+                    cur = cur.next
+                pre.next = cur.next
+            else:
+                pre = pre.next
+
+            cur = cur.next
+        return dummy.next
 
 
 if __name__ == "__main__":
@@ -29,5 +42,6 @@ if __name__ == "__main__":
     head = Node(1)
     head.next = Node(1)
     head.next.next = Node(2)
+
     res = sol.deleteDuplicates(head)
     print(res)
