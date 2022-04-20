@@ -25,15 +25,40 @@ from helpers.LinkedList import Node
 
 
 class Solution:
+    dict = {}
+
     def isScramble(self, s1: str, s2: str) -> bool:
         """
         Do not return anything, modify nums in-place instead.
         """
+        if (s1, s2) in self.dict:
+            return self.dict[(s1, s2)]
+        n, m = len(s1), len(s2)
+        if n != m or sorted(s1) != sorted(s2):
+            self.dict[(s1, s2)] = False
+            return False
+        if n < 4 or s1 == s2:
+            self.dict[(s1, s2)] = True
+            return True
+        f = self.isScramble
+        for i in range(1, len(s1)):
+            if (
+                f(s1[:i], s2[:i])
+                and f(s1[i:], s2[i:])
+                or f(s1[:i], s2[-i:])
+                and f(s1[i:], s2[:-i])
+            ):
+                self.dict[(s1, s2)] = True
+                return True
+        self.dict[(s1, s2)] = False
+        return False
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s1 = "great"
-    s2 = "rgeat"
+    # s1 = "great"
+    # s2 = "rgeat"
+    s1 = "eebaacbcbcadaaedceaaacadccd"
+    s2 = "eadcaacabaddaceacbceaabeccd"
     res = sol.isScramble(s1, s2)
     print(res)
