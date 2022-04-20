@@ -29,10 +29,14 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        ret = [0]
+        for i in range(1, 2**n):
+            ret.append(ret[i - 1] ^ (i & ~(i - 1)))
+        return ret
 
 
 if __name__ == "__main__":
     sol = Solution()
-    n = 2
+    n = 3
     res = sol.grayCode(n)
     print(res)
