@@ -24,6 +24,20 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        left, right = Node(), Node()
+        l, r = left, right
+        while head:
+            if head.val < x:
+                l.next = head
+                l = l.next
+            else:
+                r.next = head
+                r = r.next
+            head = head.next
+        l.next = right.next
+        r.next = None
+
+        return left.next
 
 
 if __name__ == "__main__":
