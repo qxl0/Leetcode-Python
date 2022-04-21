@@ -46,6 +46,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    root = TreeNode.to_binary_tree([3, 1, 4, None, None, 2])
+    # root = TreeNode.to_binary_tree([3, 1, 4, None, None, 2])
+    root = TreeNode.to_binary_tree([1, 3, None, None, 2])
     res = sol.recoverTree(root)
     print(res)

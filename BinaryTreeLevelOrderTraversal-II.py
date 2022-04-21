@@ -22,6 +22,21 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        ans = []
+
+        def traverse(node, level):
+            nonlocal ans
+            if not node:
+                return
+            if level > len(ans):
+                ans.append([node.val])
+            else:
+                ans[level - 1].extend([node.val])
+            traverse(node.left, level + 1)
+            traverse(node.right, level + 1)
+
+        traverse(root, 1)
+        return ans[::-1]
 
 
 if __name__ == "__main__":
