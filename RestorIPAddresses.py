@@ -25,6 +25,24 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        ret = []
+
+        def dfs(s, idx, path):
+            if idx == 4:
+                if not s:
+                    ret.append(path[:-1])
+                    return
+            for i in range(1, 4):
+                if i > len(s):
+                    continue
+                if i > 1 and s[0] == "0":
+                    continue
+                if i > 2 and int(s[:i]) > 255:
+                    continue
+                dfs(s[i:], idx + 1, path + s[:i] + ".")
+
+        dfs(s, 0, "")
+        return ret
 
 
 if __name__ == "__main__":
