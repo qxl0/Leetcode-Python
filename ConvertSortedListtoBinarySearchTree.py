@@ -26,6 +26,24 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
 
+        def convert(node):
+            if not node:
+                return None
+            dummy = Node(0, node)
+            pre, cur = dummy, dummy.next
+            while cur and cur.next:
+                pre, cur = pre.next, cur.next.next
+            # prev.next=0,cur=9
+            node = TreeNode(pre.next.val)
+            right = pre.next.next
+            pre.next = None
+            left = dummy.next
+            node.left = convert(left)
+            node.right = convert(right)
+            return node
+
+        return convert(head)
+
 
 if __name__ == "__main__":
     sol = Solution()
