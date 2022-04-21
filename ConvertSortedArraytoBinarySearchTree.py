@@ -25,6 +25,19 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
 
+        def convert(nums):
+            if not nums:
+                return None
+            if len(nums) == 1:
+                return TreeNode(nums[0])
+            i = len(nums) // 2
+            node = TreeNode(nums[i])
+            node.left = convert(nums[:i])
+            node.right = convert(nums[i + 1 :])
+            return node
+
+        return convert(nums)
+
 
 if __name__ == "__main__":
     sol = Solution()
