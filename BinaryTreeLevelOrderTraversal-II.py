@@ -29,14 +29,15 @@ class Solution:
             if not node:
                 return
             if level > len(ans):
-                ans.append([node.val])
+                ans.insert(0, [node.val])
             else:
-                ans[level - 1].extend([node.val])
+                ans[0].extend([node.val])
             traverse(node.left, level + 1)
             traverse(node.right, level + 1)
 
         traverse(root, 1)
-        return ans[::-1]
+        return ans
+        # return ans[::-1]
 
 
 if __name__ == "__main__":
