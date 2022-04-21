@@ -25,18 +25,27 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        ret = []
+
+        def dfs(node, path, target):
+            if not node:
+                return
+            if not node.left and not node.right and target == node.val:
+                ret.append(path + [node.val])
+                return
+
+            dfs(node.left, path + [node.val], target - node.val)
+            dfs(node.right, path + [node.val], target - node.val)
+
+        dfs(root, [], targetSum)
+        return ret
 
 
 if __name__ == "__main__":
     sol = Solution()
-    root = TreeNode(5)
-    root.left = TreeNode(4)
-    root.left.left = TreeNode(11)
-    root.left.left.left = TreeNode(7)
-    root.left.left.right = TreeNode(2)
-    root.right.left = TreeNode(13)
-    root.right.right = TreeNode(4)
-    root.right.right.left = TreeNode(5)
-    root.right.right.right = TreeNode(1)
-    res = sol.pathSum(root)
+    # root = TreeNode.to_binary_tree([5, 4, 8, 11, None, 13, 4, 7, 2, None, None, 5, 1])
+    # targetSum = 22
+    root = TreeNode.to_binary_tree([1, 2])
+    targetSum = 1
+    res = sol.pathSum(root, targetSum)
     print(res)
