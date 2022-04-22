@@ -13,13 +13,18 @@ Given a string s, find the first non-repeating character in it and return its in
 """
 
 
+import collections
 from typing import List, Optional
 from helpers.TreeNode import TreeNode
 
 
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-        pass
+        counter = collections.Counter(s)
+        for i, c in enumerate(s):
+            if counter[c] == 1:
+                return i
+        return -1
 
 
 if __name__ == "__main__":
