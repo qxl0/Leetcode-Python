@@ -26,7 +26,17 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def isSubsequence(s, t):
-        pass
+        def helper(s, t):
+            if len(s) == 0:
+                return True
+            if len(s) > len(t):
+                return False
+            if s[0] == t[0]:
+                return helper(s[1:], t[1:])
+            else:
+                return helper(s, t[1:])
+
+        return helper(s, t)
 
 
 if __name__ == "__main__":
