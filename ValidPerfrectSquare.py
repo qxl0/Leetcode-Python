@@ -26,11 +26,21 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def isPerfectSquare(self, num):
-        pass
+        l, r = 1, num
+        while l <= r:
+            print(f"{l} - {r}")
+            mid = l + (r - l) // 2
+            if mid * mid == num:
+                return True
+            elif mid * mid > num:
+                r = mid - 1
+            else:
+                l = mid + 1
+        return False
 
 
 if __name__ == "__main__":
     sol = Solution()
-    num = 16
+    num = 100
     res = sol.isPerfectSquare(num)
     print(res)
