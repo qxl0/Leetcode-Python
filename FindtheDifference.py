@@ -28,7 +28,15 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
-        pass
+        d = collections.Counter(s)
+
+        for c in t:
+            if c not in d:
+                return c
+            elif d[c] > 0:
+                d[c] -= 1
+            else:
+                return c
 
 
 if __name__ == "__main__":
