@@ -26,7 +26,8 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def countSegments(self, s: str) -> int:
-        pass
+        ret = s.split(", ")
+        return len(ret)
 
 
 if __name__ == "__main__":
