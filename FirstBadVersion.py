@@ -30,12 +30,25 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def firstBadVersion(self, n: int) -> int:
-        pass
+        def isBadVersion(x):
+            return x == 4
+
+        l, r = 1, n
+        while l < r:
+            print(f"({l}, {r})")
+            mid = l + (r - l) // 2
+            print("mid: ", mid)
+            if isBadVersion(mid):
+                r = mid
+            else:
+                l = mid + 1
+
+        return l
 
 
 if __name__ == "__main__":
     sol = Solution()
     n = 5
     bad = 4
-    res = sol.firstBadVersion(n, bad)
+    res = sol.firstBadVersion(n)
     print(res)
