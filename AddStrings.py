@@ -26,7 +26,23 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def addStrings(self, num1: str, num2: str) -> str:
-        pass
+        n1 = list(num1)[::-1]
+        n2 = list(num2)[::-1]
+
+        carry = 0
+        ret = []
+        i1, i2 = 0, 0
+        while i1 < len(n1) or i2 < len(n2) or carry:
+            sum = 0
+            if i1 < len(n1):
+                sum += int(n1[i1])
+                i1 += 1
+            if i2 < len(n2):
+                sum += int(n2[i2])
+                i2 += 1
+            ret.append(str((sum + carry) % 10))
+            carry = (sum + carry) // 10
+        return "".join(ret[::-1])
 
 
 if __name__ == "__main__":
