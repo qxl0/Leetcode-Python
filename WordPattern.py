@@ -28,12 +28,26 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        pass
+        d = {}
+        r = {}
+        wordlist = s.split(" ")
+        if len(wordlist) != len(pattern):
+            return False
+        for p, w in zip(pattern, wordlist):
+            if p not in d and w not in r:
+                d[p] = w
+                r[w] = p
+            else:
+                if p in d and w != d[p]:
+                    return False
+                if w in r and r[w] != p:
+                    return False
+        return True
 
 
 if __name__ == "__main__":
     sol = Solution()
     pattern = "abba"
-    s = "dog cat cat dog"
+    s = "dog dog dog dog"
     res = sol.wordPattern(pattern, s)
     print(res)
