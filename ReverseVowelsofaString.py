@@ -26,11 +26,25 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        pass
+        vowels = "aeiouAEIOU"
+        v = []
+        for c in s:
+            if c in vowels:
+                v.append(c)
+        vindex = len(v) - 1
+        ret = ""
+        for c in s:
+            if c in vowels:
+                ret += v[vindex]
+                vindex -= 1
+            else:
+                ret += c
+        return ret
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "hello"
+    # s = "hello"
+    s = "aA"
     res = sol.reverseVowels(s)
     print("Ans is ", res)
