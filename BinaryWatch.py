@@ -37,7 +37,8 @@ class Solution:
 
         for hour in range(0, 12):
             for minute in range(0, 60):
-                if bitcount(hour) + bitcount(minute) == turnedOn:
+                # if bitcount(hour) + bitcount(minute) == turnedOn:
+                if bin(hour).count("1") + bin(minute).count("1") == turnedOn:
                     temp = str(hour) + ":"
                     if minute < 10:
                         temp += "0"
