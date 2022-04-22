@@ -32,7 +32,7 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def canWinNim(self, n: int) -> bool:
-        pass
+        return n % 4 != 0
 
 
 if __name__ == "__main__":
