@@ -28,7 +28,19 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
-        pass
+        ans = []
+
+        def dfs(node, path):
+            if not node.left and not node.right:
+                ans.append("->".join(path + [str(node.val)]))
+                return
+            if node.left:
+                dfs(node.left, path + [str(node.val)])
+            if node.right:
+                dfs(node.right, path + [str(node.val)])
+
+        dfs(root, [])
+        return ans
 
 
 if __name__ == "__main__":
