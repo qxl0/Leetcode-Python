@@ -24,7 +24,7 @@ class Solution:
         nums2.sort()
 
         i1, i2 = 0, 0
-        while i1 < len(nums1) or i2 < len(nums2):
+        while i1 < len(nums1) and i2 < len(nums2):
             if nums1[i1] < nums2[i2]:
                 i1 += 1
             elif nums1[i1] > nums2[i2]:
