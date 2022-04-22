@@ -31,19 +31,21 @@ from helpers.TreeNode import TreeNode
 
 class MyStack:
     def __init__(self):
-        pass
+        self.data = collections.deque()
 
     def push(self, x: int) -> None:
-        pass
+        self.data.append(x)
+        return None
 
     def pop(self) -> int:
-        pass
+        v = self.data.pop()
+        return v
 
     def top(self) -> int:
-        pass
+        return self.data[-1]
 
     def empty(self) -> bool:
-        pass
+        return len(self.data) == 0
 
 
 # Your MyStack object will be instantiated and called as such:
