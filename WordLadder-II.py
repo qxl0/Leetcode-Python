@@ -106,6 +106,35 @@ class Solution2:
         return ans
 
 
+class Solution3:
+    def findLadders(self, beginWord, endWord, wordList):
+        wordList = set(wordList)
+        L = len(beginWord)
+        res = []
+        layer = {}
+        layer[beginWord] = [[beginWord]]
+
+        while layer:
+            print(layer)
+            newlayer = {}
+            for w in layer:
+                if w == endWord:
+                    res.extend(k for k in layer[w])
+                    return res
+                else:
+                    for i in range(L):
+                        for c in "abcdefghijklmnopqrstuvwxyz":
+                            neww = w[:i] + c + w[i + 1 :]
+                            if neww in wordList:
+                                newlayer[neww] = newlayer.get(neww, []) + [
+                                    j + [neww] for j in layer[w]
+                                ]
+            wordList -= set(newlayer.keys())
+            layer = newlayer
+
+        return res
+
+
 if __name__ == "__main__":
     sol = Solution()
     beginWord = "hit"
