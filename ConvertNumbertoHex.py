@@ -28,15 +28,9 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def toHex(self, num: int) -> str:
-        mapping = {i: str(i) for i in range(10)} | {
-            10: "a",
-            11: "b",
-            12: "c",
-            13: "d",
-            14: "e",
-            15: "f",
-        }
-
+        mapping = "0123456789abcdef"
+        if num == 0:
+            return "0"
         if num < 0:
             num += 2**32
         ret = []
@@ -49,6 +43,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    num = 26
+    num = 0
     res = sol.toHex(num)
     print("Ans is ", res)
