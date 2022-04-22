@@ -26,11 +26,25 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
-        pass
+        ret = 0
+
+        def dfs(node):
+            nonlocal ret
+            if not node:
+                return
+
+            if node.left and not node.left.left and not node.left.right:
+                ret += node.left.val
+            dfs(node.left)
+            dfs(node.right)
+
+        dfs(root)
+        return ret
 
 
 if __name__ == "__main__":
     sol = Solution()
-    root = TreeNode.to_binary_tree([3, 9, 20, None, None, 15, 7])
+    # root = TreeNode.to_binary_tree([3, 9, 20, None, None, 15, 7])
+    root = TreeNode.to_binary_tree([1, 2, 3, 4, 5])
     res = sol.sumOfLeftLeaves(root)
     print("Ans is ", res)
