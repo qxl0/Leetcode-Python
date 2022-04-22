@@ -26,7 +26,17 @@ from helpers.TreeNode import TreeNode
 #         self.right = right
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        pass
+        counter = collections.Counter(s)
+        ans = 0
+        flag = 0
+        for c in counter:
+          if counter[c] % 2 == 0:
+            ans += counter[c]
+          else:
+            ans += counter[c] -1
+            flag = 1
+        return ans if flag == 0 else ans+1
+
 
 
 if __name__ == "__main__":
