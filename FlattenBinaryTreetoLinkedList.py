@@ -25,10 +25,45 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        dummy = TreeNode(0)
+        dummy.right = root
+
+        def dfs(node, ret):
+            if not node:
+                return node
+            ret.append(node)
+            if node.left:
+                dfs(node.left, ret)
+            if node.right:
+                dfs(node.right, ret)
+
+        ret = []
+        dfs(root, ret)
+        for i in range(len(ret)):
+            ret[i].left = None
+            if i < len(ret) - 1:
+                ret[i].right = ret[i + 1]
+        return dummy.right
+
+
+class Solution2:
+    def __init__(self):
+        self.prev = None
+
+    def flatten(self, root):
+        if not root:
+            return None
+        self.flatten(root.right)
+        self.flatten(root.left)
+
+        root.right = self.prev
+        root.left = None
+        self.prev = root
 
 
 if __name__ == "__main__":
-    sol = Solution()
-    root = TreeNode.to_binary_tree([1, 2, 5, 3, 4, None, 6])
+    sol = Solution2()
+    # root = TreeNode.to_binary_tree([1, 2, 5, 3, 4, None, 6])
+    root = TreeNode.to_binary_tree([1, 3, 4])
     res = sol.flatten(root)
     print(res)

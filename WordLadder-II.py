@@ -19,6 +19,7 @@ Given two words, beginWord and endWord, and a dictionary wordList, return all th
 
 
 import collections
+from turtle import back
 from typing import List, Optional
 from helpers.TreeNode import TreeNode
 
@@ -59,6 +60,62 @@ class Solution:
         d = construct_dict(set(wordList) | set([beginWord]))
         bfs_words(beginWord, endWord, d)
         return res
+
+
+class Solution_BiBFS:
+    def findLadders(self, beginWord, endWord, wordList):
+        ans = []
+        dict = set(wordList)
+        if endWord not in dict:
+            return ans
+
+        L = len(beginWord)
+
+        q1, q2 = [beginWord], [endWord]
+        children = {}
+
+        found, backward = False, False
+        while q1 and q2 and not found:
+            if len(q1) > len(q2):
+                q1, q2 = q2, q1
+                backward = not backward
+            for w in q1:
+                dict.discard(w)
+            for w in q2:
+                dict.discard(w)
+
+            q = []
+            for w in q1:
+                for i in range(L):
+                    for c in "abcdefghijklmnopqrstuvwxyz":
+                        neww = w[:i] + c + w[i + 1 :]
+
+                        parent, child = w, neww
+                        if backward:
+                            parent, child = neww, w
+                        if neww in q2:
+                            found = True
+                            children[parent] = children.get(parent, []) + [child]
+                        elif neww in dict and not found:
+                            q.append(neww)
+                            children[parent] = children.get(parent, []) + ([child])
+            q1 = q
+            if found:
+                path = [beginWord]
+                self.getPaths(beginWord, endWord, children, path, ans)
+        return ans
+
+    def getPaths(self, word, endWord, children, path, ans):
+        if word == endWord:
+            ans.append(path.copy())
+            return
+        if word not in children:
+            return
+
+        for child in children[word]:
+            path.append(child)
+            self.getPaths(child, endWord, children, path, ans)
+            path.pop()
 
 
 class Solution2:
@@ -136,7 +193,7 @@ class Solution3:
 
 
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution_BiBFS()
     beginWord = "hit"
     endWord = "cog"
     wordList = ["hot", "dot", "dog", "lot", "log", "cog"]
