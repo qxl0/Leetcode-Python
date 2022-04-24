@@ -28,13 +28,27 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def __init__(self, root: Optional[TreeNode]):
-        pass
+        self.root = root
+        self.l = []
+        self.curr = 0
+        self.inorder(self.root)
+
+    def inorder(self, node):
+        if not node:
+            return
+        self.inorder(node.left)
+        self.l.append(node)
+        self.inorder(node.right)
 
     def next(self) -> int:
-        pass
+        ret = None
+        if self.curr < len(self.l):
+            ret = self.l[self.curr].val
+            self.curr += 1
+        return ret
 
     def hasNext(self) -> bool:
-        pass
+        return self.curr < len(self.l)
 
 
 # Your BSTIterator object will be instantiated and called as such:
