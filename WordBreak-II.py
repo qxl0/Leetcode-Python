@@ -21,7 +21,19 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        pass
+        ret = []
+        dict = set(wordDict)
+
+        def helper(s, path):
+            if len(s) == 0:
+                ret.append(" ".join(path))
+                return
+            for i in range(1, 1 + len(s)):
+                if s[:i] in dict:
+                    helper(s[i:], path + [s[:i]])
+
+        helper(s, [])
+        return ret
 
 
 if __name__ == "__main__":
