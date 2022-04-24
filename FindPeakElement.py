@@ -31,9 +31,33 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
 
+        def helper(nums, l, r):
+            print(f"({l}  {r})")
+            if l == r:
+                return l
+            mid = (l + r) // 2
+            if nums[mid] > nums[mid + 1]:
+                return helper(nums, l, mid)
+            return helper(nums, mid + 1, r)
+
+        return helper(nums, 0, len(nums) - 1)
+
+    def findPeakElement2(self, nums: List[int]) -> int:
+        def helper(nums, l, r):
+            print(f"({l} - {r}")
+            if l == r:
+                return l
+            mid = r - (r - l) // 2
+            if nums[mid] > nums[mid + 1]:
+                return helper(nums, l, mid)
+            return helper(nums, mid + 1, r)
+
+        return helper(nums, 0, len(nums) - 1)
+
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [1, 2, 3, 1]
-    res = sol.findPeakElement(nums)
+    # nums = [1, 2, 3, 1]
+    nums = [1, 2, 1, 3, 5, 6, 4]
+    res = sol.findPeakElement2(nums)
     print(res)
