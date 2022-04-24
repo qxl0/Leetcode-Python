@@ -37,24 +37,37 @@ class Solution:
                 l += 1
                 r -= 1
 
-        def reverse_word(s, i, j):
+        def reverse_word(s, i, k):
             # s[i:j]
-            k = j - 1
             while i < k:
                 s[i], s[k] = s[k], s[i]
                 i += 1
                 k -= 1
 
         reverse_array(s)
-        i = 0
-        j = 0
-        while j < len(s):
-            if s[j] == " ":
-                reverse_word(s, i, j)
-                i = j + 1
-            elif j == len(s) - 1:
-                reverse_word(s, i, j + 1)
+        start, j = 0, 0
+        while start < len(s):
+            while j < len(s) and s[j] != " ":
+                j += 1
+            reverse_word(s, start, j - 1)
+            start = j + 1
             j += 1
+
+    def reverse_each_word(self, l: list) -> None:
+        n = len(l)
+        start = end = 0
+
+        while start < n:
+            while end < n and l[end] != " ":
+                end += 1
+            self.reverse(l, start, end - 1)
+            start = end + 1
+            end += 1
+
+    def reverse(self, l: list, left: int, right: int) -> None:
+        while left < right:
+            l[left], l[right] = l[right], l[left]
+            left, right = left + 1, right - 1
 
 
 if __name__ == "__main__":
