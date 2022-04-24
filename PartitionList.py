@@ -16,15 +16,15 @@ You should preserve the original relative order of the nodes in each of the two 
 
 
 from typing import List, Optional
-from helpers.LinkedList import Node
+from helpers.LinkedList import ListNode
 
 
 class Solution:
-    def partition(self, head: Optional[Node], x: int) -> Optional[Node]:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
         """
         Do not return anything, modify nums in-place instead.
         """
-        left, right = Node(), Node()
+        left, right = ListNode(), ListNode()
         l, r = left, right
         while head:
             if head.val < x:
@@ -42,11 +42,11 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    head = Node(1)
-    head.next = Node(4)
-    head.next.next = Node(3)
-    head.next.next.next = Node(2)
-    head.next.next.next.next = Node(5)
-    head.next.next.next.next.next = Node(2)
+    head = ListNode(1)
+    head.next = ListNode(4)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(2)
+    head.next.next.next.next = ListNode(5)
+    head.next.next.next.next.next = ListNode(2)
     res = sol.partition(head)
     print(res)

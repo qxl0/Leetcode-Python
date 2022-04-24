@@ -14,15 +14,17 @@ Given the head of a singly linked list and two integers left and right where lef
 
 
 from typing import List, Optional
-from helpers.LinkedList import Node
+from helpers.LinkedList import ListNode
 
 
 class Solution:
-    def reverseBetween(self, head: Optional[Node], l: int, r: int) -> Optional[Node]:
+    def reverseBetween(
+        self, head: Optional[ListNode], l: int, r: int
+    ) -> Optional[ListNode]:
         """
         Do not return anything, modify nums in-place instead.
         """
-        dummy = Node(0)
+        dummy = ListNode(0)
         dummy.next = head
 
         leftPrev, left = dummy, head
@@ -46,11 +48,11 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    head = Node(1)
-    head.next = Node(2)
-    head.next.next = Node(3)
-    head.next.next.next = Node(4)
-    head.next.next.next.next = Node(5)
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
 
     res = sol.reverseBetween(head, 2, 4)
     print(res)

@@ -15,7 +15,7 @@ Given an array of integers heights representing the histogram's bar height where
 
 import enum
 from typing import List, Optional
-from helpers.LinkedList import Node
+from helpers.LinkedList import ListNode
 
 
 class Solution:

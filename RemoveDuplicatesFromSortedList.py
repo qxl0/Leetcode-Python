@@ -14,11 +14,11 @@ Given the head of a sorted linked list, delete all duplicates such that each ele
 
 
 from typing import List, Optional
-from helpers.LinkedList import Node
+from helpers.LinkedList import ListNode
 
 
 class Solution:
-    def deleteDuplicates(self, head: Optional[Node]) -> Optional[Node]:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """
         Do not return anything, modify nums in-place instead.
         """
@@ -37,8 +37,8 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    head = Node(1)
-    head.next = Node(1)
-    head.next.next = Node(2)
+    head = ListNode(1)
+    head.next = ListNode(1)
+    head.next.next = ListNode(2)
     res = sol.deleteDuplicates(head)
     print(res)

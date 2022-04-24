@@ -34,16 +34,16 @@ class Node:
 
 
 from typing import Optional
-from helpers.LinkedList import Node
+from helpers.LinkedList import ListNode
 from helpers.LinkedList import LinkedList
 
 
 class Solution:
-    def copyRandomList(self, head: "Optional[Node]") -> "Optional[Node]":
+    def copyRandomList(self, head: "Optional[ListNode]") -> "Optional[ListNode]":
         curr = head
         mappings = {}
         while curr: 
-          mappings[curr] = Node(curr.val)
+          mappings[curr] = ListNode(curr.val)
           curr = curr.next
         curr = head
         while curr:

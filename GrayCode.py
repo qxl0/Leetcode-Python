@@ -21,7 +21,7 @@ Given an integer n, return any valid n-bit gray code sequence.
 
 
 from typing import List, Optional
-from helpers.LinkedList import Node
+from helpers.LinkedList import ListNode
 
 
 class Solution:

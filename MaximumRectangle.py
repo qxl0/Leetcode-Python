@@ -14,7 +14,7 @@ Given a rows x cols binary matrix filled with 0's and 1's, find the largest rect
 
 
 from typing import List, Optional
-from helpers.LinkedList import Node
+from helpers.LinkedList import ListNode
 
 
 class Solution:

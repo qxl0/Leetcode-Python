@@ -21,7 +21,7 @@ Given two strings s1 and s2 of the same length, return true if s2 is a scrambled
 
 
 from typing import List, Optional
-from helpers.LinkedList import Node
+from helpers.LinkedList import ListNode
 
 
 class Solution:
