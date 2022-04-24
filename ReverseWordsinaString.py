@@ -30,10 +30,12 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        slist = s.split()
+        return " ".join(slist[::-1])
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "the sky is blue"
+    s = "  the sky is blue"
     res = sol.reverseWords(s)
     print(res)
