@@ -17,12 +17,30 @@ Note: The solution set must not contain duplicate combinations.
 """
 
 
+from re import I
 from typing import List
 
 
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        pass
+        ans = []
+
+        def helper(avail, path, target):
+            if target == 0:
+                ans.append(path)
+                return
+            if target < 0:
+                return
+            for i in range(len(avail)):
+                if i > 0 and avail[i] == avail[i - 1]:
+                    continue
+                if avail[i] > target:
+                    break
+                helper(avail[i + 1 :], path + [avail[i]], target - avail[i])
+
+        candidates.sort()
+        helper(candidates, [], target)
+        return ans
 
 
 if __name__ == "__main__":
