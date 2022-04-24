@@ -1,4 +1,4 @@
-class Node:
+class ListNode:
     def __init__(self, value, next_node=None, random=None):
         self.value = value
         self.next = next_node
@@ -16,9 +16,9 @@ class LinkedList:
             self.add_multiple_nodes(values)
 
     def lst2link(self, lst):
-        cur = dummy = Node(0)
+        cur = dummy = ListNode(0)
         for e in lst:
-            cur.next = Node(e)
+            cur.next = ListNode(e)
             cur = cur.next
         return dummy.next
 
@@ -45,9 +45,9 @@ class LinkedList:
 
     def add_node(self, value):
         if self.head is None:
-            self.tail = self.head = Node(value)
+            self.tail = self.head = ListNode(value)
         else:
-            self.tail.next = Node(value)
+            self.tail.next = ListNode(value)
             self.tail = self.tail.next
         return self.tail
 
@@ -57,7 +57,7 @@ class LinkedList:
 
     def add_node_as_head(self, value):
         if self.head is None:
-            self.tail = self.head = Node(value)
+            self.tail = self.head = ListNode(value)
         else:
-            self.head = Node(value, self.head)
+            self.head = ListNode(value, self.head)
         return self.head

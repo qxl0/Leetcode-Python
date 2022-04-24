@@ -15,6 +15,7 @@ Given the head of a linked list, return the list after sorting it in ascending o
 
 from typing import List, Optional
 from helpers.LinkedList import LinkedList
+from helpers.LinkedList import ListNode
 from helpers.TreeNode import TreeNode
 
 
