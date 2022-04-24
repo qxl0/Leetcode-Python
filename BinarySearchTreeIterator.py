@@ -44,6 +44,14 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "eceba"
-    res = sol.lengthOfLongestSubstringTwoDistinct(s)
+    root = TreeNode.to_binary_tree([7, 3, 15, None, None, 9, 20])
+    sol.next()
+    sol.next()
+    res = sol.hasNext()
+    sol.next()
+
+    res = sol.hasNext()
+    sol.next()
+    res = sol.hasNext()
+    sol.next()
     print(res)
