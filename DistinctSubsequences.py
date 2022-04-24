@@ -45,9 +45,24 @@ class Solution:
         return dp[-1][-1]
 
 
+class Solution2:
+    def numDistinct(self, s, t):
+        l1, l2 = len(s) + 1, len(t) + 1
+        cur = [0] * l2  # row --> t
+        cur[0] = 1
+
+        for i in range(1, l1):
+            pre = cur[:]
+            for j in range(1, l2):
+                cur[j] = pre[j] + pre[j - 1] * (s[i - 1] == t[j - 1])
+            print(f"{i}:", cur)
+
+        return cur[-1]
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     s = "rabbbit"
     t = "rabbit"
     res = sol.numDistinct(s, t)
-    print(res)
+    print("Ans is: ", res)
