@@ -32,10 +32,20 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            mid = l + (r - l) // 2
+            if nums[mid] < nums[r]:
+                r = mid
+            elif nums[mid] > nums[r]:
+                l = mid + 1
+            else:
+                r -= 1
+        return nums[l]
 
 
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     nums = [1, 3, 5]
     res = sol.findMin(nums)
     print(res)

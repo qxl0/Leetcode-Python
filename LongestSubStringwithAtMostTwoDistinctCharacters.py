@@ -24,10 +24,25 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        d = {}
+        longest = 1
+        start = 0
+        for i, c in enumerate(s):
+            d[c] = d.get(c, 0) + 1
+            while len(d) > 2:
+                d[s[start]] -= 1
+                if d[s[start]] == 0:
+                    d.pop(s[start])
+                start += 1
+            longest = max(longest, i - start + 1)
+
+        return longest
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "eceba"
+    # s = "eceba"
+    # s = "ccaabbb"
+    s = "abaccc"
     res = sol.lengthOfLongestSubstringTwoDistinct(s)
     print(res)
