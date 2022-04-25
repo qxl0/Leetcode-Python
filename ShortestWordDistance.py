@@ -20,7 +20,16 @@ from typing import List
 
 class Solution:
     def shortestDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:
-        pass
+        shortest = sys.maxsize
+        index1, index2 = sys.maxsize / 2, sys.maxsize
+        for i, w in enumerate(wordsDict):
+            if w == word1:
+                index1 = i
+                shortest = min(shortest, abs(index1 - index2))
+            if w == word2:
+                index2 = i
+                shortest = min(shortest, abs(index1 - index2))
+        return shortest
 
 
 if __name__ == "__main__":
