@@ -25,18 +25,30 @@ from math import factorial
 from operator import itemgetter
 from typing import List
 
-class Node:
-  def __init__(self, val=0, neighbors = None):
-    self.val = val
-    self.neighbors = neighbors if neighbors is not None else []
+from helpers.Graph import Node
+
 
 class Solution:
-    def cloneGraph(self, node: 'Node') -> 'Node':
-        pass
+    def cloneGraph(self, node: "Node") -> "Node":
+        m = {}
+
+        def helper(node):
+            if not node:
+                return None
+            if node in m:
+                return m[node]
+            m[node] = Node(node.val)
+
+            for neigh in node.neighbors:
+                m[node].neighbors.append(helper(neigh))
+
+            return m[node]
+
+        return helper(node)
 
 
 if __name__ == "__main__":
     sol = Solution()
-    adjList = [[2,4],[1,3],[2,4],[1,3]]
+    adjList = [[2, 4], [1, 3], [2, 4], [1, 3]]
     res = sol.cloneGraph(adjList)
     print(res)
