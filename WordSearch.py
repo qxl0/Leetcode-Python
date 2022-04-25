@@ -78,8 +78,10 @@ class Solution2:
 
 
 if __name__ == "__main__":
-    board = [["a", "b", "c", "e"], ["d", "e", "c", "s"], ["a", "a", "e", "e"]]
-    word = "abcced"
+    # board = [["a", "b", "c", "e"], ["d", "e", "c", "s"], ["a", "a", "e", "e"]]
+    # word = "abcced"
+    board = [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]]
+    word = "SEE"
     s = Solution2()
     res = s.wordsearch(board, word)
     print("Word exists: ", res)
