@@ -29,8 +29,8 @@ class Solution:
         def dfs(queens, ddiff, ssum):
             p = len(queens)
             if p == n:
-                queens = ["." * i + "Q" + "." * (n - i - 1) for i in queens]
-                res.append(queens)
+                # queens = ["." * i + "Q" + "." * (n - i - 1) for i in queens]
+                res.append(["." * i + "Q" + "." * (n - i - 1) for i in queens])
                 return
             for q in range(n):
                 if q in queens or p - q in ddiff or p + q in ssum:
