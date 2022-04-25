@@ -31,6 +31,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    text = "abcabcabc"
-    res = sol.distinctEchoSubstrings(text)
+    nums = [1, 7, 4, 9, 2, 5]
+    res = sol.wiggleMaxLength(nums)
     print(res)
