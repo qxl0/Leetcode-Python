@@ -30,7 +30,30 @@ from helpers.Graph import Node
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        pass
+        Ans = 0
+        m, n = len(grid), len(grid[0])
+
+        def helper(i, j):
+
+            if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] != 1:
+                return 0
+            grid[i][j] = 0
+
+            return (
+                1
+                + helper(i + 1, j)
+                + helper(i - 1, j)
+                + helper(i, j - 1)
+                + helper(i, j + 1)
+            )
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    temp = helper(i, j)
+                    print(f"({i} {j}) : {temp}")
+                    Ans = max(Ans, temp)
+        return Ans
 
 
 if __name__ == "__main__":
