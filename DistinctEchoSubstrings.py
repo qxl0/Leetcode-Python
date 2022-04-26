@@ -20,7 +20,22 @@ from typing import List
 
 class Solution:
     def distinctEchoSubstrings(self, text: str) -> int:
-        pass
+        res = set()
+        n = len(text)
+
+        def check(str):
+            l = len(str)
+            if l % 2 != 0:
+                return False
+            if str[: l // 2] == str[l // 2 :]:
+                return True
+            return False
+
+        for i in range(n):
+            for j in range(i + 1, n + 1):
+                if check(text[i : j + 1]):
+                    res.add(text[i : j + 1])
+        return len(res)
 
 
 if __name__ == "__main__":
