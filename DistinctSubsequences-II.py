@@ -15,6 +15,7 @@ A subsequence of a string is a new string that is formed from the original strin
 """
 from collections import defaultdict
 import collections
+import enum
 from math import factorial
 from operator import itemgetter
 from typing import List
@@ -25,19 +26,29 @@ MOD = 10**9 + 7
 
 class Solution:
     def distinctSubseqII(self, s: str) -> int:
-        dp = [1] * len(s)
-        last = {c: i for i, c in enumerate(s)}
+        last = {}
+        dp = [1]
 
-        for i in range(1, len(s)):
-            dp[i] = (2 * dp[i - 1]) % MOD
-            if 0 < last[s[i]] < i:
-                dp[i] -= dp[last[s[i]] - 1]
+        for i, c in enumerate(s):
+            dp.append(dp[-1] * 2)
+            if c in last:
+                dp[-1] -= dp[last[c]]
+            last[c] = i
+        print(dp)
+        return (dp[-1] - 1) % MOD
 
-        return dp[-1]
+
+class Solution2:
+    def distinctSubseqII(self, s: str) -> int:
+        dp = [0] * 26
+        for c in s:
+            dp[ord(c) - ord("a")] = (sum(dp) + 1) % MOD
+        return sum(dp)
 
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "abc"
+    # s = "aba"  # 6
+    s = "cbab"
     res = sol.distinctSubseqII(s)
     print(res)
