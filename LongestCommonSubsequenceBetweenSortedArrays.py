@@ -22,7 +22,14 @@ from typing import List
 
 class Solution:
     def longestCommonSubsequence(self, arrays):
-        pass
+        data = {}
+        n = len(arrays)
+
+        for i in range(n):
+            for c in arrays[i]:
+                data[c] = data.get(c, 0) + 1
+
+        return [c for c in data if data[c] == n]
 
 
 if __name__ == "__main__":
