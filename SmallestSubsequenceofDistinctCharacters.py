@@ -33,6 +33,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "bcabc"
+    # s = "bcabc"
+    s = "cbacdcbc"
     res = sol.smallestSubsequence(s)
     print(res)
