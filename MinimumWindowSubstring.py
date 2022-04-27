@@ -114,16 +114,33 @@ class Solution:
         return S[best_i : best_j + 1] if best_j - best_i < len(S) else ""
 
 
+class Solution2:
+    def minWindow(self, s, t):
+        need = collections.Counter(t)
+        missing = len(t)
+        i = I = J = 0
+
+        for j, c in enumerate(s, 1):
+            missing -= need[c] > 0
+            need[c] -= 1
+            if not missing:
+                while i < j and need[s[i]] < 0:
+                    need[s[i]] += 1
+                    i += 1
+                if not J or J - I >= j - i:
+                    J, I = j, i
+        return s[I:J]
+
+
 if __name__ == "__main__":
-    sol = Solution()
-    # s = "ADOBECODEBANC"
-    s = "ABCDOODEBANC"
+    sol = Solution2()
+    s = "ADOBECODEBANC"
     t = "ABC"
     # x = "aaa"
     # t = "aa"
     # s = "a"
     # t = "aa"
-    s = "abcd"
-    t = "db"
-    res = sol.minWindow3(s, t)
+    # s = "abcd"
+    # t = "db"
+    res = sol.minWindow(s, t)
     print("Result is: ", res)
