@@ -57,6 +57,19 @@ class Solution2:
             max_length = max(max_length, r - l + 1)
         return max_length
 
+    def LongestRepeatingCharacterReplacement2(self, s: str, k: int) -> int:
+        counter = defaultdict(int)
+        counter[s[0]] += 1
+        l = 0
+        maxlen = 0
+        for i, c in enumerate(s[1:], 1):
+            counter[c] += 1
+            while i - l + 1 - max(counter.values()) > k:
+                counter[s[l]] -= 1
+                l -= 1
+            maxlen = max(maxlen, i - l + 1)
+        return maxlen
+
 
 if __name__ == "__main__":
     sol = Solution2()
@@ -65,5 +78,5 @@ if __name__ == "__main__":
     # s = "ABCDEFG"
     s = "AABABBA"
     k = 1
-    res = sol.LongestRepeatingCharacterReplacement(s, k)
+    res = sol.LongestRepeatingCharacterReplacement2(s, k)
     print("Result is: ", res)
