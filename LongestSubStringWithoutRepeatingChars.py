@@ -42,10 +42,27 @@ class Solution2:
         return max_length
 
 
+class Solution3:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        l = 0
+        longest = 0
+        seen = {}
+        for i, c in enumerate(s):
+            if c in seen and l <= seen[c]:
+                l = seen[c] + 1
+            else:
+                longest = max(longest, i - l + 1)
+            seen[c] = i
+        return longest
+
+
 if __name__ == "__main__":
-    sol = Solution2()
-    s = "abcabcbb"
+    sol = Solution3()
+    # s = "abcabcbb"
     # s = "bbbb"
     # s = "dvdf"
+    # s = "pwwkew"
+    # s = "tmmzuxt"
+    s = "abcabcbb"
     maxlen = sol.lengthOfLongestSubstring(s)
     print("Max len is:", maxlen)
