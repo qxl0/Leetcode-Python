@@ -18,8 +18,8 @@ Return an integer array answer where answer[i] is the value of the next greater 
 
 
 from math import floor
-from typing import List
-from helpers.LinkedList import LinkedList
+from typing import List, Optional
+from helpers.LinkedList import LinkedList, ListNode
 
 
 class Solution:

@@ -19,7 +19,14 @@ from typing import List
 
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        pass
+        ans = [0] * len(temperatures)
+        stack = []
+        for i, t in enumerate(temperatures):
+            while stack and stack[-1][1] < t:
+                idx, v = stack.pop()
+                ans[idx] = i - idx
+            stack.append([i, t])
+        return ans
 
 
 if __name__ == "__main__":
