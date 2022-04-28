@@ -19,6 +19,7 @@ It is guaranteed that the given RPN expression is always valid. That means the e
 """
 
 
+from math import floor
 from typing import List
 
 
@@ -44,11 +45,11 @@ class Solution:
             elif t == "/":
                 o1 = stack.pop()
                 o2 = stack.pop()
-                val = int(o2) // int(o1)
+                val = int(o2 / o1)
                 print(val)
                 stack.append(val)
             else:
-                stack.append(t)
+                stack.append(int(t))
         return stack[-1]
 
 
