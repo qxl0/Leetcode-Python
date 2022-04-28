@@ -57,9 +57,9 @@ class Solution3:
 
 
 if __name__ == "__main__":
-    sol = Solution3()
+    sol = Solution()
     # s = "()[]{}"
-    # s = "(()())"
-    s = "()"
+    s = "(()())"
+    # s = "()"
     res = sol.isValid(s)
     print(res)
