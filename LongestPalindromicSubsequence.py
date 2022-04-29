@@ -36,8 +36,51 @@ class Solution:
         return f(s)
 
 
+class Solution2:
+    def longestPalindromeSubseq(self, s):
+        """
+        Use DP
+        """
+        str_len = len(s)
+        dp_matrix = [[0] * len(s) for i in range(str_len)]
+
+        k = 0
+        while k < str_len:
+            for i in range(str_len - k):
+                j = i + k
+                if i == j:
+                    dp_matrix[i][j] = 1
+                elif s[i] == s[j]:
+                    dp_matrix[i][j] = dp_matrix[i + 1][j - 1] + 2
+                else:
+                    dp_matrix[i][j] = max(dp_matrix[i][j - 1], dp_matrix[i + 1][j])
+            k += 1
+
+        return dp_matrix[0][str_len - 1]
+
+
+class Solution3:
+    def longestPalindromeSubseq(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        n = len(s)
+        dp = [1] * n
+        for j in range(1, len(s)):
+            pre = dp[j]
+            for i in reversed(range(0, j)):
+                tmp = dp[i]
+                if s[i] == s[j]:
+                    dp[i] = 2 + pre if i + 1 <= j - 1 else 2
+                else:
+                    dp[i] = max(dp[i + 1], dp[i])
+                pre = tmp
+        return dp[0]
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution3()
     s = "bbbab"
     res = sol.longestPalindromeSubseq(s)
     print(res)

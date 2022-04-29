@@ -31,7 +31,6 @@ class Solution:
                 d and nums[d[-1]] < nums[i]
             ):  # new element > q's end, remove it , desc order
                 d.pop()
-            # d += (i,)
             d.append(i)
             if d[0] == i - k:  # out of sliding window, remove
                 d.popleft()
