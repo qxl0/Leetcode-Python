@@ -26,7 +26,18 @@ from typing import List
 
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
-        pass
+        if not nums:
+            return 0
+        l = 0
+        up = None
+        for i in range(1, len(nums)):
+            if nums[i] < nums[i - 1] and up != False:
+                l += 1
+                up = False
+            if nums[i] > nums[i - 1] and up != True:
+                l += 1
+                up = True
+        return l
 
 
 if __name__ == "__main__":
