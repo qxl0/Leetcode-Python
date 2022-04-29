@@ -40,14 +40,33 @@ class Solution:
                 r = mid - 1
         return True if getValue(l) == target else False
 
+    def searchMatrix2(self, matrix, target):
+        m, n = len(matrix), len(matrix[0])
+
+        def check(k):
+            val = matrix[k // n][k % n]
+            return val
+
+        l, r = 0, m * n - 1
+        while l < r:
+            mid = l + (r - l) // 2
+            val = check(mid)
+            if val == target:
+                return True
+            elif val > target:
+                r = mid - 1
+            else:
+                l = mid + 1
+        return check(l) == target
+
 
 if __name__ == "__main__":
     sol = Solution()
-    # matrix = [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]]
-    # target = 3
-    matrix = [[1, 3, 5, 7], [10, 13, 16, 20], [23, 30, 34, 60]]
-    target = 13
+    matrix = [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]]
+    target = 3
+    # matrix = [[1, 3, 5, 7], [10, 13, 16, 20], [23, 30, 34, 60]]
+    # target = 13
     # matrix = [[1]]
     # target = 0
-    res = sol.searchMatrix(matrix, target)
+    res = sol.searchMatrix2(matrix, target)
     print(res)
