@@ -20,7 +20,16 @@ from typing import List
 
 class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
-        pass
+        first, second = float("inf"), float("inf")
+
+        for n in nums:
+            if n <= first:
+                first = n
+            elif n <= second:
+                second = n
+            else:
+                return True
+        return False
 
 
 if __name__ == "__main__":
