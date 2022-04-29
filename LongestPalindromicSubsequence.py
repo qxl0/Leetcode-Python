@@ -22,11 +22,23 @@ from typing import List
 
 class Solution:
     def longestPalindromeSubseq(self, s: str) -> int:
-        pass
+        def longestPalindromeSubseq(self, s):
+            d = {}
+
+            def f(s):
+                if s not in d:
+                    maxL = 0
+                    for c in set(s):
+                        i, j = s.find(c), s.rfind(c)
+                        maxL = max(maxL, 1 if i == j else 2 + f(s[i + 1 : j]))
+                    d[s] = maxL
+                return d[s]
+
+            return f(s)
 
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [1, 2, 3, 4, 5]
-    res = sol.increasingTriplet(nums)
+    s = "bbbab"
+    res = sol.longestPalindromeSubseq(s)
     print(res)
