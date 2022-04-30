@@ -19,7 +19,6 @@ Return the final string after all such duplicate removals have been made. It can
 """
 
 
-from curses.ascii import SO
 from math import floor
 from string import ascii_lowercase
 from typing import List
@@ -33,13 +32,22 @@ class Solution:
         while l != len(s):
             l = len(s)
             for d in dup:
-                s.replace(d, "")
+                s = s.replace(d, "")
 
         return s
+
+    def removeDuplicates2(self, S: str) -> str:
+        stack = []
+        for ch in S:
+            if stack and stack[-1] == ch:
+                stack.pop()
+            else:
+                stack.append(ch)
+        return "".join(stack)
 
 
 if __name__ == "__main__":
     sol = Solution()
     s = "abbaca"
-    res = sol.removeDuplicates(s)
+    res = sol.removeDuplicates2(s)
     print(res)
