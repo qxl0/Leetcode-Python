@@ -22,7 +22,19 @@ from typing import List
 
 class Solution:
     def maximumPopulation(self, logs: List[List[int]]) -> int:
-        pass
+        dates = []
+        for birth, death in logs:
+            dates.append((birth, 1))
+            dates.append((death, -1))
+        dates.sort()
+
+        max_popu, max_year, popu = 0, 0, 0
+        for year, change in dates:
+            popu += change
+            if popu > max_popu:
+                max_popu = popu
+                max_year = year
+        return max_year
 
 
 if __name__ == "__main__":
