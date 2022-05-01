@@ -43,6 +43,21 @@ class Solution:
                 ans.append(val)
         return ans
 
+    def nextGreaterElement(self, nums1, nums2):
+        stack = []
+        map = {}
+        ans = []
+        for i in range(len(nums2)):
+            while stack and stack[-1] < nums2[i]:
+                map[stack.pop()] = nums2[i]
+            stack.append(nums2[i])
+        while stack:
+            map[stack.pop()] = -1
+        for n in nums1:
+            ans.append(map[n])
+
+        return ans
+
 
 if __name__ == "__main__":
     sol = Solution()
