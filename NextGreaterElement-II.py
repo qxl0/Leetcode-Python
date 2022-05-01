@@ -29,9 +29,24 @@ class Solution:
         return res
 
 
+class Solution2(object):
+    def nextGreaterElements(self, nums):
+        n = len(nums)
+        ret = [-1] * n
+        stack = nums[::-1]
+        for i in range(n - 1, -1, -1):
+            while stack and stack[-1] <= nums[i]:
+                stack.pop()
+            if stack:
+                ret[i] = stack[-1]
+            stack.append(nums[i])
+        return ret
+
+
 if __name__ == "__main__":
-    sol = Solution()
-    nums = [1, 2, 1]
+    sol = Solution2()
+    # nums = [3, 8, 4, 1, 2]
+    nums = [5, 4, 3, 2, 1]
     res = sol.nextGreaterElements(nums)
 
     print(res)
