@@ -17,12 +17,32 @@ Note that the returned integer should fit in 32-bit integer, if there is a valid
 
 class Solution:
     def nextGreaterElements(self, n):
-        pass
+        s = list(str(n))
+
+        fst = -1
+        for i in range(len(s) - 2, -1, -1):
+            if s[i] < s[i + 1]:
+                fst = i
+                break
+        if fst == -1:
+            return -1
+
+        scd = -1
+
+        for i in range(len(s) - 1, -1, -1):
+            if s[i] > s[fst]:
+                scd = i
+                break
+        s[fst], s[scd] = s[scd], s[fst]
+        s[fst + 1 :] = s[fst + 1 :][::-1]
+        ans = int("".join(s))
+        return ans if ans < 2147483648 else -1
 
 
 if __name__ == "__main__":
     sol = Solution()
-    n = 12
+    # n = 158476531
+    n = 230241
     res = sol.nextGreaterElements(n)
 
     print(res)
