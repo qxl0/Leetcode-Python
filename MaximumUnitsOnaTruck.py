@@ -25,7 +25,18 @@ from typing import List
 
 class Solution:
     def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
-        pass
+        boxTypes.sort(key=lambda x: x[1])
+
+        ans = 0
+        box = 0
+        for b, u in boxTypes:
+            if box + b <= truckSize:
+                ans += b * u
+                box += b
+            else:
+                ans += (truckSize - b) * u
+                return ans
+        return ans
 
 
 if __name__ == "__main__":
