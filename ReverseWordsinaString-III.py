@@ -16,7 +16,11 @@ from string import ascii_lowercase, ascii_uppercase
 
 class Solution:
     def reverseWords(self, s: str) -> str:
-        pass
+        slist = s.split(" ")
+
+        for i, word in enumerate(slist):
+            slist[i] = word[::-1]
+        return " ".join(slist)
 
 
 if __name__ == "__main__":
