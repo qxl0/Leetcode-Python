@@ -35,6 +35,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    s = "LEETCODE"
+    # s = "LEETCODE"
+    s = "ABBCA"
     res = sol.uniqueLetterString(s)
     print(res)
