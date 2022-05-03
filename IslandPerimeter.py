@@ -31,7 +31,37 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def islandPerimeter(self, grid: List[List[int]]) -> int:
-        pass
+        ans = 0
+        m, n = len(grid), len(grid[0])
+        dt = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+        def isValid(grid, i, j):
+            return i >= 0 and i < m and j >= 0 and j < n
+
+        def checkPeri(grid, i, j):
+            nonlocal ans
+            change = 4
+            for dx, dy in dt:
+                newx, newy = i + dx, j + dy
+                if isValid(grid, newx, newy) and grid[newx][newy] != 0:
+                    change -= 1
+            ans += change
+            print(f"{i},{j} --- {change}")
+
+        def helper(grid, i, j):
+            if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] != 1:
+                return
+            grid[i][j] = "-1"
+            ans = checkPeri(grid, i, j)
+            for dx, dy in dt:
+                newx, newy = i + dx, i + dy
+                helper(grid, newx, newy)
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    helper(grid, i, j)
+        return ans
 
 
 if __name__ == "__main__":
