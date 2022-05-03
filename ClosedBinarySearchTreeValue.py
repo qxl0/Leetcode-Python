@@ -25,11 +25,26 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def closestValue(self, root: Optional[TreeNode], target: float) -> int:
-        pass
+        stack, pred = [], float("-inf")
+
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+
+            if pred <= target and target < root.val:
+                return min(pred, root.val, key=lambda x: abs(target - x))
+
+            pred = root.val
+            root = root.right
+
+        return pred
 
 
 if __name__ == "__main__":
     sol = Solution()
     root = TreeNode.to_binary_tree([4, 2, 5, 1, 3])
-    res = sol.closestValue(root)
+    target = 3.7
+    res = sol.closestValue(root, target)
     print("result is: ", res)
