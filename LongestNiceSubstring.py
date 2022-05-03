@@ -18,7 +18,29 @@ from typing import List
 
 class Solution:
     def longestNiceSubstring(self, s: str) -> str:
-        pass
+        if len(s) < 2:
+            return ""
+
+        hs = set(s)
+        badchars = {ch for ch in hs if ch.swapcase() not in hs}
+
+        if len(badchars) == 0:
+            return s
+        if len(hs) == len(badchars):
+            return ""
+
+        substrs = []
+        lp = 0
+        for i in range(len(s)):
+            if s[i] in badchars:
+                if lp != i:
+                    substrs.append(s[lp:i])
+                lp = i + 1
+        substrs.append(s[lp:])
+
+        return sorted(
+            [self.longestNiceSubstring(x) for x in substrs], key=len, reverse=True
+        )[0]
 
 
 if __name__ == "__main__":
