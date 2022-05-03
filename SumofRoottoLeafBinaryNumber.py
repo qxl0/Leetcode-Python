@@ -34,18 +34,42 @@ class Solution:
 
         def dfs(node, cur):
             nonlocal sum
-            if not node:
-                sum += cur
+            if not node.left and not node.right:
+                sum += cur * 2 + node.val
                 return
-            dfs(node.left, cur * 2 + node.val)
-            dfs(node.right, cur * 2 + node.val)
+            if node.left:
+                dfs(node.left, cur * 2 + node.val)
+            if node.right:
+                dfs(node.right, cur * 2 + node.val)
 
         dfs(root, 0)
         return sum
 
 
+class Solution2:
+    def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
+        ans = 0
+
+        def isLeaf(node):
+            return node and not node.left and not node.right
+
+        def helper(node, val):
+            nonlocal ans
+            if not node:
+                return 0
+            val = (val << 1) + node.val
+            if isLeaf(node):
+                ans += val
+                return
+            helper(node.left, val)
+            helper(node.right, val)
+
+        helper(root, 0)
+        return ans
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     root = TreeNode.to_binary_tree([1, 0, 1, 0, 1, 0, 1])
     res = sol.sumRootToLeaf(root)
     print("result is: ", res)
