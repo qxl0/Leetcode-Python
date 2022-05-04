@@ -18,7 +18,14 @@ from typing import List
 
 class Solution:
     def gcdOfStrings(self, str1: str, str2: str) -> str:
-        pass
+        str1len, str2len = len(str1), len(str2)
+        if str1len < str2len:
+            return self.gcdOfStrings(str2, str1)
+        if str1[:str2len] == str2:
+            if str1len == str2len:
+                return str2
+            return self.gcdOfStrings(str1[str2len:], str2)
+        return ""
 
 
 if __name__ == "__main__":
