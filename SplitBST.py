@@ -27,7 +27,22 @@ class Solution:
     def splitBST(
         self, root: Optional[TreeNode], target: int
     ) -> List[Optional[TreeNode]]:
-        pass
+        if not root:
+            return [None, None]
+
+        if root.val == target:
+            right = root.right
+            root.right = None
+            return [root, right]
+
+        elif root.val > target:
+            A, B = self.splitBST(root.left, target)
+            root.left = B  # this is the benefit of the recursion method, as the root if the parent of the subtree and is known
+            return [A, root]
+        else:
+            A, B = self.splitBST(root.right, target)
+            root.right = A
+            return [root, B]
 
 
 if __name__ == "__main__":

@@ -19,13 +19,22 @@ Given an array of count-paired domains cpdomains, return an array of the count-p
 
 
 from calendar import c
+import collections
 from math import floor
 from typing import List
 
 
 class Solution:
     def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
-        pass
+        ans = collections.Counter()
+        for domain in cpdomains:
+            ct, domain = domain.split(" ")
+            count = int(ct)
+            frags = domain.split(".")
+            for i in range(len(frags)):
+                ans[".".join(frags[i:])] += count
+
+        return [f"{ct} {dom}" for dom, ct in ans.items()]
 
 
 if __name__ == "__main__":
