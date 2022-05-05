@@ -26,7 +26,30 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
-        pass
+        if not root:
+            return None
+        if key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            # find the node
+            if not (root.left or root.right):
+                root = None
+                return root
+            elif not root.left:
+                return root.right
+            elif not root.right:
+                return root.left
+            else:
+                temp = root.right
+                mini = temp.val
+                while temp.left:
+                    temp = temp.left
+                    mini = temp.val
+                root.val = mini
+                root.right = self.deleteNode(root.right, mini)
+        return root
 
 
 if __name__ == "__main__":
