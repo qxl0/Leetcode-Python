@@ -22,15 +22,18 @@ from typing import List
 class Solution:
     def numWays(self, steps: int, arrLen: int) -> int:
         n = arrLen
-        dp = [[0] * (steps // 2 + 2) for _ in range(steps + 1)]
+        pos = min(n, steps // 2 + 2)
+        dp = [[0] * (pos) for _ in range(steps + 1)]
         dp[0][0] = 1
 
         M = 10**9 + 7
         for k in range(1, steps + 1):
-            for i in range(steps // 2 + 1):
-                if i == 0:
+            for i in range(pos):
+                if i == 0 and i == pos - 1:
+                    dp[k][i] = dp[k - 1][i]
+                elif i == 0:
                     dp[k][i] = (dp[k - 1][i] + dp[k - 1][i + 1]) % M
-                elif i == n - 1:
+                elif i == pos - 1:
                     dp[k][i] = (dp[k - 1][i - 1] + dp[k - 1][i]) % M
                 else:
                     dp[k][i] = (dp[k - 1][i - 1] + dp[k - 1][i] + dp[k - 1][i + 1]) % M
@@ -40,6 +43,6 @@ class Solution:
 if __name__ == "__main__":
     sol = Solution()
     steps = 3
-    arrLen = 2
+    arrLen = 1
     res = sol.numWays(steps, arrLen)
     print(res)
