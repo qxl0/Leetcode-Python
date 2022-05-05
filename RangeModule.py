@@ -23,6 +23,7 @@ void removeRange(int left, int right) Stops tracking every real number currently
 
 
 from audioop import add
+from bisect import bisect, bisect_left
 from unittest import removeResult
 
 
@@ -158,29 +159,90 @@ class RangeModule2:
         self.ranges[i : j + 1] = new_ranges
 
 
-if __name__ == "__main__":
-    sol = RangeModule()
-    # sol.addRange(10, 20)
-    # sol.removeRange(14, 16)
-    # res = sol.queryRange(10, 14)
-    # print("res is : ", res)
-    # res = sol.queryRange(13, 15)
-    # print("res is : ", res)
-    # res = sol.queryRange(16, 17)
-    sol.addRange(55, 62)
-    sol.addRange(1, 29)
-    sol.removeRange(18, 49)
-    sol.removeRange(40, 45)
-    sol.removeRange(4, 58)
-    sol.removeRange(57, 69)
-    sol.removeRange(20, 30)
-    sol.removeRange(1, 40)
-    sol.removeRange(32, 93)
-    sol.addRange(38, 100)
-    sol.removeRange(50, 64)
-    sol.addRange(26, 72)
+class RangeModule3(object):
+    def __init__(self):
+        self.range = [-float("inf"), float("inf")]
 
-    sol.addRange(44, 85)
-    sol.addRange(10, 71)
-    res = sol.queryRange(54, 70)
+    def addRange(self, left, right):
+        self._updateRange(left, right, 0)
+
+    def queryRange(self, left, right):
+        li = bisect(self.range, left)
+        ri = bisect_left(self.range, right)
+        return li == ri and li % 2 == 0
+
+    def removeRange(self, left, right):
+        self._updateRange(left, right, 1)
+
+    def _updateRange(self, left, right, op):
+        li = bisect_left(self.range, left)
+        ri = bisect(self.range, right)
+
+        if li % 2 == op:
+            li = li - 1
+            left = self.range[li]
+        if ri % 2 == op:
+            right = self.range[ri]
+            ri += 1
+
+        self.range[li:ri] = [left, right]
+
+
+class RangeModule4:
+    def __init__(self):
+        self._ranges = []
+
+    def addRange(self, left: int, right: int) -> None:
+        # insert
+        inserted = False
+        new_ranges = []
+        for range in self._ranges:
+            if range[0] > right and not inserted:
+                new_ranges.append([left, right])
+                inserted = True
+            if range[1] < left or right < range[0]:
+                new_ranges.append(range)
+            else:
+                left = min(range[0], left)
+                right = max(range[1], right)
+        if not inserted:
+            new_ranges.append([left, right])
+        self._ranges = new_ranges
+
+    def queryRange(self, left: int, right: int) -> bool:
+        n = len(self._ranges)
+        l, r = 0, n - 1
+        while l <= r:
+            m = l + (r - l) // 2
+            if self._ranges[m][1] < left:
+                l = m + 1
+            elif right < self._ranges[m][0]:
+                r = m - 1
+            else:
+                return self._ranges[m][0] <= left and right <= self._ranges[m][1]
+        return False
+
+    def removeRange(self, left: int, right: int) -> None:
+        new_ranges = []
+        for range in self._ranges:
+            if range[1] <= left or right <= range[0]:
+                new_ranges.append(range)
+            else:
+                if range[0] < left:
+                    new_ranges.append([range[0], left])
+                if right < range[1]:
+                    new_ranges.append([right, range[1]])
+        self._ranges = new_ranges
+
+
+if __name__ == "__main__":
+    sol = RangeModule3()
+    sol.addRange(10, 20)
+    sol.removeRange(14, 16)
+    sol.addRange(20, 21)
+    res = sol.queryRange(10, 14)
+    print("res is : ", res)
+    res = sol.queryRange(13, 15)
+    print("res is : ", res)
+    res = sol.queryRange(16, 17)
     print("res is: ", res)
