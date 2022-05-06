@@ -23,7 +23,19 @@ from typing import List
 
 class Solution:
     def mySqrt(self, x: int) -> int:
-        pass
+        if x < 2:
+            return x
+        l, r = 2, x // 2
+        while l <= r:
+            m = l + (r - l) // 2
+            prod = m * m
+            if prod < x:
+                l = m + 1
+            elif prod > x:
+                r = m - 1
+            else:
+                return m
+        return r
 
 
 if __name__ == "__main__":
