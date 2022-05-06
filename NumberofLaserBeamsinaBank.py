@@ -28,7 +28,16 @@ from typing import List
 
 class Solution:
     def numberOfBeams(self, bank: List[str]) -> int:
-        pass
+        total = 0
+        pre = 0
+
+        for row in bank:
+            cur = row.count("1")
+            if cur:
+                total += pre * cur
+                pre = cur
+
+        return total
 
 
 if __name__ == "__main__":
