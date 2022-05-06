@@ -32,6 +32,28 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
+        m, n = len(grid), len(grid[0])
+        seen = set()
+        self.res = float("inf")
+
+        def helper(total):
+            pos = [
+                (i, j)
+                for i in range(m)
+                for j in range(n)
+                if grid[i][j] == 1 and ("r", i) not in seen and ("c", j) not in seen
+            ]
+            if not pos:
+                self.res = min(self.res, total)
+            for i, j in pos:
+                seen.add(("r", i))
+                seen.add(("c", j))
+                helper(total + 1)
+                seen.remove(("r", i))
+                seen.remove(("c", j))
+
+        helper(0)
+        return self.res
 
 
 if __name__ == "__main__":
