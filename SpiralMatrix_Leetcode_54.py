@@ -28,9 +28,24 @@ class Solution:
         return res
 
 
+class Solution2:
+    def spiralOrder(self, matrix):
+        m = len(matrix)
+        if m == 0:
+            return []
+        n = len(matrix[0])
+        new_matrix = []
+        for j in range(n - 1, -1, -1):
+            new_l = []
+            for i in range(1, m):
+                new_l.append(matrix[i][j])
+            new_matrix.append(new_l)
+        return matrix.pop(0) + self.spiralOrder(new_matrix)
+
+
 if __name__ == "__main__":
-    sol = Solution()
-    # matrix = [[1,2,3],[4,5,6],[7,8,9]]
-    matrix = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
-    res = sol.spiralOrder2(matrix)
+    sol = Solution2()
+    matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    # matrix = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+    res = sol.spiralOrder(matrix)
     print(res)
