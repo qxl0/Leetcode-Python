@@ -46,7 +46,7 @@ class Solution2:
 
 if __name__ == "__main__":
     sol = Solution2()
-    digits = [1, 2, 8]
+    digits = [1, 2, 9]
     res = sol.plusOne(digits)
     print("Ans is:", res)
     digits = [9, 9, 9]
