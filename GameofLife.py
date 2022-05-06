@@ -31,6 +31,42 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
+        # Original | New | State
+        #    0     |  0  |  0   live nei
+        #    1     |  0  |  1   live nei > 3 or < 2
+        #    0     |  1  |  2   live nei == 3
+        #    1     |  1  |  3   live nei == 2, 3
+        m, n = len(board), len(board[0])
+
+        def checkNeigh(r, c):
+            nei = 0
+            for i in range(r - 1, r + 2):
+                for j in range(c - 1, c + 2):
+                    if i < 0 or i >= m or j < 0 or j >= n or (i == r and j == c):
+                        continue
+                    if board[i][j] in [1, 3]:
+                        nei += 1
+            return nei
+
+        for r in range(m):
+            for c in range(n):
+                nei = checkNeigh(r, c)
+
+                if board[r][c]:
+                    if nei in [2, 3]:
+                        board[r][c] = 3
+                    else:
+                        board[r][c] = 1
+                else:
+                    if nei == 3:
+                        board[r][c] = 2
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == 1:
+                    board[r][c] = 0
+                elif board[r][c] in [2, 3]:
+                    board[r][c] = 1
+        print(board)
 
 
 if __name__ == "__main__":
