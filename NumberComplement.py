@@ -27,14 +27,17 @@ class Interval:
 
 
 class Solution:
-    def intervalIntersection(
-        self, firstList: List[List[int]], secondList: List[List[int]]
-    ) -> List[List[int]]:
-        pass
+    def numberComplement(self, num):
+        todo, bit = num, 1
+        while todo:
+            num ^= bit
+            bit <<= 1
+            todo >>= 1
+        return num
 
 
 if __name__ == "__main__":
     sol = Solution()
     num = 5
-    res = sol.intervalIntersection(num)
-    print(res)
+    res = sol.numberComplement(num)
+    print("Ans is: ", res)
