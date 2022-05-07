@@ -19,6 +19,7 @@ from typing import List
 
 class Solution:
     def myPow(self, x: float, n: int) -> float:
+        # n = 1010, so pow(x, n) = x**2 + x**8
         if n < 0:
             n = -n
             x = 1 / x

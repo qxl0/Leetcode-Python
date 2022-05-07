@@ -25,8 +25,22 @@ class Solution:
         return pow(a, b, MOD)
 
 
+class Solution2:
+    def superPow(self, a, b):
+        curr = a
+        ret = 1
+        for digit in b[::-1]:
+            for i in range(digit):
+                ret *= curr
+            new_curr = 1
+            for i in range(10):
+                new_curr *= curr
+            curr = new_curr
+        return ret
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     a = 2
     b = [1, 0]
     res = sol.superPow(a, b)
