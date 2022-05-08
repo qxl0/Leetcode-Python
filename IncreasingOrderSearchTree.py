@@ -20,11 +20,24 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def increasingBST(self, root):
-        pass
+        dummy = pre = TreeNode()
+
+        def helper(node):
+            nonlocal pre
+            if not node:
+                return None
+            helper(node.left)
+            node.left = None
+            pre.right = node
+            pre = pre.right
+            helper(node.right)
+
+        helper(root)
+        return dummy.right
 
 
 if __name__ == "__main__":
     sol = Solution()
-    root = TreeNode.to_binary_tree([5, 1, 7])
+    root = TreeNode.to_binary_tree([2, 1, 4, None, None, 3])
     res = sol.increasingBST(root)
     print("Ans is: ", res)
