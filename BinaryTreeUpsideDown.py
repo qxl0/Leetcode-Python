@@ -26,11 +26,20 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def upsideDownBinaryTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        pass
+        def helper(node):
+            if not node or not node.left:
+                return node
+            newRoot = helper(node.left)
+            node.left.left = node.right
+            node.left.right = node
+            node.left = node.right = None
+            return newRoot
+
+        return helper(root)
 
 
 if __name__ == "__main__":
     sol = Solution()
-    root = TreeNode.to_binary_tree([2, 1, 4, None, None, 3])
-    res = sol.increasingBST(root)
+    root = TreeNode.to_binary_tree([1, 2, 3, None, None, 6, 7])
+    res = sol.upsideDownBinaryTree(root)
     print("Ans is: ", res)
