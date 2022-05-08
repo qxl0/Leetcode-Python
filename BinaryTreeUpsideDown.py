@@ -40,6 +40,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    root = TreeNode.to_binary_tree([1, 2, 3, None, None, 6, 7])
+    root = TreeNode.to_binary_tree([1, 2, 3, 6, 7])
     res = sol.upsideDownBinaryTree(root)
     print("Ans is: ", res)
