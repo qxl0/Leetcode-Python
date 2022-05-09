@@ -33,7 +33,20 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def longestZigZag(self, root: Optional[TreeNode]) -> int:
-        pass
+        longest = 0
+
+        def helper(root):
+            if not root:
+                return -1, -1
+            _, rightLen = helper(root.left)
+            leftLen, _ = helper(root.right)
+            left = rightLen + 1
+            right = leftLen + 1
+            longest = max(longest, left, right)
+            return left, right
+
+        helper(root)
+        return longest
 
 
 if __name__ == "__main__":
