@@ -29,7 +29,29 @@ class Solution:
         self.longest = 0
 
     def longestConsecutive(self, root: Optional[TreeNode]) -> int:
-        pass
+        longest = 1
+
+        def helper(root):
+            if not root:
+                return (0, 0)
+            dcr = inr = 1
+            if root.left:
+                left = helper(root.left)
+                if root.left.val - 1 == root.val:
+                    dcr = left[0] + 1
+                elif root.left.val + 1 == root.val:
+                    inr = left[1] + 1
+            if root.right:
+                right = helper(root.right)
+                if root.right.val - 1 == root.val:
+                    dcr = max(dcr, right[0] + 1)
+                elif root.right.val + 1 == root.val:
+                    inr = max(inr, right[1] + 1)
+            longest = max(longest, inr + dcr - 1)
+            return (dcr, inr)
+
+        helper(root)
+        return longest
 
 
 if __name__ == "__main__":
