@@ -29,9 +29,10 @@ class Solution:
         def helper(i, j, memo):
             if (i, j) in memo:
                 return memo[(i, j)]
+
+            length = 0
             for dx, dy in dt:
                 newi, newj = i + dx, j + dy
-                length = 0
                 if (
                     newi >= 0
                     and newi < m
