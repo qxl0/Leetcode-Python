@@ -23,7 +23,24 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def longestConsecutive(self, root: Optional[TreeNode]) -> int:
-        pass
+        ans = 0
+
+        def dfs(p, parent, length):
+            nonlocal ans
+            if not p:
+                return
+            if parent and parent.val + 1 == p.val:
+                length += 1
+            else:
+                length = 1
+            ans = max(ans, length)
+            dfs(p.left, p, length)
+            dfs(p.right, p, length)
+
+        if not root:
+            return 0
+        dfs(root, None, 1)
+        return ans
 
 
 if __name__ == "__main__":
