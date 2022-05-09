@@ -53,12 +53,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    # n = 5
-    # edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]]
-    # edges = [[0, 1], [0, 2], [0, 3], [1, 4]]
-    # n = 5
-    # edges = [[1, 0]]
-    edges = [[0, 1], [0, 2]]
-    n = 3
-    res = sol.valid_tree(n, edges)
+    matrix = [[9, 9, 4], [6, 6, 8], [2, 1, 1]]
+    res = sol.longestIncreasingPath(matrix)
     print("result is: ", res)
