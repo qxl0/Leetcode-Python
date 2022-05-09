@@ -22,25 +22,26 @@ from helpers.TreeNode import TreeNode
 
 
 class Solution:
+    def __init__(self):
+        self.longest = 0
+
     def longestConsecutive(self, root: Optional[TreeNode]) -> int:
-        ans = 0
+        def helper(root):
+            if not root:
+                return 0
+            left = helper(root.left)
+            right = helper(root.right)
+            length = 1
+            if root.left and root.left.val == root.val + 1:
+                length = max(length, left + 1)
+            if root.right and root.right.val == root.val + 1:
+                length = max(length, right + 1)
+            self.longest = max(self.longest, length)
+            print(self.longest)
+            return length
 
-        def dfs(p, parent, length):
-            nonlocal ans
-            if not p:
-                return
-            if parent and parent.val + 1 == p.val:
-                length += 1
-            else:
-                length = 1
-            ans = max(ans, length)
-            dfs(p.left, p, length)
-            dfs(p.right, p, length)
-
-        if not root:
-            return 0
-        dfs(root, None, 1)
-        return ans
+        helper(root)
+        return self.longest
 
 
 if __name__ == "__main__":
