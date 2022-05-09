@@ -38,6 +38,8 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    matrix = [[9, 9, 4], [6, 6, 8], [2, 1, 1]]
-    res = sol.longestIncreasingPath(matrix)
+    root = TreeNode.to_binary_tree(
+        root=[1, None, 1, 1, 1, None, None, 1, 1, None, 1, None, None, None, 1, None, 1]
+    )
+    res = sol.longestZigZag(root)
     print("result is: ", res)
