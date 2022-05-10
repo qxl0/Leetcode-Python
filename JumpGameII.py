@@ -79,11 +79,11 @@ class Solution3:
         curFarSofar = 0
         for i in range(n):
             farest = max(farest, i + nums[i])
-            if farest >= n - 1:
-                return step + 1
+
             if i == curFarSofar:
                 step += 1
-                curFarSofar = max(curFarSofar, farest)
+                # curFarSofar = max(curFarSofar, farest)
+                curFarSofar = farest
             if curFarSofar >= n - 1:
                 return step
         return sys.maxsize
