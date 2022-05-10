@@ -52,9 +52,36 @@ class Solution2:
         return res
 
 
+class Solution3:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        if len(nums) == 0:
+            return ans
+
+        def swap(arry, x, y):
+            tmp = arry[x]
+            arry[x] = arry[y]
+            arry[y] = tmp
+
+        def dfs(index):
+            if index == len(nums):
+                ans.append(nums.copy())
+                print("done!")
+                return
+
+            for i in range(index, len(nums)):
+                swap(nums, i, index)
+                print(nums)
+                dfs(index + 1)
+                swap(nums, i, index)
+
+        dfs(0)
+        return ans
+
+
 if __name__ == "__main__":
 
-    sol = Solution2()
+    sol = Solution3()
     nums = [1, 2, 3]
     res = sol.permute(nums)
     print(res)

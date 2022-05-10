@@ -51,13 +51,36 @@ class Solution:
         return helper(n, k)
 
 
+class Solution2:
+    def getPermutation(self, n: int, k: int) -> str:
+        nums = [str(i) for i in range(1, n + 1)]
+        facnum = []
+        i = 1
+        total = k - 1
+        while total:
+            total, f = divmod(total, i)
+            facnum.append(f)
+            i += 1
+        # len(facnum) == n
+        i = len(facnum)
+        while i < n:
+            facnum.append(0)
+            i += 1
+        # got the facnum
+        output = []
+        for n in facnum[::-1]:
+            output.append(nums[n])
+            nums.remove(nums[n])
+        return "".join(output)
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     # n = 3
     # k = 3
     # n = 4
     # k = 9
-    n = 1
-    k = 1
-    res = sol.getPermutation2(n, k)
+    n = 3
+    k = 3
+    res = sol.getPermutation(n, k)
     print(res)

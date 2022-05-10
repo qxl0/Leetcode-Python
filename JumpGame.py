@@ -47,11 +47,23 @@ class Solution:
         return not goal
 
 
+class Solution2:
+    def canJump(self, nums: List[int]) -> bool:
+        n = len(nums)
+        if n == 0:
+            return False
+        if n == 1:
+            return True
+        farest = 0 + nums[0]
+        for i in range(1, min(n - 1, farest) + 1):
+            farest = max(farest, i + nums[i])
+            if farest >= n - 1:
+                return True
+        return farest >= n - 1
+
+
 if __name__ == "__main__":
-    s = Solution()
+    s = Solution2()
     nums = [3, 2, 1, 0, 4]
-    res = s.canJump3(nums)
-    print("Ans is : ", res)
-    nums = [2, 3, 1, 1, 4]
-    res = s.canJump3(nums)
+    res = s.canJump(nums)
     print("Ans is : ", res)
