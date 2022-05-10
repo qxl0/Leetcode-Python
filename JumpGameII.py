@@ -36,9 +36,40 @@ class Solution:
         return step
 
 
+class Solution2:
+    def jump(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0:
+            return sys.maxsize
+        if n == 1:
+            return 0
+
+        q = [0]
+        visited = set()
+        visited.add(0)
+        level = 0
+
+        while q:
+            qsize = len(q)
+
+            for i in range(qsize):
+                currIdx = q.pop(0)
+                j = min(n - 1, currIdx + nums[currIdx])
+                while j > currIdx:
+                    if j == n - 1:
+                        return level + 1
+                    if j not in visited:
+                        visited.add(j)
+                        q.append(j)
+                    j -= 1
+            level += 1
+        return sys.maxsize
+
+
 if __name__ == "__main__":
-    s = Solution()
+    s = Solution2()
     # nums = [3, 2, 1, 0, 4]
-    nums = [2, 3, 1, 1, 4]
+    # nums = [2, 3, 1, 1, 4]
+    nums = [3, 4, 3, 2, 5, 4, 3]
     res = s.jump(nums)
     print("Ans is : ", res)
