@@ -79,6 +79,8 @@ class Solution3:
         curFarSofar = 0
         for i in range(n):
             farest = max(farest, i + nums[i])
+            if farest >= n - 1:
+                return step + 1
             if i == curFarSofar:
                 step += 1
                 curFarSofar = max(curFarSofar, farest)
@@ -88,9 +90,9 @@ class Solution3:
 
 
 if __name__ == "__main__":
-    s = Solution2()
+    s = Solution3()
     # nums = [3, 2, 1, 0, 4]
-    # nums = [2, 3, 1, 1, 4]
-    nums = [3, 4, 3, 2, 5, 4, 3]
+    nums = [2, 3, 1, 1, 4]
+    # nums = [3, 4, 3, 2, 5, 4, 3]
     res = s.jump(nums)
     print("Ans is : ", res)
