@@ -55,15 +55,17 @@ class Solution2:
         if n == 1:
             return True
         farest = 0 + nums[0]
-        for i in range(1, min(n - 1, farest) + 1):
+        i = 1
+        while i <= min(n - 1, farest):
             farest = max(farest, i + nums[i])
             if farest >= n - 1:
                 return True
+            i += 1
         return farest >= n - 1
 
 
 if __name__ == "__main__":
     s = Solution2()
-    nums = [3, 2, 1, 0, 4]
+    nums = [1, 1, 1, 0]
     res = s.canJump(nums)
     print("Ans is : ", res)
