@@ -66,6 +66,27 @@ class Solution2:
         return sys.maxsize
 
 
+class Solution3:
+    def jump(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0:
+            return sys.maxsize
+        if n == 1:
+            return 0
+
+        farest = 0
+        step = 0
+        curFarSofar = 0
+        for i in range(n):
+            farest = max(farest, i + nums[i])
+            if i == curFarSofar:
+                step += 1
+                curFarSofar = max(curFarSofar, farest)
+            if curFarSofar >= n - 1:
+                return step
+        return sys.maxsize
+
+
 if __name__ == "__main__":
     s = Solution2()
     # nums = [3, 2, 1, 0, 4]
