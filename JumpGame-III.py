@@ -19,25 +19,19 @@ from typing import List
 
 
 class Solution:
-    def canReach(arr, start):
+    def canReach(self, arr, start):
         n = len(arr)
-        memo = {}
         visited = set()
 
         def helper(idx):
             if idx < 0 or idx >= n or idx in visited:
                 return False
+
             if arr[idx] == 0:
                 return True
-            if idx in memo:
-                return memo[idx]
             visited.add(idx)
-            if helper(idx + arr[idx]) or helper(idx - arr[idx]):
-                memo[idx] = True
-                return memo[idx]
-            return False
+            return helper(idx + arr[idx]) or helper(idx - arr[idx])
 
-        visited.add(start)
         return helper(start)
 
 
@@ -45,5 +39,5 @@ if __name__ == "__main__":
     s = Solution()
     nums = [4, 2, 3, 0, 3, 1, 2]
     start = 5
-    res = s.jump(nums)
+    res = s.canReach(nums, start)
     print("Ans is : ", res)
