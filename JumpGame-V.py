@@ -55,6 +55,30 @@ class Solution:
         return maxNum
 
 
+class Solution2:
+    def maxJumps(self, arr: List[int], d: int) -> int:
+        n = len(arr)
+        if n == 0:
+            return 0
+        mixedList = [(arr[i], i) for i in range(n)]
+        mixedList.sort()
+
+        globalMax = 0
+        dp = [1] * n
+        for i in range(n):
+            val, idx = mixedList[i]
+            j = idx + 1
+            while j < n and j <= idx + d and arr[j] < val:
+                dp[idx] = max(dp[idx], 1 + dp[j])
+                j += 1
+            j = idx - 1
+            while j >= 0 and j >= idx - d and arr[j] < val:
+                dp[idx] = max(dp[idx], 1 + dp[j])
+                j -= 1
+            globalMax = max(globalMax, dp[idx])
+        return globalMax
+
+
 if __name__ == "__main__":
     s = Solution()
     arr = [6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12]
