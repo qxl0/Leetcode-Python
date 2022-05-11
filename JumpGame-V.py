@@ -79,6 +79,51 @@ class Solution2:
         return globalMax
 
 
+class Solution3:
+    def maxJumps(self, arr: List[int], d: int) -> int:
+        n = len(arr)
+        if n == 0:
+            return 0
+
+        dp = [1] * n
+        stack = []
+        globalMax = 0
+        #
+        for i in range(n):
+            while stack and arr[stack[-1]] < arr[i]:
+                idx = stack.pop()
+                curResult = 0
+
+                j = idx + 1
+                while j < i and j <= idx + d:
+                    if arr[j] == arr[idx]:
+                        break
+                    curResult = max(curResult, dp[j])
+                    j += 1
+                dp[idx] = max(dp[idx], 1 + curResult)
+                globalMax = max(globalMax, dp[idx])
+
+                if i <= idx + d:
+                    dp[i] = max(dp[i], 1 + dp[idx])
+                    globalMax = max(globalMax, dp[idx])
+            stack.append(i)
+
+        # round 2
+        while stack:
+            idx = stack.pop()
+            curResult = 0
+            j = idx + 1
+            while j < i and j <= idx + d:
+                if arr[j] == arr[idx]:
+                    break
+                curResult = max(curResult, dp[j])
+                j += 1
+            dp[idx] = max(dp[idx], 1 + curResult)
+            globalMax = max(globalMax, dp[idx])
+
+        return globalMax
+
+
 if __name__ == "__main__":
     s = Solution()
     arr = [6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12]
