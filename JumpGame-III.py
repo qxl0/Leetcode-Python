@@ -9,7 +9,8 @@ Medium
 Add to List
 
 Share
-Given an array of non-negative integers arr, you are initially positioned at start index of the array. When you are at index i, you can jump to i + arr[i] or i - arr[i], check if you can reach to any index with value 0.
+Given an array of non-negative integers arr, you are initially positioned at start index of the array. When you are at index i, 
+you can jump to i + arr[i] or i - arr[i], check if you can reach to any index with value 0.
 
 Notice that you can not jump outside of the array at any time.
 """
@@ -19,7 +20,25 @@ from typing import List
 
 class Solution:
     def canReach(arr, start):
-        pass
+        n = len(arr)
+        memo = {}
+        visited = set()
+
+        def helper(idx):
+            if idx < 0 or idx >= n or idx in visited:
+                return False
+            if arr[idx] == 0:
+                return True
+            if idx in memo:
+                return memo[idx]
+            visited.add(idx)
+            if helper(idx + arr[idx]) or helper(idx - arr[idx]):
+                memo[idx] = True
+                return memo[idx]
+            return False
+
+        visited.add(start)
+        return helper(start)
 
 
 if __name__ == "__main__":
