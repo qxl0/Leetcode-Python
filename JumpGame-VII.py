@@ -22,7 +22,21 @@ from typing import List
 
 class Solution:
     def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
-        pass
+        n = len(s)
+        q = [0]
+        visited = set()
+        visited.add(0)
+        while q:
+            idx = q[0]
+            for i in range(idx + minJump, idx + maxJump + 1):
+                if i < n and s[i] == "0":
+                    if i == n - 1:
+                        return True
+                    if i in visited:
+                        continue
+                    q.append(i)
+                    visited.add(i)
+        return False
 
 
 if __name__ == "__main__":
