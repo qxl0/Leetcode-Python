@@ -26,7 +26,33 @@ from typing import List
 
 class Solution:
     def maxJumps(self, arr: List[int], d: int) -> int:
-        pass
+        n = len(arr)
+        if not arr or n == 0:
+            return 0
+
+        visited = set()
+        maxNum = 0
+
+        def DFS(curIndex, d, curLength, visited):
+            nonlocal maxNum
+            if curIndex in visited:
+                return
+            curLength += 1
+            maxNum = max(maxNum, curLength)
+            visited.add(curIndex)
+            j = curIndex + 1
+            while j < n and j <= curIndex + d and arr[j] < arr[curIndex]:
+                DFS(j, d, curLength, visited)
+                j += 1
+            j = curIndex - 1
+            while j >= 0 and j >= curIndex - d and arr[j] < arr[curIndex]:
+                DFS(j, d, curLength, visited)
+                j -= 1
+            visited.remove(curIndex)
+
+        for i in range(n):
+            DFS(i, d, 0, visited)
+        return maxNum
 
 
 if __name__ == "__main__":
