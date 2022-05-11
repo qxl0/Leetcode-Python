@@ -113,7 +113,7 @@ class Solution3:
             idx = stack.pop()
             curResult = 0
             j = idx + 1
-            while j < i and j <= idx + d:
+            while j < n and j <= idx + d:
                 if arr[j] == arr[idx]:
                     break
                 curResult = max(curResult, dp[j])
@@ -125,8 +125,10 @@ class Solution3:
 
 
 if __name__ == "__main__":
-    s = Solution()
-    arr = [6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12]
-    d = 2
+    s = Solution3()
+    # arr = [6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12]
+    # d = 2
+    arr = [7, 6, 5, 4, 3, 2, 1]
+    d = 1
     res = s.maxJumps(arr, d)
     print("Ans is : ", res)
