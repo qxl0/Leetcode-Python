@@ -63,8 +63,46 @@ class Solution:
             dist += 1
 
 
+class Solution2:
+    def walls_and_gates(self, rooms: List[List[int]]) -> None:
+        """
+        Do not return anything, modify rooms in-place instead.
+        """
+        WALL = -1
+        GATE = 0
+        EMPTY = 2**31 - 1
+        dt = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        q = []
+        vis = set()
+
+        m, n = len(rooms), len(rooms[0])
+        if m == 0:
+            return
+
+        for i in range(m):
+            for j in range(n):
+                if rooms[i][j] == GATE:
+                    q.append((i, j))
+
+        while q:
+            x, y = q.pop(0)
+
+            for dx, dy in dt:
+                newx, newy = x + dx, y + dy
+                if (
+                    newx < 0
+                    or newx >= m
+                    or newy < 0
+                    or newy >= n
+                    or rooms[newx][newy] != EMPTY
+                ):
+                    continue
+                rooms[newx][newy] = rooms[x][y] + 1
+                q.append((newx, newy))
+
+
 if __name__ == "__main__":
-    s = Solution()
+    s = Solution2()
     rooms = [
         [2147483647, -1, 0, 2147483647],
         [2147483647, 2147483647, 2147483647, -1],
