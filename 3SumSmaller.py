@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def threeSumSmaller(self, nums: List[int], target: int) -> int:
         if len(nums) < 3:
@@ -9,8 +12,8 @@ class Solution:
             while j < k:
                 sum3 = nums[i] + nums[j] + nums[k]
                 if sum3 < target:
-                    ans += 1
-                if sum3 > target:
+                    ans += k - j
+                if sum3 >= target:
                     k -= 1
                 else:
                     j += 1
@@ -19,7 +22,8 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    nums = [-2, 0, 1, 3]
-    target = 2
+    # nums = [-2, 0, 1, 3]
+    nums = [-1, 1, -1, -1]
+    target = -1
     res = s.threeSumSmaller(nums, target)
     print(res)
