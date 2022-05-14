@@ -25,7 +25,33 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
-        pass
+        n = len(bloomDay)
+
+        def bouquet(day):
+            total = 0
+            count = 0
+            for bday in bloomDay:
+                if bday <= day:
+                    count += 1
+                    if count >= k:
+                        total += 1
+                        count = 0
+                else:
+                    count = 0  # reset
+            return total
+
+        if n < m * k:
+            return -1
+
+        l, r = min(bloomDay), max(bloomDay)
+        while l <= r:
+            mid = l + (r - l) // 2
+            if bouquet(mid) >= m:
+                r = mid - 1
+            else:
+                l = mid + 1
+        # (r,l)
+        return l
 
 
 if __name__ == "__main__":
