@@ -30,3 +30,11 @@ class Solution:
                 queue.append((root.left, col - 1))
                 queue.append((root.right, col + 1))
         return [ans[x] for x in sorted(ans.keys())]
+
+
+if __name__ == "__main__":
+    sol = Solution()
+    root = TreeNode.to_binary_tree([3, 9, 20, None, None, 15, 7])
+    res = sol.verticalOrder(root)
+
+    print(res)
