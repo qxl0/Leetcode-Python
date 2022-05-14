@@ -36,12 +36,12 @@ class Solution:
                     balls += 1
             return balls
 
-        while l < r:
+        while l + 1 < r:
             mid = l + (r - l) // 2  # force
             if balls(mid) >= m:
                 l = mid
             else:
-                r = mid - 1
+                r = mid
         return l
 
 
@@ -51,28 +51,8 @@ if __name__ == "__main__":
     # m = 3
     # position = [5, 4, 3, 2, 1, 100000000]
     # m = 2
-    position = [
-        94,
-        95,
-        37,
-        30,
-        67,
-        7,
-        5,
-        44,
-        26,
-        55,
-        42,
-        28,
-        97,
-        19,
-        100,
-        74,
-        13,
-        88,
-        18,
-    ]
-    m = 7
+    position = [1, 2, 3, 4, 5, 100]
+    m = 2
     res = sol.maxDistance(position, m)
 
     print(res)
