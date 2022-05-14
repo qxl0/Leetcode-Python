@@ -16,6 +16,7 @@ Each result of the division is rounded to the nearest integer greater than or eq
 The test cases are generated so that there will be an answer.
 """
 from collections import defaultdict, deque
+from math import ceil
 from typing import List, Optional
 
 from helpers.TreeNode import TreeNode
@@ -23,7 +24,25 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def smallestDivisor(self, nums: List[int], threshold: int) -> int:
-        pass
+        n = len(nums)
+        if n > threshold:
+            return float("inf")
+
+        def gettotal(d):
+            total = 0
+            for n in nums:
+                total += ceil(n / d)
+            return total
+
+        l, r = 1, max(nums)
+        while l <= r:
+            print(l, r)
+            mid = l + (r - l) // 2
+            if gettotal(mid) <= threshold:
+                r = mid - 1
+            else:
+                l = mid + 1
+        return r
 
 
 if __name__ == "__main__":
