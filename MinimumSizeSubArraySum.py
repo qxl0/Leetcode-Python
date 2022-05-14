@@ -1,3 +1,4 @@
+import sys
 from typing import List
 
 
@@ -10,8 +11,8 @@ class Solution:
             sum += nums[i]
             if sum >= target:
                 ans = min(ans, i - left + 1)
-                left += 1
-                while left < len(nums) and sum - nums[left] >= target:
+                while left < len(nums) and sum >= target:
+                    sum -= nums[left]
                     ans = min(ans, i - left + 1)
                     left += 1
         return ans
