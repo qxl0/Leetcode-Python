@@ -23,13 +23,56 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def maxDistance(self, position: List[int], m: int) -> int:
-        pass
+        position.sort()
+        l, r = 1, position[-1] - position[0]
+
+        def balls(f):
+            # given force, count balls
+            balls = 1
+            prevpos = position[0]
+            for i in range(1, len(position)):
+                if position[i] - prevpos >= f:
+                    prevpos = position[i]
+                    balls += 1
+            return balls
+
+        while l < r:
+            mid = l + (r - l) // 2  # force
+            if balls(mid) >= m:
+                l = mid
+            else:
+                r = mid - 1
+        return l
 
 
 if __name__ == "__main__":
     sol = Solution()
-    position = [1, 2, 3, 4, 7]
-    m = 3
+    # position = [1, 2, 3, 4, 7]
+    # m = 3
+    # position = [5, 4, 3, 2, 1, 100000000]
+    # m = 2
+    position = [
+        94,
+        95,
+        37,
+        30,
+        67,
+        7,
+        5,
+        44,
+        26,
+        55,
+        42,
+        28,
+        97,
+        19,
+        100,
+        74,
+        13,
+        88,
+        18,
+    ]
+    m = 7
     res = sol.maxDistance(position, m)
 
     print(res)
