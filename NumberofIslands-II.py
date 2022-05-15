@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Union:
     def __init__(self, N):
         self.parent = [-1 for i in range(N)]
@@ -10,7 +13,7 @@ class Union:
 
     def find(self, x):
         if self.parent[x] != x:
-            self.parent[x] = find(self.parent[x])
+            self.parent[x] = self.find(self.parent[x])
         return self.parent[x]
 
     def union(self, x, y):
@@ -32,6 +35,9 @@ class Solution:
         numofIslands = 0
         for i, j in positions:
             pos = i * n + j
+            if union.getParent(pos) != -1:
+                ans.append(numofIslands)
+                continue
             union.setParent(pos)
             numofIslands += 1
             for di, dj in dt:
@@ -43,7 +49,7 @@ class Solution:
                 if pos != anoIsland:
                     union.union(anoIsland, pos)
                     numofIslands -= 1
-        ans.append(numofIslands)
+            ans.append(numofIslands)
 
         return ans
 
@@ -52,6 +58,6 @@ if __name__ == "__main__":
     sol = Solution()
     m = 3
     n = 3
-    positions = [[0, 0], [0, 1], [1, 2], [2, 1]]
+    positions = [[0, 0], [0, 1], [1, 2], [1, 2]]
     res = sol.numIslands2(m, n, positions)
     print("Ans is: ", res)
