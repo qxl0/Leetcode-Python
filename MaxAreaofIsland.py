@@ -56,8 +56,33 @@ class Solution:
         return Ans
 
 
+class Solution2:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        dt = [(1, 0), (-1, 0), (0, -1), (0, 1)]
+
+        def dfs(i, j, area):
+            print(f"{i},{j} --- {area}")
+            area[0] += 1
+            for di, dj in dt:
+                ci, cj = i + di, j + dj
+                if ci >= 0 and ci < m and cj >= 0 and cj < n and grid[ci][cj] == 1:
+                    grid[ci][cj] = 0
+                    dfs(ci, cj, area)
+
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                area = [0]
+                if grid[i][j] == 1:
+                    grid[i][j] = 0
+                    dfs(i, j, area)
+                    ans = max(ans, area[0])
+        return ans
+
+
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     grid = [
         [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
