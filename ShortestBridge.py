@@ -56,6 +56,8 @@ class Solution:
             for i in range(size):
                 curx, cury = q.popleft()
                 for nx, ny in neighbors(curx, cury):
+                    if (nx, ny) in vis:
+                        continue
                     if grid[nx][ny] == 1:
                         return step
                     q.append((nx, ny))
