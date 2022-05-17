@@ -21,7 +21,22 @@ from helpers.TreeNode import TreeNode
 
 class Solution:
     def findLeaves(self, root: Optional[TreeNode]) -> List[List[int]]:
-        pass
+        ans = []
+
+        def helper(node):
+            if not node:
+                return -1
+
+            l = helper(node.left)
+            r = helper(node.right)
+            myheight = max(l, r) + 1
+            if myheight >= len(ans):
+                ans.append([])
+            ans[myheight].append(node.val)
+            return myheight
+
+        helper(root)
+        return ans
 
 
 if __name__ == "__main__":
