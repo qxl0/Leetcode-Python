@@ -97,7 +97,7 @@ class Solution4:
                 return
 
             # select a random pivot_index
-            pivot_index = random.randint(left, right)
+            pivot_index = right  # random.randint(left, right)
 
             # find the pivot position in a sorted list
             pivot_index = partition(left, right, pivot_index)
@@ -124,10 +124,12 @@ class Solution4:
 
 
 if __name__ == "__main__":
-    s = Solution2()
-    nums = [1, 1, 1, 2, 2, 3]
-    k = 2
+    s = Solution4()
+    # nums = [1, 1, 1, 2, 2, 3]
+    # k = 2
     # nums = [3, 0, 1, 0]
     # k = 1
+    nums = [4, 5, 5, 2, 1, 1, 1, 5, 2, 3, 3, 5, 2]
+    k = 3
     res = s.topKFrequent(nums, k)
     print(res)
