@@ -25,15 +25,15 @@ class Solution:
                     if grid[i][j] != val:
                         isLeaf = False
                         break
-            newNode = Node(val, True, None, None, None, None)
+            newNode = None
             if isLeaf:
+                newNode = Node(val, True, None, None, None, None)
                 return newNode
             else:
                 newSize = (i2 - i1 + 1) // 2
-                newNode.topLeft = helper(i1, j1, i1 + -1, j1 + newSize - 1)
-                newNode.topRight = helper(
-                    i1, j1 + newSize, i1 + newSize - 1, j1 + newSize - 1
-                )
+                newNode = Node(val, False, None, None, None, None)
+                newNode.topLeft = helper(i1, j1, i1 + newSize - 1, j1 + newSize - 1)
+                newNode.topRight = helper(i1, j1 + newSize, i1 + newSize - 1, j2)
                 newNode.bottomLeft = helper(i1 + newSize, j1, i2, j1 + newSize - 1)
                 newNode.bottomRight = helper(i1 + newSize, j1 + newSize, i2, j2)
                 return newNode
