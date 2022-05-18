@@ -58,7 +58,7 @@ class Solution:
             for nei in graph[cur]:
                 if nei == parent:
                     continue
-                if nei in vis:
+                if nei not in vis:
                     tarjan(cur, nei, time + 1, vis)
                 if time < timeMap[nei]:
                     foundCritialEdge = True
@@ -73,18 +73,18 @@ class Solution:
             return 2  # 1 island with size 2
 
         buildGraph(grid)
-        root = (0, 0)
-        parent = (0, 0)
         time = 0
         timeMap = {}
         foundCritialEdge = False
-        tarjan(parent, root, time, {})
+        vis.clear()
+        parent, root = None, list(graph.keys())[0]
+        tarjan(parent, root, time, vis)
         return 1 if foundCritialEdge else 2
 
 
 if __name__ == "__main__":
     sol = Solution()
-    grid = [[0, 1, 1, 0], [0, 1, 1, 0]]
+    grid = [[0, 1, 0, 0], [0, 1, 1, 0]]
     res = sol.minDays(grid)
 
     print(res)
