@@ -1,10 +1,11 @@
+import collections
 from typing import Collection, List, Optional
 from helpers.TreeNode import TreeNode
 
 
 class Solution:
     def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
-        ans = Collection.defaultdict(list)
+        ans = collections.defaultdict(list)
 
         def helper(node, r, c):
             if not node:
