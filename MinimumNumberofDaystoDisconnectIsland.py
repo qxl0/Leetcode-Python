@@ -9,7 +9,7 @@ class Solution:
         m, n = len(grid), len(grid[0])
         vis = set()
         size = 0
-        graph = {}
+        graph = defaultdict(list)
 
         def numofislands(grid):
             res = 0
@@ -39,8 +39,10 @@ class Solution:
         def mark(grid, prevx, prevy, x, y):
             if grid[x][y] == 0:
                 return
-            graph[(x, y)] = (prevx, prevy)
-            graph[(prevx, prevy)] = (x, y)
+            if (prevx, prevy) not in graph[(x, y)]:
+                graph[(x, y)].append((prevx, prevy))
+            if (x, y) not in graph[(prevx, prevy)]:
+                graph[(prevx, prevy)].append((x, y))
 
         def buildGraph(grid):
             for i in range(m):
@@ -59,7 +61,7 @@ class Solution:
                 if nei in vis:
                     tarjan(cur, nei, time + 1, vis)
                 if time < timeMap[nei]:
-                    foundCriticalEdge = True
+                    foundCritialEdge = True
                 timeMap[cur] = min(timeMap[cur], timeMap[nei])
 
         count = numofislands(grid)
@@ -71,11 +73,12 @@ class Solution:
             return 2  # 1 island with size 2
 
         buildGraph(grid)
-        root = -1
+        root = (0, 0)
+        parent = (0, 0)
         time = 0
         timeMap = {}
         foundCritialEdge = False
-        tarjan(-1, root, 0, {})
+        tarjan(parent, root, time, {})
         return 1 if foundCritialEdge else 2
 
 
