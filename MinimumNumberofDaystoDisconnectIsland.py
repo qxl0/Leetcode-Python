@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import List, Optional
 from helpers.TreeNode import TreeNode
 
@@ -8,6 +9,7 @@ class Solution:
         m, n = len(grid), len(grid[0])
         vis = set()
         size = 0
+        graph = {}
 
         def numofislands(grid):
             res = 0
@@ -34,11 +36,31 @@ class Solution:
                 if grid[ni][nj] == 1 and (ni, nj) not in vis:
                     dfs(ni, nj)
 
-        def buildGraph(grid):
-            pass
+        def mark(grid, prevx, prevy, x, y):
+            if grid[x][y] == 0:
+                return
+            graph[(x, y)] = (prevx, prevy)
+            graph[(prevx, prevy)] = (x, y)
 
-        def tarjan():
-            pass
+        def buildGraph(grid):
+            for i in range(m):
+                for j in range(n):
+                    if grid[i][j] == 1:
+                        for ni, nj in neighbors(i, j):
+                            mark(grid, i, j, ni, nj)
+
+        def tarjan(parent, cur, time, vis):
+            nonlocal timeMap, graph, foundCritialEdge
+            vis.add(cur)
+            timeMap[cur] = time
+            for nei in graph[cur]:
+                if nei == parent:
+                    continue
+                if nei in vis:
+                    tarjan(cur, nei, time + 1, vis)
+                if time < timeMap[nei]:
+                    foundCriticalEdge = True
+                timeMap[cur] = min(timeMap[cur], timeMap[nei])
 
         count = numofislands(grid)
         if count != 1:
@@ -49,7 +71,12 @@ class Solution:
             return 2  # 1 island with size 2
 
         buildGraph(grid)
+        root = -1
+        time = 0
+        timeMap = {}
+        foundCritialEdge = False
         tarjan(-1, root, 0, {})
+        return 1 if foundCritialEdge else 2
 
 
 if __name__ == "__main__":
