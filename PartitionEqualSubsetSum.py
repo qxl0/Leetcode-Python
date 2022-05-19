@@ -25,8 +25,8 @@ class Interval:
 
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        total = sum(nums) % 2
-        if total != 0:
+        total = sum(nums)
+        if total % 2 != 0:
             return False
 
         total //= 2
@@ -38,7 +38,7 @@ class Solution:
             for j in range(1, total + 1):
                 dp[i][j] = dp[i - 1][j]
                 if nums[i - 1] <= j:
-                    dp[i][j] = dp[i][j] and dp[i - 1][j - nums[i - 1]]
+                    dp[i][j] = dp[i][j] or dp[i - 1][j - nums[i - 1]]
 
         return dp[n][total]
 
