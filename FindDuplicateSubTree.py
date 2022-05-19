@@ -1,4 +1,5 @@
 import collections
+from typing import List, Optional
 
 from helpers.TreeNode import TreeNode
 
@@ -44,6 +45,29 @@ class Solution2:
                     res.append(node)
 
             return key2Id[key]
+
+        getId(root)
+        return res
+
+    def findDuplicateSubtrees2(
+        self, root: Optional[TreeNode]
+    ) -> List[Optional[TreeNode]]:
+        key2count = {}
+        res = []
+
+        def getId(node):
+            if not node:
+                return ""
+
+            key = str(node.val) + "#" + getId(node.left) + "#" + getId(node.right)
+            if key not in key2count:
+                key2count[key] = 1
+            else:
+                key2count[key] += 1
+                if key2count[key] == 2:
+                    res.append(node)
+
+            return key
 
         getId(root)
         return res
