@@ -40,7 +40,7 @@ class Solution:
         for i in range(n):
             p[i][0] = p[i][-1] = 1
         for i in range(2, n):
-            for j in range(i):
+            for j in range(1, i):
                 p[i][j] = p[i - 1][j - 1] + p[i - 1][j]
 
     def numOfWays(self, nums: List[int]) -> int:
@@ -56,9 +56,9 @@ class Solution:
             return 1
         root = nums[0]
         left, right = partition(nums, root)
-        return (combine(len(left) + len(right), len(left))) % self.MOD * self.numOfWays(
-            left
-        ) * self.numOfWays(right) - 1
+        total = (
+            combine(len(left) + len(right), len(left))
+        ) % self.MOD * self.numOfWays(left) * self.numOfWays(right) - 1
 
 
 if __name__ == "__main__":
