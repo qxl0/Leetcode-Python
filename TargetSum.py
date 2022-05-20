@@ -45,7 +45,7 @@ class Solution:
 
         if target > s or (s + target) % 2 == 1:
             return 0
-        return subsetSum((s + target // 2))
+        return subsetSum((s + target) // 2)
 
 
 if __name__ == "__main__":
