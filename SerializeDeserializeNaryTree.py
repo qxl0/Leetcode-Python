@@ -34,6 +34,9 @@ class Node(object):
         if not self.children:
             self.children = []
 
+    def __repr__(self):
+        return f"val:{self.val}"
+
     def add_child(self, obj):
         self.children.append(obj)
 
