@@ -31,6 +31,22 @@ class Node(object):
     def __init__(self, val=None, children=None):
         self.val = val
         self.children = children
+        if not self.children:
+            self.children = []
+
+    def add_child(self, obj):
+        self.children.append(obj)
+
+
+class WrappableInt:
+    def __init__(self, x):
+        self.value = x
+
+    def getValue(self):
+        return self.value
+
+    def increment(self):
+        self.value += 1
 
 
 class Codec:
@@ -40,6 +56,27 @@ class Codec:
         :type root: Node
         :rtype: str
         """
+        serializedList = []
+        self._serializeHelper(root, serializedList, WrappableInt(1), None)
+        return "".join(serializedList)
+
+    def _serializeHelper(self, root, serializedList, identity, parentId):
+        if not root:
+            return
+
+        # Own identity
+        serializedList.append(chr(identity.getValue() + 48))
+
+        # Actual value
+        serializedList.append(chr(root.val + 48))
+
+        # Parent's identity
+        serializedList.append(chr(parentId + 48) if parentId else "N")
+
+        parentId = identity.getValue()
+        for child in root.children:
+            identity.increment()
+            self._serializeHelper(child, serializedList, identity, parentId)
 
     def deserialize(self, data: str) -> "Node":
         """Decodes your encoded data to tree.
@@ -48,38 +85,63 @@ class Codec:
         :rtype: Node
         """
 
+        if not data:
+            return None
+
+        return self._deserializeHelper(data)
+
+    def _deserializeHelper(self, data):
+
+        nodesAndParents = {}
+        for i in range(0, len(data), 3):
+            identity = ord(data[i]) - 48
+            orgValue = ord(data[i + 1]) - 48
+            parentId = ord(data[i + 2]) - 48
+            nodesAndParents[identity] = (parentId, Node(orgValue, []))
+
+        for i in range(3, len(data), 3):
+
+            # Current node
+            identity = ord(data[i]) - 48
+            node = nodesAndParents[identity][1]
+
+            # Parent node
+            parentId = ord(data[i + 2]) - 48
+            parentNode = nodesAndParents[parentId][1]
+
+            # Attach!
+            parentNode.children.append(node)
+
+        return nodesAndParents[ord(data[0]) - 48][1]
+
 
 if __name__ == "__main__":
     sol = Codec()
-    root = Node.totree(
-        [
-            1,
-            null,
-            2,
-            3,
-            4,
-            5,
-            null,
-            null,
-            6,
-            7,
-            null,
-            8,
-            null,
-            9,
-            10,
-            null,
-            null,
-            11,
-            null,
-            12,
-            null,
-            13,
-            null,
-            null,
-            14,
-        ]
-    )
+    root = Node(1)
+    root.add_child(Node(2))
+
+    node11 = Node(11)
+    node11.add_child(Node(14))
+    node7 = Node(7)
+    node7.add_child(node11)
+    node3 = Node(3)
+    node3.add_child(Node(6))
+    node3.add_child(node7)
+    root.add_child(node3)
+
+    node8 = Node(8)
+    node8.add_child(Node(12))
+    node4 = Node(4)
+    node4.add_child(node8)
+    root.add_child(node4)
+
+    node9 = Node(9)
+    node9.add_child(Node(13))
+    node5 = Node(5)
+    node5.add_child(node9)
+    node5.add_child(Node(10))
+    root.add_child(node5)
+
     res = sol.serialize(root)
     res2 = sol.deserialize(res)
     print(res2)
