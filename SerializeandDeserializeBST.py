@@ -33,6 +33,7 @@ class Codec:
 if __name__ == "__main__":
     sol = Codec()
     root = TreeNode.to_binary_tree([2, 1, 3])
-    res = sol.serialize(root)
+    # res = sol.serialize(root)
+    res = "2 3 6 5"
     print("Ans is: ", res)
     node = sol.deserialize(res)

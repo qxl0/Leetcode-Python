@@ -81,7 +81,7 @@ class Solution2:
         if not root:
             return ""
         Index = [1]
-        helper(root, Index - 1)
+        helper(root, Index, -1)
         return "".join(serializedlist)
 
     def deserialize(self, data):
@@ -116,7 +116,7 @@ class Solution2:
         return helper(data)
 
 
-class Solution2:
+class Solution3:
     def serialize(self, root):
         def doit(node):
             if node:
@@ -153,7 +153,8 @@ class Solution2:
 if __name__ == "__main__":
     sol = Solution2()
     s = [1, 2, 3, None, None, 4, 5]
-    root = TreeNode.to_binary_tree(s)
-    res = sol.serialize(root)
+    # root = TreeNode.to_binary_tree(s)
+    # res = sol.serialize(root)
+    res = "11Nn221l331r443l553r"
     print("ans is ", res)
     node = sol.deserialize(res)
