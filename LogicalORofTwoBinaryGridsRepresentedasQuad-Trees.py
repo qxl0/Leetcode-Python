@@ -1,8 +1,8 @@
 class Node:
     def __init__(
         self,
-        val,
-        isLeaf,
+        val=-1,
+        isLeaf=False,
         topLeft=None,
         topRight=None,
         bottomLeft=None,
@@ -14,6 +14,9 @@ class Node:
         self.topRight = topRight
         self.bottomLeft = bottomLeft
         self.bottomRight = bottomRight
+
+    def __repr__(self) -> str:
+        return f"val: {self.val}, isLeaf: {self.isLeaf}"
 
 
 class Solution:
@@ -67,7 +70,13 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    t1 = Node(0, False)
+    t1 = Node(0, False, Node(0, True), Node(1, True), Node(0, True), Node(0, True))
+    t1_child = Node(0, False)
+    t1_child.topLeft = Node(1, True)
+    t1_child.topRight = Node(1, True)
+    t1_child.bottomLeft = Node(0, True)
+    t1_child.bottomRight = Node(0, True)
+    t2 = Node(0, False, t1_child, Node(0, True), Node(1, True), Node(1, True))
     res = sol.intersect(t1, t2)
 
     print(res)
