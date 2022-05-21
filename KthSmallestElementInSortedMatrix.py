@@ -102,14 +102,14 @@ class Solution2:
             if count == k:
                 return small
             if count < k:
-                start = large
+                l = large
             else:
-                end = small
+                r = small
         return l
 
 
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     matrix = [[1, 2, 3], [10, 11, 13], [12, 13, 15]]
     k = 8
     res = sol.kthSmallest(matrix, k)
