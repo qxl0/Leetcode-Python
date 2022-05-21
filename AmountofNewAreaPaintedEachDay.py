@@ -21,8 +21,10 @@ Return an integer array worklog of length n, where worklog[i] is the amount of n
 
 
 from collections import defaultdict
+import collections
 from math import floor
 from typing import List
+from sortedcontainers import SortedList
 
 
 class Interval:
@@ -33,33 +35,31 @@ class Interval:
 
 class Solution:
     def amountPainted(self, paint: List[List[int]]) -> List[int]:
-        posmap = defaultdict(list)
-        for i, p in enumerate(paint):
-            # posmap: pos --> (colorid, flag), flag: -1 or 1
-            posmap[p[0]].append((i, 1))
-            posmap[p[1]].append((i, -1))
+        posmap = collections.defaultdict(list)
+        for i, (s, e) in enumerate(paint):
+            posmap[s].append((i, 1))
+            posmap[e].append((i, -1))
 
-        # [(1, [(0, 1)]), (4, [(0, -1), (1, 1)]), (7, [(1, -1)]), (5, [(2, 1)]), (8, [(2, -1)])]
-        scanarr = list(posmap.items())
-        scanarr.sort(key=lambda x: x[0])
-        curpaint = []
-        res = [0] * len(paint)
-        for i in range(len(scanarr)):
-            pos = scanarr[i][0]
-            for pid, flag in scanarr[i][1]:
-                if flag == 1:  # new paint come in
-                    curpaint.append(pid)
+        s1 = SortedList()
+        result = [0] * (len(paint))
+        prev = -1
+        for pos in sorted(posmap.keys()):
+            if s1:
+                result[s1[0]] += pos - prev
+            prev = pos
+            for i, flag in posmap[pos]:
+                if flag == 1:
+                    s1.add(i)
                 else:
-                    curpaint.remove(pid)
-            if len(curpaint) > 0:
-                res[curpaint[0]] += scanarr[i + 1][0] - pos
-        return res
+                    s1.remove(i)
+
+        return result
 
 
 if __name__ == "__main__":
-    sol = Solution()
-    # paint = [[1, 4], [4, 7], [5, 8]]
-    paint = [[1, 4], [5, 8], [4, 7]]
+    sol = Solution2()
+    paint = [[1, 4], [4, 7], [5, 8]]
+    # paint = [[1, 4], [5, 8], [4, 7]]
     res = sol.amountPainted(paint)
 
     print(res)
