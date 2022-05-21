@@ -57,9 +57,9 @@ class Solution:
 
 
 if __name__ == "__main__":
-    sol = Solution2()
-    paint = [[1, 4], [4, 7], [5, 8]]
-    # paint = [[1, 4], [5, 8], [4, 7]]
+    sol = Solution()
+    # paint = [[1, 4], [4, 7], [5, 8]]
+    paint = [[1, 4], [5, 8], [4, 7]]
     res = sol.amountPainted(paint)
 
     print(res)
