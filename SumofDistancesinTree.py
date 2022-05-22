@@ -31,17 +31,31 @@ class Solution:
         for a, b in edges:
             adj[a].append(b)
             adj[b].append(a)
+        vis = set()
+        res = [0] * n
+        cnt = [1] * n
 
-        def dfs(i):
-            pass
+        def dfs(node=0, parent=None):
+            for nei in adj[node]:
+                if nei != parent:
+                    dfs(nei, node)
+                    cnt[node] += cnt[nei]
+                    res[node] += res[nei] + cnt[nei]
+
+        def dfs2(node=0, parent=None):
+            for nei in adj[node]:
+                if nei != parent:
+                    res[nei] = res[node] - cnt[nei] + n - cnt[nei]
+                    dfs2(nei, node)
+
+        dfs()
+        dfs2()
+        return res
 
 
 if __name__ == "__main__":
     sol = Solution()
-    root = TreeNode(1)
-    root.right = TreeNode(2)
-    root.right.right = TreeNode(3)
-    root.right.right.right = TreeNode(4)
-    res = sol.balanceBST(root)
-
+    edges = [[0, 1], [0, 2], [2, 3], [2, 4], [2, 5]]
+    n = 6
+    sol.sumOfDistancesInTree(n, edges)
     print(res)
