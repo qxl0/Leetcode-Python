@@ -33,14 +33,12 @@ class Solution:
             inorder.append(node.val)
             helper(node.right)
 
-        helper(root)
-
         # construct based on inorder
         def constructBST(left, right):
             print(left, right)
             if left > right:
                 return None
-            mid = left + (right + left) // 2
+            mid = left + (right - left) // 2
             cur = TreeNode(inorder[mid])
             cur.left = constructBST(left, mid - 1)
             cur.right = constructBST(mid + 1, right)
