@@ -48,8 +48,8 @@ class Solution:
                     res[nei] = res[node] - cnt[nei] + n - cnt[nei]
                     dfs2(nei, node)
 
-        dfs()
-        dfs2()
+        dfs(5)
+        dfs2(5)
         return res
 
 
@@ -57,5 +57,5 @@ if __name__ == "__main__":
     sol = Solution()
     edges = [[0, 1], [0, 2], [2, 3], [2, 4], [2, 5]]
     n = 6
-    sol.sumOfDistancesInTree(n, edges)
+    res = sol.sumOfDistancesInTree(n, edges)
     print(res)
