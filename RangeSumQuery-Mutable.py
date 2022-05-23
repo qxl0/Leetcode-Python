@@ -84,8 +84,9 @@ class NumArray:
 # param_1 = obj.sumRange(left,right)
 
 if __name__ == "__main__":
-    sol = NumArray([-2, 0, 3, -5, 2, -1])
+    sol = NumArray([2, 4, 5, 7, 8])
     sol.sumRange(0, 2)
-    sol.sumRange(2, 5)
-    res = sol.sumRange(0, 5)
+    sol.update(1, 2)
+    sol.sumRange(2, 4)
+    res = sol.sumRange(0, 4)
     print("Ans is ", res)
