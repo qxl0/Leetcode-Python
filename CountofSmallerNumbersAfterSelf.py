@@ -49,6 +49,44 @@ class Solution:
         return count
 
 
+class Solution2:
+    def countSmaller(self, nums: List[int]) -> List[int]:
+        def query(left, right, tree, size):
+            # tree: [.....] (20002)
+            # return [left,right)
+            res = 0
+            left += size
+            right += size  # leaf
+            while left < right:
+                if left % 2 == 1:
+                    res += tree[left]
+                    left += 1
+                left //= 2
+                if right % 2 == 0:
+                    res += tree[right]
+                    right -= 1
+                right //= 2
+            return res
+
+        def update(index, value, tree, size):
+            index += size
+            tree[index] += value  # add on top of
+            # now update parent
+            while index > 1:
+                index //= 2
+                tree[index] = tree[index * 2] + tree[index * 2 + 1]
+
+        offset = 10**4
+        size = 2 * 10**4 + 1
+        tree = [0] * 2 * size
+        result = []
+        for num in nums[::-1]:
+            cnt = query(0, num + offset, tree, size)
+            result.append(cnt)
+            update(num + offset, 1, tree, size)
+        return result[::-1]
+
+
 if __name__ == "__main__":
     sol = Solution()
     nums = [5, 2, 6, 1]
