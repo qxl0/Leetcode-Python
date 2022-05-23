@@ -26,25 +26,26 @@ class Solution:
     def countSmaller(self, nums: List[int]) -> List[int]:
         n = len(nums)
         count = [0] * n
+        snums = nums.copy()
 
-        def helper(nums, snums, l, r):
-            nonlocal count
+        def helper(nums, l, r):
+            nonlocal count, snums
             if l >= r:
                 return
 
             mid = l + (r - l) // 2
 
-            helper(nums, snums, l, mid)
-            helper(nums, snums, mid + 1, r)
+            helper(nums, l, mid)
+            helper(nums, mid + 1, r)
 
             for i in range(l, mid + 1):
                 pos = bisect_left(snums, nums[i], mid + 1, r + 1)
                 count[i] += pos - (mid + 1)
 
             snums = snums[:l] + sorted(snums[l : r + 1]) + snums[r + 1 :]
+            print(snums)
 
-        snums = nums.copy()
-        helper(nums, snums, 0, n - 1)
+        helper(nums, 0, n - 1)
         return count
 
 
