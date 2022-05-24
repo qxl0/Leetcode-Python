@@ -57,9 +57,26 @@ class Solution2:
         return volume
 
 
-if __name__ == "__main__":
-    sol = Solution()
+class Solution3:
+    def trap(self, height: List[int]) -> int:
+        stack = []
+        area = 0
+        curr = 0
 
-    height = [4, 2, 0, 3, 2, 5]
+        while curr < len(height):
+            while stack and stack[-1] < height[curr]:
+                top = stack.pop()
+                if not stack:
+                    break
+                area += (curr - stack[-1] - 1) * min(height[curr], height[stack[-1]])
+            stack.append(curr)
+            curr += 1
+        return area
+
+
+if __name__ == "__main__":
+    sol = Solution3()
+    # height = [4, 2, 0, 3, 2, 5]
+    height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
     res = sol.trap(height)
     print(res)
