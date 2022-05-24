@@ -64,11 +64,13 @@ class Solution3:
         curr = 0
 
         while curr < len(height):
-            while stack and stack[-1] < height[curr]:
+            while stack and height[stack[-1]] < height[curr]:
                 top = stack.pop()
                 if not stack:
                     break
-                area += (curr - stack[-1] - 1) * min(height[curr], height[stack[-1]])
+                area += (curr - stack[-1] - 1) * (
+                    min(height[curr], height[stack[-1]]) - height[top]
+                )
             stack.append(curr)
             curr += 1
         return area
