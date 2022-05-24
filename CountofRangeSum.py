@@ -31,20 +31,20 @@ from helpers.TreeNode import TreeNode
 class Solution:
     def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
         n = len(nums)
-        tree = [0] * (2 * n)
+        tree = [0] * (2 * n + 2)
 
         def constructST(st, idx, nums, l, r):
-            if l == r:
+            if l >= r:
                 st[idx] = nums[l]
                 return nums[l]
 
             mid = l + (r - l) // 2
-            st[idx] = constructST(st, 2 * idx, nums, l, mid) + constructST(
-                st, 2 * idx + 1, nums, mid + 1, r
+            st[idx] = constructST(st, 2 * idx + 1, nums, l, mid) + constructST(
+                st, 2 * idx + 2, nums, mid + 1, r
             )
             return st[idx]
 
-        constructST(tree, 1, nums, 0, n - 1)
+        constructST(tree, 0, nums, 0, n - 1)
         print(tree)
 
 
@@ -58,5 +58,4 @@ if __name__ == "__main__":
     lower = -2
     upper = 2
     res = sol.countRangeSum(nums, lower, upper)
-    (0, 5)
     print("Ans is ", res)
