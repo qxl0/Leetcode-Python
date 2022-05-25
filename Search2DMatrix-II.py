@@ -20,7 +20,7 @@ class Solution:
             if matrix[up][left] > target or matrix[down][right] < target:
                 return False
             row = up
-            while row < down and matrix[row][mid] <= target:
+            while row <= down and matrix[row][mid] <= target:
                 mid = (left + right) // 2
                 if matrix[row][mid] == target:
                     return True
@@ -35,13 +35,15 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    matrix = [
-        [1, 4, 7, 11, 15],
-        [2, 5, 8, 12, 19],
-        [3, 6, 9, 16, 22],
-        [10, 13, 14, 17, 24],
-        [18, 21, 23, 26, 30],
-    ]
-    target = 5
+    # matrix = [
+    #     [1, 4, 7, 11, 15],
+    #     [2, 5, 8, 12, 19],
+    #     [3, 6, 9, 16, 22],
+    #     [10, 13, 14, 17, 24],
+    #     [18, 21, 23, 26, 30],
+    # ]
+    # target = 5
+    matrix = [[-5]]
+    target = -5
     res = sol.searchMatrix(matrix, target)
     print(res)
