@@ -44,6 +44,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    ratings = [1, 0, 2]
+    # ratings = [1, 0, 2]
+    ratings = [1, 2, 3]
     res = sol.candy(ratings)
     print(res)
