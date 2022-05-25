@@ -4,6 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from typing import List, Optional
 from helpers.TreeNode import TreeNode
 
 
@@ -21,14 +22,14 @@ class Solution:
 
         height = findHeight(root)
         width = 2**height - 1
-        ans = [[""] * n for _ in range(m)]
+        ans = [[""] * width for _ in range(height)]
 
         def output(node, row, left, right):
             if not node:
                 return
             mid = (left + right) // 2
             ans[row][mid] = str(node.val)
-            output(node.left, row + 1, 0, mid - 1)
+            output(node.left, row + 1, left, mid - 1)
             output(node.right, row + 1, mid + 1, right)
 
         output(root, 0, 0, width - 1)
