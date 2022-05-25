@@ -21,7 +21,7 @@ from helpers.LinkedList import ListNode
 
 class Solution:
     def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        dummy = ListNode()
+        dummy = ListNode(0)
         cur = head
 
         while cur:
@@ -34,7 +34,7 @@ class Solution:
             cur.next = prev.next
             prev.next = cur
 
-            cur.next = nxt
+            cur = nxt
 
         return dummy.next
 

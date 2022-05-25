@@ -7,6 +7,9 @@ class ListNode:
     def __str__(self):
         return str(self.val)
 
+    def __repr__(self) -> str:
+        return f"val: {self.val},next:{self.next}"
+
 
 class LinkedList:
     def __init__(self, values=None):
