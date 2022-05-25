@@ -20,7 +20,7 @@ class Solution:
             if matrix[up][left] > target or matrix[down][right] < target:
                 return False
             row = up
-            while row < down:
+            while row < down and matrix[row][mid] <= target:
                 mid = (left + right) // 2
                 if matrix[row][mid] == target:
                     return True
@@ -42,5 +42,6 @@ if __name__ == "__main__":
         [10, 13, 14, 17, 24],
         [18, 21, 23, 26, 30],
     ]
-    res = sol.searchMatrix(matrix)
+    target = 5
+    res = sol.searchMatrix(matrix, target)
     print(res)
