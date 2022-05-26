@@ -52,7 +52,10 @@ class Solution:
         return node
 
 
-class Solution2:
+NODEVAL = 1000
+
+
+class BinaryTreeSerializer:
     def serialize(self, root):
         serializedlist = []
         """Encodes a tree to a single string.
@@ -65,7 +68,7 @@ class Solution2:
             if not node:
                 return
             serializedlist.append(chr(idx[0] + 48))
-            val = node.val
+            val = node.val + NODEVAL
             serializedlist.append(chr(val + 48))
             serializedlist.append(chr(parentId + 48) if parentId != -1 else "N")
             serializedlist.append(lorR)
@@ -73,16 +76,18 @@ class Solution2:
             parentid = idx[0]
             if node.left:
                 idx[0] += 1
-                helper(node.left, idx, parentId, "l")
+                helper(node.left, idx, parentid, "l")
             if node.right:
                 idx[0] += 1
-                helper(node.right, idx, parentId, "r")
+                helper(node.right, idx, parentid, "r")
 
         if not root:
             return ""
         Index = [1]
         helper(root, Index, -1)
-        return "".join(serializedlist)
+        res = "".join(serializedlist)
+        print(res)
+        return res
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
@@ -95,7 +100,7 @@ class Solution2:
             nodesMap = {}
             for i in range(0, len(data), 4):
                 id = ord(data[i]) - 48
-                val = ord(data[i + 1]) - 48
+                val = ord(data[i + 1]) - 48 - NODEVAL
                 parentId = ord(data[i + 2]) - 48
                 nodesMap[id] = (parentId, TreeNode(val))
 
@@ -110,6 +115,7 @@ class Solution2:
                     parent.left = node
                 elif leftOrRight == "r":
                     parent.right = node
+            return nodesMap[ord(data[0]) - 48][1]
 
         if not data:
             return None
