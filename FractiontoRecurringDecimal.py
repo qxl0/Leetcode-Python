@@ -27,5 +27,5 @@ class Solution(object):
 
 if __name__ == "__main__":
     sol = Solution()
-    res = sol.fractionToDecimal(1, 6)
+    res = sol.fractionToDecimal(-8, 4)
     print("Ans is: ", res)
