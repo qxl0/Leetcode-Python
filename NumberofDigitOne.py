@@ -7,11 +7,11 @@ class Solution:
             f = n // int(pow(10, i))
             count += f * int(pow(10, i - 1))
 
-            digit = (n - f * pow(10, i)) // pow(10, i)
+            digit = (n - f * pow(10, i)) // pow(10, i - 1)
             if digit > 1:
                 count += pow(10, i - 1)
             elif digit == 1:
-                last = n - f * pow(10, i) % pow(10, i - 1)
+                last = (n - f * pow(10, i)) % pow(10, i - 1) + 1
                 count += last
         return count
 
