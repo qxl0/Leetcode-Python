@@ -18,7 +18,7 @@ class Solution:
             else:
                 ops.append(expression[i])
                 i += 1
-        dp = [[[]] * 21 for _ in range(21)]
+        dp = [[[] for _ in range(lenexp)] for _ in range(lenexp)]
 
         def helper(a, b):
             if len(dp[a][b]) > 0:
