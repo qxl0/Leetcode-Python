@@ -16,6 +16,7 @@ The cost of painting each house with a certain color is represented by an n x k 
 For example, costs[0][0] is the cost of painting house 0 with color 0; costs[1][2] is the cost of painting house 1 with color 2, and so on...
 Return the minimum cost to paint all houses.
 """
+import math
 import sys
 from typing import List
 
@@ -26,7 +27,7 @@ class Solution:
         if m == 0:
             return 0
         # dp[i][k] represents minimum cost to
-        dp = [[sys.maxsize] for _ in range(k + 1) for _ in range(m + 1)]
+        dp = [[sys.maxsize] * (k + 1) for _ in range(m + 1)]
         for j in range(k):
             dp[0][j] = costs[0][j]
 
@@ -36,7 +37,7 @@ class Solution:
                 for prev in range(k):
                     if color == prev:
                         continue
-                    best = min(best, costs[i - 1][prev])
+                    best = min(best, dp[i - 1][prev])
                 dp[i][color] = best + costs[i][color]
 
         return min(dp[m - 1])
@@ -44,6 +45,10 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    nums = [4, 3, 2, 1]
-    res = s.maximumProduct(nums)
+    costs = [
+        [20, 19, 11, 13, 12, 16, 16, 17, 15, 9, 5, 18],
+        [3, 8, 15, 17, 19, 8, 18, 3, 11, 6, 7, 12],
+        [15, 4, 11, 1, 18, 2, 10, 9, 3, 6, 4, 15],
+    ]
+    res = s.minCostII(costs)
     print(res)
