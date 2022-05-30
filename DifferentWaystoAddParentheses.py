@@ -18,25 +18,25 @@ class Solution:
             else:
                 ops.append(expression[i])
                 i += 1
-        dp = [[sys.maxsize] * 21 for _ in range(21)]
+        dp = [[[]] * 21 for _ in range(21)]
 
         def helper(a, b):
-            if dp[a][b] != sys.maxsize:
+            if len(dp[a][b]) > 0:
                 return dp[a][b]
             if a == b:
-                dp[a][b] = nums[a]
+                dp[a][b].append(nums[a])
                 return
             for i in range(a, b):
                 helper(a, i)
                 helper(i + 1, b)
-                x = dp[a][i]
-                y = dp[i + 1][b]
-                if ops[i] == "+":
-                    dp[a][b] = x + y
-                elif ops[i] == "-":
-                    dp[a][b] = x - y
-                elif ops[i] == "*":
-                    dp[a][b] = x * y
+                for x in dp[a][i]:
+                    for y in dp[i + 1][b]:
+                        if ops[i] == "+":
+                            dp[a][b].append(x + y)
+                        elif ops[i] == "-":
+                            dp[a][b].append(x - y)
+                        elif ops[i] == "*":
+                            dp[a][b].append(x * y)
 
         n = len(nums)
         helper(0, n - 1)
