@@ -10,8 +10,8 @@ class Vector2D:
     def next(self) -> int:
         i, j = self.cur
         if self.hasNext():
-            while not self.data[i][j]:
-                self.increase()
+            # while self.data[i][j] != None:
+            #     self.increase()
             ret = self.data[i][j]
             self.increase()
             return ret
@@ -33,6 +33,7 @@ class Vector2D:
         while i < len(self.data) and len(self.data[i]) == 0:
             i += 1
 
+        self.cur = (i, j)
         if i >= len(self.data):
             return False
         elif j >= len(self.data[i]):
@@ -41,7 +42,8 @@ class Vector2D:
 
 
 if __name__ == "__main__":
-    sol = Vector2D([[], [2]])
+    # sol = Vector2D([[], [2]])
+    sol = Vector2D([[0]])
     res = sol.hasNext()
     res = sol.next()
     res = sol.hasNext()
