@@ -13,11 +13,11 @@ class Solution:
             if cur == n - 1:
                 pass
             elif color == 0:
-                total_cost += min(helper(n + 1, 1), helper(n + 1, 2))
+                total_cost += min(helper(cur + 1, 1), helper(cur + 1, 2))
             elif color == 1:
-                total_cost += min(helper(n + 1, 0), helper(n + 1, 1))
+                total_cost += min(helper(cur + 1, 0), helper(cur + 1, 1))
             else:
-                total_cost += min(helper(n + 1, 0), helper(n + 1, 1))
+                total_cost += min(helper(cur + 1, 0), helper(cur + 1, 1))
 
             memo[(cur, color)] = total_cost
             return total_cost
