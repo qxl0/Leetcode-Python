@@ -1,24 +1,31 @@
+from math import lcm
 import sys
+from tkinter import E
 from typing import List
 
 
 class Solution:
     def nthUglyNumber(self, n: int, a: int, b: int, c: int) -> int:
-        ugly = [a]
-        ia, ib, ic = 0, 0, 0
-        i = 1
-        while i < n:
-            ua, ub, uc = a * ugly[ia], b * ugly[ib], c * ugly[ic]
-            umin = min(ua, ub, uc)
-            if umin == ua:
-                ia += 1
-            if umin == ub:
-                ib += 1
-            if umin == uc:
-                ic += 1
-            ugly.append(umin)
-            i += 1
-        return ugly[-1]
+        l, r = sys.maxsize
+
+        def count(m, a, b, c):
+            return (
+                m // a
+                + m // b
+                + m // c
+                - m // lcm(a, b)
+                - m // lcm(a, c)
+                - m // lcm(b, c)
+                + m // lcm(a, b, c)
+            )
+
+        while l < r:
+            m = l + (r - l) // 2
+            if count(m, a, b, c) > n:
+                r = m - 1
+            else:
+                l = m
+        return l
 
 
 if __name__ == "__main__":
@@ -27,5 +34,8 @@ if __name__ == "__main__":
         if "q" == line.rstrip():
             break
         n = int(line.rstrip())
-        res = sol.nthUglyNumber(n)
+        a = 2
+        b = 11
+        c = 13
+        res = sol.nthUglyNumber(n, a, b, c)
         print("Ans is: ", res)
