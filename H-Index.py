@@ -4,7 +4,12 @@ from typing import List
 
 class Solution:
     def hIndex(self, citations):
-        pass
+        citations.sort(reverse=True)
+        n = len(citations)
+        i = 0
+        while i < n and citations[i] > i:
+            i += 1
+        return i
 
 
 if __name__ == "__main__":
