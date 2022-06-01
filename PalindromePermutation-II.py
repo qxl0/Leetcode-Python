@@ -1,32 +1,37 @@
+from collections import Counter
+from typing import List
+
+
 class Solution:
     def generatePalindromes(self, s: str) -> List[str]:
         count = Counter(s)
-        if len([i for i in count.values() if count[i] % 2 == 1]) > 1:
-            return []
-        even = [i for i in count.keys() if count[i] % 2 == 0]
+        res = []
         odd = [i for i in count.keys() if count[i] % 2 == 1]
+        if len(odd) > 1:
+            return res
 
-        perm = []
-
-        def swap(s, i, j):
-            tmp = s[i]
-            s[i] = s[j]
-            s[j] = tmp
-
-        def generate(st, idx, cur):
-            print(cur)
-            if idx == len(st):
-                perm.append(cur)
+        def generate(cur=""):
+            if not count:
+                res.append(cur)
                 return
-            for i in range(idx + 1, len(st)):
-                if st[idx] != st[i]:
-                    # swap(st, idx, i)
-                    generate(st, idx + 1, cur + [s[i]])
-                    # swap(st, i, idx)
 
-        generate(even, 0, [])
+            for c in list(count.keys()):
+                if count[c]:
+                    count[c] -= 2
+                    if count[c] == 0:
+                        del count[c]
+                    generate(c + cur + c)
+                    count[c] += 2
 
-        print(perm)
+        if len(odd) == 0:
+            generate()
+        if len(odd) == 1:
+            oddchar = odd[0]
+            count[oddchar] -= 1
+            if count[oddchar] == 0:
+                del count[oddchar]
+            generate(oddchar)
+        return res
 
 
 if __name__ == "__main__":
