@@ -43,7 +43,7 @@ class Solution:
                 return dfs(x + 1, y + len(t), p, s)
             else:
                 for i in range(y, len(s)):
-                    t = s[y : i - y + 1]
+                    t = s[y : i + 1]
                     if t in map2:
                         continue
                     map1[ch] = t
@@ -59,7 +59,9 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    p = "abab"
-    s = "asdasdasdasd"
+    # p = "abab"
+    # s = "asdasdasdasd"
+    p = "ab"
+    s = "cd"
     res = sol.wordPatternMatch(p, s)
     print(res)
