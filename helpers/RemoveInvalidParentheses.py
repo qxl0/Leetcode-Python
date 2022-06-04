@@ -47,7 +47,7 @@ class Solution:
             if len(curStr) > maxLen:
                 return
             if idx == len(s):
-                if count == 0 and len(curStr) == maxLen:
+                if cnt == 0 and len(curStr) == maxLen:
                     ret.append(curStr)
                 return
             if s[idx] != "(" and s[idx] != ")":
@@ -67,6 +67,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    s = ")("
+    s = "((()"
     res = sol.removeInvalidParentheses(s)
     print(res)
