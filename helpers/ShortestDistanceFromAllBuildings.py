@@ -1,4 +1,4 @@
-from collections import Counter
+from collections import Counter, deque
 import heapq
 from typing import List
 
@@ -19,7 +19,7 @@ class Solution:
 
             while q:
                 x, y, dist = q.popleft()
-                for i, j in [(x + 1, y), (x - 1, y), (x, y - 1), (x, y + 2)]:
+                for i, j in [(x + 1, y), (x - 1, y), (x, y - 1), (x, y + 1)]:
                     if 0 <= i < m and 0 <= j < n and not vis[i][j]:
                         vis[i][j] = True
                         if not grid[i][j]:
