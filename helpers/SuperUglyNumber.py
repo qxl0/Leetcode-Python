@@ -1,3 +1,7 @@
+import heapq
+from typing import List
+
+
 class Solution:
     def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
         q = []
@@ -8,9 +12,9 @@ class Solution:
         nums[0] = 1
         i = 1
         while i < n:
-            n, p, idx = heapq.heappop(q)
-            if n != nums[i - 1]:
-                nums[i] = n
+            num, p, idx = heapq.heappop(q)
+            if num != nums[i - 1]:
+                nums[i] = num
                 i += 1
             heapq.heappush(q, (p * nums[idx + 1], p, idx + 1))
         print(nums)
