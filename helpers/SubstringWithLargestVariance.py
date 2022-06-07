@@ -89,7 +89,7 @@ class Solution2:
 
 
 if __name__ == "__main__":
-    sol = Solution()
+    sol = Solution2()
     s = "aababbb"
     res = sol.largestVariance(s)
     print(res)
