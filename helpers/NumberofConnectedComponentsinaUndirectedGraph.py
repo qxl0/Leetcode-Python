@@ -1,10 +1,13 @@
+from typing import List
+
+
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
         parents = [i for i in range(n)]
         size = [1 for i in range(n)]
 
         def find(a):
-            while parents[a] != a:
+            if parents[a] != a:
                 parents[a] = find(parents[a])
             return parents[a]
 
