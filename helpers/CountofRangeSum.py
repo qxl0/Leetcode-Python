@@ -14,10 +14,10 @@ class Solution:
             helper(presum, a, mid, lower, upper)
             helper(presum, mid + 1, b, lower, upper)
             x, y = 0, 0
-            for i in range(a, mid):
-                x = bisect_left(presum, mid + 1, b + 1, presum[i] + lower)
+            for i in range(a, mid + 1):
+                x = bisect_left(presum, presum[i] + lower, mid + 1, b + 1)
                 print(presum, mid + 1, b + 1)
-                y = bisect(presum, mid + 1, b + 1, presum[i] + upper)
+                y = bisect(presum, presum[i] + upper, mid + 1, b + 1)
                 ret += y - x
 
             # sort
