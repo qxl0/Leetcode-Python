@@ -31,6 +31,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [2, 2, 2, 2, 4, 4, 4]
+    # nums = [2, 2, 2, 2, 4, 4, 4]
+    nums = [1, 5, 1, 1, 6, 4]
     res = sol.wiggleSort(nums)
     print(res)
