@@ -18,7 +18,31 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [1, 3]
-    n = 6
+    # nums = [1, 5, 10]
+    # n = 20
+    nums = [
+        1,
+        2,
+        16,
+        19,
+        31,
+        35,
+        36,
+        64,
+        64,
+        67,
+        69,
+        71,
+        73,
+        74,
+        76,
+        79,
+        80,
+        91,
+        95,
+        96,
+        97,
+    ]
+    n = 8
     res = sol.minPatches(nums, n)
     print(res)
