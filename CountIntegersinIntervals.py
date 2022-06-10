@@ -1,4 +1,4 @@
-import bisect
+from bisect import bisect_left, bisect_right
 from operator import itemgetter
 
 
@@ -13,8 +13,8 @@ class CountIntervals:
             self.cur_count = right - left + 1
             return
 
-        l = bisect.bisect_left(self.intervals, left, key=itemgetter(1))
-        r = bisect.bisect_right(self.intervals, right, key=itemgetter(0))
+        l = bisect_left(self.intervals, left, key=itemgetter(1))
+        r = bisect_right(self.intervals, right, key=itemgetter(0))
 
         if l < len(self.intervals):
             left = min(left, self.intervals[l][0])
