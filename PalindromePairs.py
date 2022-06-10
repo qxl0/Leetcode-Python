@@ -70,25 +70,30 @@ class Solution2:
             s = words[j]
 
             # split to YYY YYYY
-            for k in range(len(s)):
+            for k in range(len(s) + 1):
                 s1 = s[:k]
                 s2 = s[k:]
 
                 # s1 par, s2 reversed
                 s2r = s2[::-1]
                 if ispar(s1) and s2r != s and s2r in m:
+                    print("1", j, s, s2, s2r)
                     ans.append([m[s2r], j])
 
                 # s2 par, s1 reversed
+                if len(s1) == len(s):
+                    continue
                 s1r = s1[::-1]
                 if ispar(s2) and s1r != s and s1r in m:
+                    print("2", j, s, s1, s1r)
                     ans.append([j, m[s1r]])
         return ans
 
 
 if __name__ == "__main__":
-    s = Solution()
+    s = Solution2()
     words = ["abcd", "dcba", "lls", "s", "sssll"]
-    words = ["lls", "sssll"]
+    # words = ["lls", "sssll"]
+    # words = ["a", ""]
     res = s.palindromePairs(words)
     print(res)
