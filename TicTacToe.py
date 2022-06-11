@@ -1,6 +1,6 @@
 class TicTacToe:
     def __init__(self, n: int):
-        self.grid = [[-1] * n for _ in range(n)]
+        self.grid = [[0] * n for _ in range(n)]
         self.size = n
 
     def move(self, row: int, col: int, player: int) -> int:
