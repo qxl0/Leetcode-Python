@@ -3,6 +3,7 @@ class SegTreeNode:
         self.tag = 0
         self.start = a
         self.end = b
+        self.left = self.right = None
         if a == b:
             self.info = val
             return
@@ -29,8 +30,8 @@ class SegTreeNode:
             return
         if self.left:
             self.pushDown()
-            self.left = self.updateRange(a, b, val)
-            self.right = self.updateRange(a, b, val)
+            self.left.updateRange(a, b, val)
+            self.right.updateRange(a, b, val)
             self.info = max(self.left.info, self.right.info)
 
     def queryRange(self, a, b):

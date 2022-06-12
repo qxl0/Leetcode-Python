@@ -3,6 +3,7 @@ class SegTreeNode:
         self.tag = 0
         self.start = a
         self.end = b
+        self.left = self.right = None
         if a == b:
             self.info = val
             return
