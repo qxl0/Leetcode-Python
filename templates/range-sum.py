@@ -49,9 +49,10 @@ class SegTreeNode:
 
 if __name__ == "__main__":
     length = 8
+    val = 1
     updates = [[0, 3, 3], [4, 7, 9]]
     queries = [[0, 3], [2, 5]]
-    sol = SegTreeNode(0, length - 1)
+    sol = SegTreeNode(0, length - 1, val)
     for s, e, val in updates:
         sol.updateRange(s, e, val)
     for s, e in queries:
