@@ -45,7 +45,7 @@ class SegTreeNode:
             self.pushDown()
             ret = self.left.queryRange(a, b) + self.right.queryRange(a, b)
             self.info = self.left.info + self.right.info
-            return self.info
+            return ret
 
 
 if __name__ == "__main__":
