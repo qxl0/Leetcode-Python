@@ -1,43 +1,40 @@
 class Solution:
-    def similarRGB(self, color):
-        """
-        :type color: str
-        :rtype: str
-        """
+    def similarRGB(self, color: str) -> str:
         result = []
 
+        def closest(ss):
+            m = [
+                "00",
+                "11",
+                "22",
+                "33",
+                "44",
+                "55",
+                "66",
+                "77",
+                "88",
+                "99",
+                "aa",
+                "bb",
+                "cc",
+                "dd",
+                "ee",
+                "ff",
+            ]
+            d = float("inf")
+            idx = -1
+            for i in range(len(m)):
+                dist = abs(int(ss, 16) - int(m[i], 16))
+                # print(i, m[i], dist)
+                if dist < d:
+                    d = dist
+                    idx = i
+            # print(m[idx], d)
+            return m[idx]
+
         for i in range(1, len(color), 2):
-            result.append(self.getClosest(color[i : i + 2]))
-
+            result.append(closest(color[i : i + 2]))
         return "#" + "".join(result)
-
-    def getClosest(self, ss):
-        hexcolor = [
-            "00",
-            "11",
-            "22",
-            "33",
-            "44",
-            "55",
-            "66",
-            "77",
-            "88",
-            "99",
-            "aa",
-            "bb",
-            "cc",
-            "dd",
-            "ee",
-            "ff",
-        ]
-
-        distances = []
-
-        for color in hexcolor:
-            dist = abs(int(ss, 16) - int(color, 16))
-            distances.append(dist)
-
-        return hexcolor[distances.index(min(distances))]
 
 
 if __name__ == "__main__":
