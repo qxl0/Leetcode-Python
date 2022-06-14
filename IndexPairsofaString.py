@@ -31,6 +31,6 @@ class Solution:
 if __name__ == "__main__":
     sol = Solution()
     text = "thestoryofleetcodeandme"
-    words = ["story", "fleet", "leetcode"]
+    words = ["story", "fleet", "fleetcode"]
     res = sol.indexPairs(text, words)
     print(res)
