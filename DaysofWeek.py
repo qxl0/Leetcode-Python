@@ -14,13 +14,13 @@ class Solution:
             y -= 1
         c, y = y / 100, y % 100
         w = (c / 4 - 2 * c + y + y / 4 + 13 * (m + 1) / 5 + d - 1) % 7
-        return self.days[w]
+        return days[int(w)]
 
 
 if __name__ == "__main__":
     sol = Solution()
-    y = 1999
-    m = 9
-    d = 1
+    y = 2022
+    m = 6
+    d = 15
     res = sol.dayOfTheWeek(d, m, y)
     print(res)
