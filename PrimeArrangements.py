@@ -28,7 +28,7 @@ class Solution:
         ret = 0
 
         def helper(avail, idx, cur):
-            # print(avail, idx, cur)
+            print(avail, idx, cur)
             nonlocal ret
             if len(avail) == 0:
                 ret += 1
