@@ -1,3 +1,4 @@
+import heapq
 from typing import List
 
 
@@ -11,17 +12,17 @@ class Solution:
         pq = [(0, start[0], start[1])]
         vis = [[0] * n for _ in range(m)]
         while pq:
-            d, x, y = heapq.heappop(pq)
-            print(d, " == ", x, y)
-            if x == destination[0] and y == destination[1]:
+            d, i, j = heapq.heappop(pq)
+            print(d, " == ", i, j)
+            if i == destination[0] and j == destination[1]:
                 return d
-            if vis[x][y] == 1:
+            if vis[i][j] == 1:
                 continue
-            vis[x][y] = 1
+            vis[i][j] = 1
 
             # d, 4 dirs
             for dx, dy in dir:
-                step = 0
+                x, y, step = i, j, 0
                 while m > x + dx >= 0 and n > y + dy >= 0 and maze[x + dx][y + dy] != 1:
                     step += 1
                     x += dx
