@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def oddCells(self, n: int, m: int, indices: List[List[int]]) -> int:
         count = 0
@@ -6,6 +9,8 @@ class Solution:
         for x, y in indices:
             row[x] += 1
             col[y] += 1
+        print(row)
+        print(col)
         for i in range(n):
             for j in range(m):
                 if (row[i] + col[j]) % 2 == 1:
