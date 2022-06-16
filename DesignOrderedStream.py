@@ -17,9 +17,10 @@ class OrderedStream:
 
 if __name__ == "__main__":
     os = OrderedStream(5)
-    os.insert(1, "aaaaa")
+    res = os.insert(3, "cccccc")
+    print(res)
     # Inserts (1, "aaaaa"), returns ["aaaaa"].
-    os.insert(3, "ccccc")
+    os.insert(1, "aaaaa")
     # Inserts (3, "ccccc"), returns [].
     os.insert(2, "bbbbb")
     # Inserts (2, "bbbbb"), returns ["bbbbb", "ccccc"].
