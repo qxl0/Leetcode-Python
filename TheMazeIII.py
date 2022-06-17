@@ -20,13 +20,6 @@ from typing import (
     List,
 )
 
-DIRECTION_HASH = {
-    "d": (1, 0),
-    "l": (0, -1),
-    "r": (0, 1),
-    "u": (-1, 0),
-}
-
 
 class Solution:
     def findShortestWay(
