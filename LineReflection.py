@@ -23,7 +23,21 @@ from typing import (
 
 class Solution:
     def isReflected(self, points: List[List[int]]) -> bool:
-        pass
+        left, right = sys.maxsize, -sys.maxsize
+        for p in points:
+            left = min(left, p[0])
+            right = max(right, p[0])
+
+        # print(left, right, mid)
+        to = left + right
+        h = set([str(x) + "a" + str(y) for (x, y) in points])
+        print(h)
+        for x, y in points:
+            t = str(to - x) + "a" + str(y)
+            print(t)
+            if t not in h:
+                return False
+        return True
 
 
 if __name__ == "__main__":
