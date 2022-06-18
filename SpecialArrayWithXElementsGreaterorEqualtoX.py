@@ -20,6 +20,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    nums = [0, 4, 3, 0, 4]
+    nums = [0, 4, 3, 3, 4]
     res = sol.specialArray(nums)
     print("result is: ", res)
