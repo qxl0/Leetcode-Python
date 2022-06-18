@@ -12,7 +12,7 @@ from typing import (
 class Solution:
     def countVowelSubstrings(self, word: str) -> int:
         vows = ["a", "e", "i", "o", "u"]
-        nonvows = "bcdfghjpqrstvwxyz"
+        nonvows = "bcdfghjklmnpqrstvwxyz"
         n = len(word)
 
         def valid(s):
@@ -23,10 +23,12 @@ class Solution:
 
         ret = 0
         for i in range(n):
-            for l in range(5, n + 1 - 5):
+            for l in range(5, n + 1):
+                if i + l > n:
+                    continue
                 cur = word[i : i + l]
                 if valid(cur):
-                    print(i, i + l, cur)
+                    # print(i,l, cur)
                     ret += 1
         return ret
 
