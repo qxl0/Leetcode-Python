@@ -25,14 +25,16 @@ class Solution:
         for k in range(m + 1):
             dp[0][k] = 1
 
+        target = "#" + target
         for i in range(1, n + 1):
             for k in range(1, m + 1):
                 dp[i][k] = dp[i][k - 1]
 
-                if target[i] in h[i]:
-                    dp[i][k] += (dp[i - 1][k - 1] * h[i][target[i]]) % mod
-            print(dp)
-        return dp[n - 1][m - 1]
+                if target[i] in h[k]:
+                    dp[i][k] += (dp[i - 1][k - 1] * h[k][target[i]]) % mod
+                dp[i][k] %= mod
+            print(dp[i])
+        return dp[n][m]
 
 
 if __name__ == "__main__":
