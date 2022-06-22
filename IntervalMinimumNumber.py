@@ -62,9 +62,9 @@ class SegmentTree:
         leftRet = sys.maxsize
         rightRet = sys.maxsize
         if start <= mid:
-            leftRet = self._queryMin(node.left, start, mid)
+            leftRet = self._queryMin(node.left, start, end)
         if mid < end:
-            rightRet = self._queryMin(node.right, mid + 1, end)
+            rightRet = self._queryMin(node.right, start, end)
 
         return min(leftRet, rightRet)
 
