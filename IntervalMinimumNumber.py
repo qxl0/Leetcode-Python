@@ -23,6 +23,9 @@ class SegmentTreeNode:
         self.minnum = minnum
         self.left = self.right = None
 
+    def __repr__(self) -> str:
+        return f"min: {self.minnum}, left:{self.left}, right: {self.right}"
+
 
 class SegmentTree:
     root = None
@@ -81,6 +84,16 @@ class Solution:
         segTree = SegmentTree(a)
 
         for query in queries:
-            ans.append(segTree.queryMin(query.start, query.end))
+            ans.append(segTree.queryMin(query[0], query[1]))
 
         return ans
+
+
+if __name__ == "__main__":
+    sol = Solution()
+    # a = [4, 5, 7, 1]
+    # queries = [(1, 2), (1, 3)]
+    a = [2, 3, 1, 4, 5]
+    queries = [(0, 0)]
+    res = sol.interval_min_number(a, queries)
+    print(res)
