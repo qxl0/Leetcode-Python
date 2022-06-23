@@ -25,8 +25,8 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    n = 5
-    start = 0
-    res = sol.xorOperation(n, start)
-
-    print(res)
+    n = 2
+    start = 8
+    for i in range(2, 100, 2):
+        res = sol.xorOperation(i, start)
+        print(i, start, res)
