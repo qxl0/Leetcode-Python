@@ -2,10 +2,10 @@ import sys
 
 
 class SegmentTreeNode:
-    def __init__(self, start, end, minnum):
+    def __init__(self, start, end, min):
         self.start = start
         self.end = end
-        self.minnum = minnum
+        self.min = min
         self.left = self.right = None
 
 
@@ -28,9 +28,9 @@ class SegmentTree:
 
         # minimum
         if root.left:
-            root.minnum = min(root.minnum, root.left.minnum)
+            root.min = min(root.min, root.left.min)
         if root.right:
-            root.minnum = min(root.minnum, root.right.minnum)
+            root.min = min(root.min, root.right.min)
 
         return root
 
@@ -39,7 +39,7 @@ class SegmentTree:
 
     def _queryMin(self, node, start, end):
         if start <= node.start and node.end <= end:
-            return node.minnum
+            return node.min
         mid = node.start + (node.end - node.start) // 2
         leftRet = sys.maxsize
         rightRet = sys.maxsize
@@ -49,3 +49,24 @@ class SegmentTree:
             rightRet = self._queryMin(node.right, start, end)
 
         return min(leftRet, rightRet)
+
+    def modify(self, index, value):
+        self._modify(self.root, index, value)
+
+    def _modify(self, root: SegmentTreeNode, index: int, value: int):
+        # write your code here
+        if root.start == root.end and root.start == index:
+            root.max = value
+            return
+
+        mid = root.start + (root.end - root.start) // 2
+
+        # left root.start, mid
+        if index <= mid:
+            self.modify(root.left, index, value)
+        else:
+            self.modify(root.right, index, value)
+
+        # maintain max
+        root.min = min(root.left.min, root.right.min)
+        return
