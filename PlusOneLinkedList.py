@@ -33,6 +33,20 @@ class Solution:
         # depends on its val
         return dummy if dummy.val != 0 else dummy.next
 
+    def plusOne2(self, head: ListNode) -> ListNode:
+        def reverse(node):
+            prev = None
+            while node:
+                node.next, node, prev = prev, node.next, node
+            return prev
+
+        head = node = reverse(head)
+        while node.val == 9:
+            node.val = 0
+            node.next = node = node.next or ListNode(0)
+        node.val += 1
+        return reverse(head)
+
 
 if __name__ == "__main__":
     sol = Solution()
