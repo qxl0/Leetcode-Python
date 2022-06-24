@@ -56,17 +56,29 @@ class SegmentTree:
     def _modify(self, root: SegmentTreeNode, index: int, value: int):
         # write your code here
         if root.start == root.end and root.start == index:
-            root.max = value
+            root.min = value
             return
 
         mid = root.start + (root.end - root.start) // 2
 
         # left root.start, mid
         if index <= mid:
-            self.modify(root.left, index, value)
+            self._modify(root.left, index, value)
         else:
-            self.modify(root.right, index, value)
+            self._modify(root.right, index, value)
 
-        # maintain max
+        # maintain min
         root.min = min(root.left.min, root.right.min)
         return
+
+
+if __name__ == "__main__":
+    nums = [3, 2, 9, 4]
+    s = SegmentTree(nums)
+    res = s.queryMin(0, 1)
+    print("Ans is: ", res)
+    res = s.queryMin(2, 3)
+    print("Ans is: ", res)
+    s.modify(1, 1)
+    res = s.queryMin(0, 3)
+    print("after modify [0,3]: min=", res)
