@@ -63,7 +63,7 @@ class SegmentTree:
         node.childrenUpdate = 0
 
     def removeRange(self, start, end):
-        self._removeRange(self.root, start, end)
+        self._removeRange(self.root, start, end - 1)
 
     def _removeRange(self, node, start, end):
         if start == node.start and end == node.end:
@@ -105,8 +105,8 @@ class SegmentTree:
 
 
 class RangeModule:
-    def __init__(self):
-        self.segTree = SegmentTree(0, 10**9)
+    def __init__(self, length=10**9):
+        self.segTree = SegmentTree(0, length)
 
     def addRange(self, left: int, right: int) -> None:
         self.segTree.addRange(left, right)
@@ -119,7 +119,7 @@ class RangeModule:
 
 
 if __name__ == "__main__":
-    sol = RangeModule()
+    sol = RangeModule(32)
     sol.addRange(10, 20)
     sol.removeRange(14, 16)
     sol.addRange(20, 21)
