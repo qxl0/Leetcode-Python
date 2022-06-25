@@ -77,8 +77,8 @@ if __name__ == "__main__":
     s = SegmentTree(10000)
     queries = [1, 8, 5]
     ans = []
-
-    root = SegmentTree(10001)
+    size = max(nums)
+    root = SegmentTree(size + 1)
     for num in nums:
         root.modify(num, 1)
 
