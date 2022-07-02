@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def maxNumEdgesToRemove(self, n: int, edges: List[List[int]]) -> int:
         Father = [i for i in range(n + 1)]
@@ -8,11 +11,11 @@ class Solution:
             return Father[x]
 
         def Union(x, y):
-            x, y = findFather(x), findFather(y)
-            if x < y:
-                Father[y] = x
+            px, py = findFather(x), findFather(y)
+            if px < py:
+                Father[py] = px
             else:
-                Father[x] = y
+                Father[px] = py
 
         edges0 = []
         edges1 = []
