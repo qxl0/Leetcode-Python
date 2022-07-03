@@ -8,8 +8,8 @@ class Solution:
                 for i in range(1, len(ans), 2):
                     tmp.append(ans[i])
             else:
-                for i in range(len(ans) - 1, -1, 2):
-                    tmp.append(ans[i])
+                for j in range(len(ans) - 1, -1, -2):
+                    tmp.append(ans[j])
                 tmp = tmp[::-1]
                 print(tmp)
             ans = tmp[:]
