@@ -43,6 +43,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    data = [248, 130, 130, 130]
+    data = [197, 130, 1]
     res = sol.validUtf8(data)
     print("Ans is: ", res)
