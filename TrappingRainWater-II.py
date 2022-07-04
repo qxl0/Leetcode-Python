@@ -46,11 +46,10 @@ class Solution:
             if cur < h:
                 cur = h
             ret += cur - h
-            print(f"{x,y}: {ret}")
+            # print(f'{x,y} at {h}, cur={cur}: added: {cur-h}')
             for nx, ny in neighbors(x, y):
                 if (nx, ny) in vis:
                     continue
-                vis.add((nx, ny))
                 heapq.heappush(q, (heightMap[nx][ny], nx, ny))
         return ret
 
