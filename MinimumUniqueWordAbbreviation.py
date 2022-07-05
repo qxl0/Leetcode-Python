@@ -16,7 +16,6 @@ class Solution:
     #     return re.sub("#+", lambda m: str(len(m.group())), s)
     def minAbbreviation(self, target, dictionary):
         def abbr(target, num):
-            old = num
             word, count = "", 0
             for w in target:
                 if num & 1 == 1:
@@ -30,7 +29,6 @@ class Solution:
                 num >>= 1
             if count:
                 word += str(count)
-            print(bin(old), word)
             return word
 
         m = len(target)
@@ -60,10 +58,27 @@ class Solution:
 
         return min(abbrs, key=lambda x: len(x))
 
+    def abbr(self, target, num):
+        word, count = "", 0
+        for w in target:
+            if num & 1 == 1:
+                if count:
+                    word += str(count)
+                    count = 0
+                word += w
+            else:
+                count += 1
+
+            num >>= 1
+        if count:
+            word += str(count)
+        return word
+
 
 if __name__ == "__main__":
     sol = Solution()
+    # res = sol.abbr("apple", 0b1111)
     target = "apple"
-    dictionary = ["blade", "angry"]
+    dictionary = ["blade"]
     res = sol.minAbbreviation(target, dictionary)
     print("Ans is: ", res)
