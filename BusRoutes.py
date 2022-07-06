@@ -10,7 +10,7 @@ class Solution:
         stop2bus = defaultdict(list)
         for bus, stops in enumerate(routes):
             for stop in stops:
-                stop2bus[bus].append(stop)
+                stop2bus[stop].append(bus)
         adj = defaultdict(list)
         for bus, stops in enumerate(routes):
             for stop in stops:
@@ -21,7 +21,7 @@ class Solution:
 
         q = []
         for bus in stop2bus[S]:
-            q.append((bus, 0))
+            q.append((bus, 1))
         Tbus = stop2bus[T]
         while q:
             cb, step = q.pop(0)
