@@ -22,12 +22,17 @@ class Solution:
         q = []
         for bus in stop2bus[S]:
             q.append((bus, 1))
+        vis = set()
         Tbus = stop2bus[T]
         while q:
             cb, step = q.pop(0)
+            vis.add(cb)
             if cb in Tbus:
                 return step
             for nb in adj[cb]:
+                if nb in vis:
+                    continue
+                vis.add(nb)
                 q.append((nb, step + 1))
         return -1
 
