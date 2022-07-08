@@ -5,9 +5,9 @@ class Solution:
         if b < c:
             return self.longestDiverseString(a, c, b, aa, cc, bb)
         if b == 0:
-            return cc * min(2, a)
+            return aa * min(2, a)
         use_a = min(2, a)
-        use_b = a - 1 if use_a >= b else 0
+        use_b = 1 if a - use_a >= b else 0
         return (
             aa * use_a
             + bb * use_b
