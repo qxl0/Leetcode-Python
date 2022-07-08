@@ -49,7 +49,7 @@ class AllOne:
     def inc(self, key: str) -> None:
         if key not in self.map:
             if self.dll.head.next.val == 1:
-                self.dll.head.strs.add(key)
+                self.dll.head.next.strs.add(key)
                 self.map[key] = self.dll.head.next
             else:  # add to the front
                 nde = Node(1)
@@ -80,7 +80,7 @@ class AllOne:
             if len(nde.strs) == 0:
                 self.dll.delete(nde)
             self.map.remove(key)
-
+            return
         prev = nde.prev
         if prev.val != nde.val - 1:
             prev = Node(nde.val - 1)
