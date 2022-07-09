@@ -35,11 +35,13 @@ class Solution:
             time += 1
 
             if maxH:
-                cnt = 1 + heapq.heappop(maxH)
+                cnt = 1 + heapq.heappop(maxH)  # run one,
                 if cnt:
-                    q.append([cnt, time + n])
+                    q.append([cnt, time + n])  # n is idle time
             if q and q[0][1] == time:
-                heapq.heappush(maxH, q.popleft()[0])
+                heapq.heappush(
+                    maxH, q.popleft()[0]
+                )  # task is ready to run, so push to maxH
         return time
 
 
