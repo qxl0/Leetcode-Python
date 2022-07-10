@@ -26,22 +26,26 @@ class Solution:
 
         q = [(click)]
         vis = set()
+        vis.add((click[0], click[1]))
         while q:
+            print(q)
             x, y = q.pop(0)
             if board[x][y] == "E":
                 num_m = mines(x, y)
                 board[x][y] = "B" if num_m == 0 else str(num_m)
             elif board[x][y] == "M":
                 board[x][y] = "X"
+
             for dx, dy in dt:
-                nx, ny = x + dy, y + dy
+                nx, ny = x + dx, y + dy
                 if nx < 0 or nx >= m or ny < 0 or ny >= n:
                     continue
                 if (nx, ny) in vis:
                     continue
                 vis.add((nx, ny))
-                if board[x][y] in ["E", "M"]:
+                if board[nx][ny] in ["E", "M"]:
                     q.append((nx, ny))
+        return board
 
 
 if __name__ == "__main__":
