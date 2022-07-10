@@ -16,32 +16,26 @@ class Solution:
         jobs = list(zip(startTime, endTime, profit))
         jobs.sort(key=lambda x: x[1])  # sort by endtime
 
-        def closest(sorted_dict, key):
-            "Return closest key in `sorted_dict` to given `key`."
-            if len(sorted_dict) <= 0:
-                return -1
-            keys = list(islice(sorted_dict.irange(minimum=key), 1))
-            keys.extend(islice(sorted_dict.irange(maximum=key, reverse=True), 1))
-            return min(keys, key=lambda k: abs(key - k))
+        def find(dp, target):
+            l, r = 0, len(dp)
+            while l < r:
+                m = l + (r - l) // 2
+                if dp[m][0] <= target:
+                    l = m + 1
+                else:
+                    r = m
+            return l
 
-        ret = 0
-        dp = SortedDict()
-
+        dp = [(0, 0)]
         for i in range(0, n):
-            cur = ret
             s, e, p = jobs[i]
-            pos = closest(dp, s)
+            idx = find(dp, s)
+            last = dp[-1][1]
+            cur = dp[idx - 1][1] + p
+            if cur > last:
+                dp.append((e, cur))
 
-            print(dp, ":", s, pos)
-            if pos >= 0:
-                cur = max(cur, dp[pos] + p)
-            else:
-                cur = max(cur, p)
-
-            dp[e] = cur
-            ret = max(ret, cur)
-
-        return ret
+        return dp[-1][1]
 
 
 if __name__ == "__main__":
