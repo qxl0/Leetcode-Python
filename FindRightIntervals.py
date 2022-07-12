@@ -21,7 +21,7 @@ class Solution:
             end, i = heapq.heappop(ends)
             # find the smallest start >= end in the sytem
             while starts and starts[0][0] < end:
-                starts.pop(0)
+                heapq.heappop(starts)
             if not starts:
                 break
             # starts[0][0]>=end
