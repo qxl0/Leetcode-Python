@@ -6,10 +6,11 @@ class Solution:
     def isPrintable(self, T: List[List[int]]) -> bool:
         m, n = len(T), len(T[0])
         adj = defaultdict(list)
-        left = [n] * 61
-        right = [-1] * 61
-        top = [m] * 61
-        down = [-1] * 61
+        maxColor = max(map(max, T)) + 1
+        left = [n] * maxColor
+        right = [-1] * maxColor
+        top = [m] * maxColor
+        down = [-1] * maxColor
 
         def paintedby(i, j, color):
             if (
