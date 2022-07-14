@@ -1,6 +1,10 @@
 class Solution:
     def canIWin(self, maxChoosableInteger: int, desiredTotal: int) -> bool:
         h = {}
+        # totalsum = (1 + maxChoosableInteger) * maxChoosableInteger / 2
+
+        # if totalsum < desiredTotal:
+        #     return False
 
         def dfs(state, sum):
             if state in h:
