@@ -9,6 +9,9 @@ class Node:
         self.freq = 1
         self.prev = self.next = None
 
+    def __repr__(self) -> str:
+        return f"key:{self.key},val:{self.val},prev:{self.prev},next:{self.next}"
+
 
 class DLinkedList:
     def __init__(self):
