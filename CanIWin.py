@@ -26,7 +26,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    maxChoosableInteger = 5
-    desiredTotal = 50
+    maxChoosableInteger = 2
+    desiredTotal = 4
     res = sol.canIWin(maxChoosableInteger, desiredTotal)
     print(res)
