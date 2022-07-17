@@ -11,7 +11,7 @@ class Solution:
         dp[0][0] = 0
 
         cost2 = [[0] * (1 << n) for _ in range(m + 1)]
-        for i in range(1, m):
+        for i in range(1, m + 1):
             for state in range(1 << n):
                 s = 0
                 for j in range(n):
