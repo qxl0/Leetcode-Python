@@ -10,13 +10,17 @@ class Solution:
         ans = [[0] * m for _ in range(n + 1)]
 
         # ans[i][j]: only keeping i digits, j-th smallest number's index in nums
+        # ans[0]: 0,1,2,3
         for j in range(m):
             ans[0][j] = j
+        #  ["102","473","251","814"]
+        #      ^
         for i in range(1, n + 1):  # trim i
-            buckets = {i: [] for i in range(10)}
+            buckets = {b: [] for b in range(10)}
             for j in range(m):
                 idx = ans[i - 1][j]
-                c = nums[idx][len(nums[idx]) - i]
+                c = nums[idx][-i]
+                print(i, j, idx, nums[idx][-i])
                 buckets[ord(c) - ord("0")].append(idx)
 
             j = 0
