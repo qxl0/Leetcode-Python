@@ -25,6 +25,6 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    for i in ["23590", "9999", "10001"]:
-        res = sol.nearestPalindromic(i)
-        print(i, res)
+    nums = [2, 6, 4, 8, 10, 9, 15]
+    res = sol.findUnsortedSubarray(nums)
+    print(res)
