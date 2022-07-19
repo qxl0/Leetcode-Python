@@ -20,7 +20,7 @@ class Solution:
             for j in range(m):
                 idx = ans[i - 1][j]
                 c = nums[idx][-i]
-                print(i, j, idx, nums[idx][-i])
+                # print(i, j, idx, nums[idx][-i])
                 buckets[ord(c) - ord("0")].append(idx)
 
             j = 0
