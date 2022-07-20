@@ -32,9 +32,9 @@ class Excel:
 
     def topSort(self, r, c):
         m, n = len(self.F), len(self.F[0])
+        key = chr(ord("A") + c) + str(r + 1)
         for i in range(m):
             for j in range(n):
-                key = chr(ord("A") + c) + str(r + 1)
                 if self.F[i][j] and key in self.F[i][j].cells:
                     self.topSort(i, j)
         self.stack.append((r, c))
