@@ -26,8 +26,8 @@ class Excel:
     def sum(self, row: int, column: str, numbers: List[str]) -> int:
         cells = self.convert(numbers)
         summ = self.calculate_sum(row - 1, ord(column) - ord("A"), cells)
-        set(row, column, summ)
-        self.F[row - 1][ord(column) - ord("A")] = Formula(cells, summ)
+        self.set(row, column, summ)
+        self.F[row - 1][ord(column) - ord("A")] = self.Formula(cells, summ)
         return summ
 
     def topSort(self, r, c):
@@ -48,18 +48,18 @@ class Excel:
     def convert(self, strs):
         res = {}
         for st in strs:
-            if st.index(":") < 0:
+            if st.find(":") < 0:
                 res[st] = res.get(st, 0) + 1
             else:
                 cells = st.split(":")
-                si = int(cells[0][1:])
-                ei = int(cells[1][1:])
-                sj = cells[0][0]
-                ej = cells[1][0]
-                for i in range(si, ei + 1):
-                    for j in range(sj, ej + 1):
+                si, ei = int(cells[0][1:]), cells[0][0]  # 1, A
+                sj, ej = int(cells[1][1:]), cells[1][0]  # 2, B
+                for i in range(si, sj + 1):
+                    j = ei
+                    while j <= ej:
                         key = j + str(i)
                         res[key] = res.get(key, 0) + 1
+                        j = chr(ord(j) + 1)
         return res
 
     def calculate_sum(self, r, c, cells):
@@ -67,7 +67,7 @@ class Excel:
         for s in cells.keys():
             x = int(s[1:]) - 1
             y = ord(s[0]) - ord("A")
-            sum += (self.F[x][y].val if self.F[x][y] else 0) * cells[s]
+            summ += (self.F[x][y].val if self.F[x][y] else 0) * cells[s]
         self.F[r][c] = self.Formula(cells, summ)
         return summ
 
@@ -82,7 +82,7 @@ class Excel:
 if __name__ == "__main__":
     sol = Excel(3, "C")
     sol.set(1, "A", 2)
-    sol.sum(3, "C")
-    sol.set(3, "C", ["A1", "A1:B2"])
+    sol.sum(3, "C", ["A1", "A1:B2"])
+    sol.set(2, "B", 2)
     res = sol.get(3, "C")
     print(res)
