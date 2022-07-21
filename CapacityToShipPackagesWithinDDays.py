@@ -18,9 +18,9 @@ class Solution:
                     ship = w
                 else:  # ship+x<=x
                     ship += w
-            return c
+            return c + 1
 
-        l, r = maxw, float("inf")
+        l, r = maxw, 20  # float("inf")
         while l < r:
             m = l + (r - l) // 2
             d = days2ship(m)
