@@ -11,7 +11,7 @@ class Solution(object):
             ans = bal = 0
 
             # Split string into primitives
-            for k in xrange(i, j):
+            for k in range(i, j):
                 bal += 1 if S[k] == "(" else -1
                 if bal == 0:
                     if k - i == 1:
@@ -27,6 +27,6 @@ class Solution(object):
 
 if __name__ == "__main__":
     sol = Solution()
-    S = "()()"
+    S = "(()())"
     res = sol.scoreOfParentheses(S)
     print(res)
