@@ -19,6 +19,8 @@ class Solution:
         for i in range(m - 2):
             for j in range(n):
                 target = abs(board[i][j])
+                if target == 0:
+                    continue
                 if target == abs(board[i + 1][j]) == abs(board[i + 2][j]):
                     board[i][j] = board[i + 1][j] = board[i + 2][j] = -target
                     todo = True
