@@ -14,7 +14,7 @@ class Solution:
             x = q.pop(0)
             for i in range(x + 1, x + 7):
                 a, b = (i - 1) // n, (i - 1) % n
-                val = board[~a][b if a % n else ~b]
+                val = board[~a][b if a % 2 == 0 else ~b]
                 if val > 0:
                     i = val
                 if i == n * n:
