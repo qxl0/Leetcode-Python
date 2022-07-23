@@ -15,11 +15,14 @@ class Solution:
             dp[0][1] = 1
         ret = 0
         for i in range(1, n):
-            for j in range(1, k + 1):
+            for j in range(0, k + 1):
                 if nums[i] == 1:
                     dp[i][j] = dp[i - 1][j] + 1
                 else:
-                    dp[i][j] = dp[i - 1][j - 1] + 1
+                    if j > 0:
+                        dp[i][j] = dp[i - 1][j - 1] + 1
+                    else:
+                        dp[i][j] = 0
                 ret = max(ret, dp[i][j])
         print(dp)
         return ret
