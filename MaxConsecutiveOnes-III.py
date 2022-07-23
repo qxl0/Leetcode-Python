@@ -28,9 +28,26 @@ class Solution:
         return ret
 
 
+class Solution2:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        n, ans, l = len(nums), 0, 0
+        for r in range(n):
+            if nums[r] == 0:
+                if k == 0:
+                    while nums[l] != 0:
+                        l += 1
+                    l += 1
+                else:
+                    k -= 1
+            ans = max(ans, r - l + 1)
+            print(l, r, nums[r], k, ans)
+        return ans
+
+
 if __name__ == "__main__":
-    sol = Solution()
-    nums = [0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1]
-    k = 3
+    sol = Solution2()
+    # nums = [0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1]
+    nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0]
+    k = 2
     res = sol.longestOnes(nums, k)
     print(res)
