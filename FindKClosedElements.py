@@ -38,5 +38,6 @@ if __name__ == "__main__":
     sol = Solution()
     arr = [1, 2, 3, 4, 5]
     k = 4
-    res = sol.findClosestElements(arr, k)
+    x = 1
+    res = sol.findClosestElements(arr, k, x)
     print(res)
