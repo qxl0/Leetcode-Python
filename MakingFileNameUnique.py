@@ -17,7 +17,9 @@ class Solution:
                 while f"{fn}({k})" in h:
                     k += 1
                 h[fn] = k
-                fn = f"{fn}({k})"
+                tmp = f"{fn}({k})"
+                h[tmp] = 1
+                fn = tmp
             else:
                 h[fn] = 1
             ans.append(fn)
