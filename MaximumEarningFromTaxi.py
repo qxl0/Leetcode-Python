@@ -1,4 +1,4 @@
-from bisect import bisect_left
+from bisect import bisect_left, bisect_right
 from collections import Counter
 import heapq
 from math import inf
@@ -21,7 +21,10 @@ class Solution:
         for i in range(1, m + 1):
             dp[i] = dp[i - 1]
             s, e, p = rides[i]
-            pos = bisect_left(endpoints, s) - 1
+            pos = bisect_right(endpoints, s)
+            while endpoints[pos] > s:
+                pos -= 1
+
             # print(pos, endpoints[pos],s)
 
             dp[i] = max(dp[i], dp[pos] + e - s + p)
