@@ -1,44 +1,32 @@
+from typing import List
+
+
 class Solution:
     def minAvailableDuration(
         self, slots1: List[List[int]], slots2: List[List[int]], duration: int
     ) -> List[int]:
-        OPEN, CLOSE = 0, 1
-        events = []
+        slots = []
+        for s, e in slots1:
+            slots.append((s, 1))
+            slots.append((e, -1))
+        for s, e in slots2:
+            slots.append((s, 1))
+            slots.append((e, -1))
 
-        # we add all intervals from person 1 and person 2, using start/end events
-        for start, end in slots1:
-            events.append((start, OPEN, 1, end))
-            events.append((end, CLOSE, 1, end))
+        slots.sort()
 
-        for start, end in slots2:
-            events.append((start, OPEN, 2, end))
-            events.append((end, CLOSE, 2, end))
-
-        events.sort()
-        seen = {}
-
-        """
-            for every event, add and remove any interval, based on the open/close events we set above, to our seen dict
-            this will produce a window, where at any given point, we can track if intervals overlap
-            since we only have two people, we can hard code the dict keys as seen above
-        """
-        for time, eventType, person, end in events:
-            if (
-                eventType is OPEN
-            ):  # this is the start of an interval, add the person to the dict
-                seen[person] = (person, end)
-            else:  # end of a given interval, remove this person
-                del seen[person]
-
-            # if we have an overlap, where both persons have intervals that coincide
-            if len(seen) > 1:
-                # grab the end values for each, since what we care about is whether at any given time point, does time + duration fit?
-                person1, person1End = seen.get(1)
-                person2, person2End = seen.get(2)
-
-                if time + duration <= person1End and time + duration <= person2End:
-                    return [time, time + duration]
-
+        pre = None
+        level = 0
+        for i in range(len(slots)):
+            time, event = slots[i]
+            level += event
+            if level == 2:
+                pre = time
+            else:
+                if pre != None and pre + duration <= time:
+                    return [pre, pre + duration]
+                else:
+                    pre = None
         return []
 
 
