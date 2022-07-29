@@ -20,16 +20,16 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    regions = (
-        [
-            ["Earth", "North America", "South America"],
-            ["North America", "United States", "Canada"],
-            ["United States", "New York", "Boston"],
-            ["Canada", "Ontario", "Quebec"],
-            ["South America", "Brazil"],
-        ],
-    )
-    region1 = ("Quebec",)
-    region2 = "New York"
+    regions = [
+        ["Earth", "North America", "South America"],
+        ["North America", "United States", "Canada"],
+        ["United States", "New York", "Boston"],
+        ["Canada", "Ontario", "Quebec"],
+        ["South America", "Brazil"],
+    ]
+    # region1 = "Quebec"
+    # region2 = "New York"
+    region1 = "Canada"
+    region2 = "Quebec"
     res = sol.findSmallestRegion(regions, region1, region2)
     print(res)
