@@ -31,7 +31,24 @@ class Interval:
 
 class Solution:
     def employeeFreeTime(self, schedule):
-        pass
+        diff = {}
+        for employee in schedule:
+            for interval in employee:
+                start, end = interval
+                diff[start] = diff.get(start, 0) + 1
+                diff[end] = diff.get(end, 0) - 1
+        sum = 0
+        ans = []
+        start = -1
+        end = -1
+        for time, event in diff:
+            sum += event
+            if sum == 0:
+                start = time
+            elif start >= 0 and sum >= 1:
+                ans.append([start, end])
+                start, end = -1, -1
+        return ans
 
 
 if __name__ == "__main__":

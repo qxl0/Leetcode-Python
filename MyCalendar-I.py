@@ -6,6 +6,9 @@ class Node:
         self.end = end
         self.left = self.right = None
 
+    def __repl__(self):
+        return f"[{self.start},{self.end}],{self.left},{self.right}"
+
     def insert(self, node):
         if self.end <= node.start:
             if not self.left:
