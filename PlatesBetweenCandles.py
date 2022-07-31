@@ -1,4 +1,4 @@
-from bisect import bisect_left
+from bisect import bisect_left, bisect_right
 from collections import defaultdict, deque
 import functools
 from typing import List
