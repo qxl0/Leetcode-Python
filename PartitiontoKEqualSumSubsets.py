@@ -10,7 +10,7 @@ class Solution:
             return False
         vis = [0] * len(nums)  # len(nums) <=16
 
-        @functools.lru_cache
+        # @functools.lru_cache
         def dfs(cur, subs, sum):
             if subs == k:
                 return True
